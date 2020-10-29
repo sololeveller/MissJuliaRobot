@@ -67,5 +67,4 @@ bing_image_downloader
 alphabet_detector
 Text2Emotion
 howdoi
-git+https://github.com/MissJuliaRobot/better_profanity.git
 nudepy
