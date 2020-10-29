@@ -7,7 +7,8 @@ class CustomFilters(object):
 
     class _Sudoers(BaseFilter):
 
-        def filter(self, message: Message):
+        @staticmethod
+        def filter(message: Message):
             return bool(message.from_user and message.from_user.id in SUDO_USERS)
 
     sudo_filter = _Sudoers()
@@ -26,7 +27,8 @@ class CustomFilters(object):
 
     class _HasText(BaseFilter):
 
-        def filter(self, message: Message):
+        @staticmethod
+        def filter(message: Message):
             return bool(message.text or message.sticker or message.photo or
                         message.document or message.video)
 
