@@ -662,7 +662,6 @@
 from pyimagesearch.transform import four_point_transform
 import imutils
 from skimage.filters import threshold_local
-import numpy as np
 import argparse
 import cv2
 
