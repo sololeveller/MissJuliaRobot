@@ -2313,37 +2313,6 @@ async def fortunate(event):
     pit = jit.decode()
     await event.reply(pit)
 
-
-@register(pattern="^/helptorrent$")
-async def helptorrent(event):
-    if event.fwd_from or event.is_group:
-        return
-    else:
-        topa = "./julia/Tutorial_For_Torrent.mp4"
-        file = await event.client.upload_file(topa)
-        await event.client.send_file(
-            event.chat_id,
-            file,
-            caption="Tutorial For Torrent Module",
-            reply_to=event.id,
-        )
-
-
-@register(pattern="^/helpcamscanner$")
-async def helpcam(event):
-    if event.fwd_from or event.is_group:
-        return
-    else:
-        topa = "./julia/Tutorial for Camscanner.mp4"
-        file = await event.client.upload_file(topa)
-        await event.client.send_file(
-            event.chat_id,
-            file,
-            caption="Tutorial For Camscanner Module",
-            reply_to=event.id,
-        )
-
-
 @register(pattern=r"^/phone (.*)")
 async def phone(event):
     approved_userss = approved_users.find({})
