@@ -688,16 +688,15 @@ async def is_register_admin(chat, user):
             (await tbot(functions.channels.GetParticipantRequest(chat, user))).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator)
         )
-    elif isinstance(chat, types.InputPeerChat):
+    if isinstance(chat, types.InputPeerChat):
         ui = await tbot.get_peer_id(user)
         ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id))) \
-            .full_chat.participants.participants
+                .full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator)
         )
-    else:
-        return None
+    return None
 
 # syntax : /poll 12345 | am i cool? | False False False yes no
 # syntax : /poll 12345 | am i cool? | True@1 False False yes no
@@ -985,30 +984,29 @@ async def stop(event):
     if not event.reply_to_msg_id:
         await event.reply("Please reply to a poll to stop it")
         return
-    else:
-        try:
-            msg = await event.get_reply_message()
-            if str(msg.from_id) != "PeerUser(user_id=1246850012)":
-                await event.reply("I can't do this operation on this poll.\nProbably it's not created by me")
-                return
-            if msg.poll:
-                allpoll = poll_id.find({})
-                for c in allpoll:
-                    if not event.from_id == c['user'] and secret == c['pollid']:
-                        await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
-                        return
-                    poll_id.delete_one(
-                        {'user': event.from_id, 'pollid': secret})
-                    pollid = msg.poll.poll.id
-                    await msg.edit(file=types.InputMediaPoll(
-                        poll=types.Poll(
-                            id=pollid,
-                            question="",
-                            answers=[],
-                            closed=True)))
-                    await event.reply("Successfully stopped the poll")
-            else:
-                await event.reply("This isn't a poll")
-        except Exception:
-            await event.reply("I can't do this operation on this poll.\nProbably it's already closed")
+    try:
+        msg = await event.get_reply_message()
+        if str(msg.from_id) != "PeerUser(user_id=1246850012)":
+            await event.reply("I can't do this operation on this poll.\nProbably it's not created by me")
             return
+        if msg.poll:
+            allpoll = poll_id.find({})
+            for c in allpoll:
+                if not event.from_id == c['user'] and secret == c['pollid']:
+                    await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
+                    return
+                poll_id.delete_one(
+                    {'user': event.from_id, 'pollid': secret})
+                pollid = msg.poll.poll.id
+                await msg.edit(file=types.InputMediaPoll(
+                    poll=types.Poll(
+                        id=pollid,
+                        question="",
+                        answers=[],
+                        closed=True)))
+                await event.reply("Successfully stopped the poll")
+        else:
+            await event.reply("This isn't a poll")
+    except Exception:
+        await event.reply("I can't do this operation on this poll.\nProbably it's already closed")
+        return

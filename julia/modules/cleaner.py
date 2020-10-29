@@ -63,7 +63,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
             return
     if user.id == context.bot.id:
         return
-    elif user.id == 1087968824:
+    if user.id == 1087968824:
         return
     if member.status in ("administrator", "creator"):
         return
