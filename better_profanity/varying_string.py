@@ -39,7 +39,7 @@ class VaryingString:
     def __eq__(self, other):
         if self is other:
             return True
-        elif other.__class__ == VaryingString:
+        if other.__class__ == VaryingString:
             # We have no use case for this yet.
             raise NotImplementedError
         elif other.__class__ == str:

@@ -791,7 +791,7 @@ async def is_register_admin(chat, user):
             ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
-    elif isinstance(chat, types.InputPeerChat):
+    if isinstance(chat, types.InputPeerChat):
         ui = await tbot.get_peer_id(user)
         ps = (
             await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
@@ -800,8 +800,7 @@ async def is_register_admin(chat, user):
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
         )
-    else:
-        return None
+    return None
 
 
 async def can_ban_users(message):
@@ -988,10 +987,9 @@ def info(update, context):
     chats = approved_users.find({})
     if not chat:
         return False
-    else:
-        for c in chats:
-            if chat.id == c["id"] and user.id == c["user"]:
-                text += "\n\n<b>This user is approved in this chat</b>"
+    for c in chats:
+        if chat.id == c["id"] and user.id == c["user"]:
+            text += "\n\n<b>This user is approved in this chat</b>"
 
     try:
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
@@ -2183,25 +2181,24 @@ def lyrics(update: Update, context: CallbackContext):
     if not query:
         msg.reply_text("You haven't specified which song to look for!")
         return
+    song = Song.find_song(query)
+    if song:
+        if song.lyrics:
+            reply = song.format()
+        else:
+            reply = "Couldn't find any lyrics for that song!"
     else:
-        song = Song.find_song(query)
-        if song:
-            if song.lyrics:
-                reply = song.format()
-            else:
-                reply = "Couldn't find any lyrics for that song!"
-        else:
-            reply = "Song not found!"
-        if len(reply) > 4090:
-            with open("lyrics.txt", "w") as f:
-                f.write(f"{reply}\n\n\nOwO UwU OwO")
-            with open("lyrics.txt", "rb") as f:
-                msg.reply_document(
-                    document=f,
-                    caption="Message length exceeded max limit! Sending as a text file.",
-                )
-        else:
-            msg.reply_text(reply)
+        reply = "Song not found!"
+    if len(reply) > 4090:
+        with open("lyrics.txt", "w") as f:
+            f.write(f"{reply}\n\n\nOwO UwU OwO")
+        with open("lyrics.txt", "rb") as f:
+            msg.reply_document(
+                document=f,
+                caption="Message length exceeded max limit! Sending as a text file.",
+            )
+    else:
+        msg.reply_text(reply)
 
 
 # Made by @MissJulia_Robot
@@ -2418,11 +2415,10 @@ def online_within(participant):
         or participant.bot
     ):
         return False
-    else:
-        last_seen = (
-            status.was_online if isinstance(status, types.UserStatusOffline) else None
-        )
-        print(last_seen)
+    last_seen = (
+        status.was_online if isinstance(status, types.UserStatusOffline) else None
+    )
+    print(last_seen)
 
 
 @register(pattern="^/kickthefools$")
@@ -2447,8 +2443,7 @@ async def _(event):
             )
             if not status:
                 return
-            else:
-                c = c + 1
+            c = c + 1
 
         if isinstance(i.status, UserStatusLastWeek):
             status = await event.client(
@@ -2456,8 +2451,7 @@ async def _(event):
             )
             if not status:
                 return
-            else:
-                c = c + 1
+            c = c + 1
 
     if c == 0:
         await done.edit("Got no one to kick 😔")
@@ -3021,11 +3015,10 @@ async def emoji_fetch(emoji):
         return await transparent(
             urllib.request.urlretrieve(img, "resources/emoji.png")[0]
         )
-    else:
-        img = emojis["⛔"]
-        return await transparent(
-            urllib.request.urlretrieve(img, "resources/emoji.png")[0]
-        )
+    img = emojis["⛔"]
+    return await transparent(
+        urllib.request.urlretrieve(img, "resources/emoji.png")[0]
+    )
 
 
 async def transparent(emoji):
@@ -4096,8 +4089,7 @@ async def spam_update(event):
             if event.is_group:
                 if await is_register_admin(event.chat_id, event.from_id):
                     return
-                else:
-                    pass
+                pass
 
             if event.text:
                 msg = str(event.text)
