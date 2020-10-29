@@ -975,7 +975,7 @@ async def _(event):
         return
 
 
-@register(pattern="^/stoppoll (.*)")
+@register(pattern="^/stoppoll(?: |$)(.*)")
 async def stop(event):
     secret = event.pattern_match.group(1)
     approved_userss = approved_users.find({})
@@ -989,6 +989,10 @@ async def stop(event):
             pass
         else:
             return
+    
+    if not input:
+        await event.reply("Where is the poll id ?")
+        return
 
     try:
         secret = int(secret)
@@ -1008,33 +1012,34 @@ async def stop(event):
     if not event.reply_to_msg_id:
         await event.reply("Please reply to a poll to stop it")
         return
-    try:
-        msg = await event.get_reply_message()
-        if str(msg.from_id) != "PeerUser(user_id=1246850012)":
+    msg = await event.get_reply_message()
+    if str(msg.from_id) != "PeerUser(user_id=1246850012)":
             await event.reply(
                 "I can't do this operation on this poll.\nProbably it's not created by me"
             )
             return
-        if msg.poll:
+    if msg.poll:
+      try:
             allpoll = poll_id.find({})
             for c in allpoll:
-                if not event.from_id == c["user"] and secret == c["pollid"]:
-                    await event.reply(
-                        "Oops, either you haven't created this poll or you have given wrong poll id"
-                    )
-                    return
-                poll_id.delete_one({"user": event.from_id, "pollid": secret})
-                pollid = msg.poll.poll.id
-                await msg.edit(
+                if event.from_id == c["user"] and secret == c["pollid"]:
+                    poll_id.delete_one({"user": event.from_id, "pollid": secret})
+                    pollid = msg.poll.poll.id
+                    await msg.edit(
                     file=types.InputMediaPoll(
                         poll=types.Poll(id=pollid, question="", answers=[], closed=True)
+                        )
                     )
-                )
-                await event.reply("Successfully stopped the poll")
-        else:
-            await event.reply("This isn't a poll")
-    except Exception:
+                    await event.reply("Successfully stopped the poll")
+                    
+                await event.reply(
+                        "Oops, either you haven't created this poll or you have given wrong poll id"
+                    )
+                return
+      except Exception:
         await event.reply(
             "I can't do this operation on this poll.\nProbably it's already closed"
         )
         return
+    else:
+         await event.reply("This isn't a poll")
