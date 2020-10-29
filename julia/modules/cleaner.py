@@ -39,7 +39,7 @@ command_list = [
     "unignorecleanbluetext",
     "listcleanbluetext",
     "ignoreglobalcleanbluetext",
-    "unignoreglobalcleanbluetext" "start",
+    "unignoreglobalcleanbluetext", "start",
     "help",
     "settings",
     "donate",
