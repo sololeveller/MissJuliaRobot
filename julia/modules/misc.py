@@ -4029,8 +4029,6 @@ async def sticklet(event):
         await event.reply("I only understand by on or off")
         return
 
-import nude
-
 @register(pattern="")
 async def spam_update(event):
     if not event:
