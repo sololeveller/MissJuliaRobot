@@ -1043,11 +1043,20 @@ def main():
     updater.start_polling(timeout=15, read_latency=4, clean=True)
     LOGGER.info("Successfully started Julia[PTB] !")
 
-    
+    if len(argv) not in (1, 3, 4):
+        tbot.disconnect()
+        ubot.disconnect()
+    else:
+        tbot.run_until_disconnected()
+        ubot.run_until_disconnected()
 
     updater.idle()
 
 
 
 if __name__ == "__main__":   
+    tbot.start(bot_token=TOKEN) 
+    LOGGER.info("Successfully started Julia[TBOT] !")
+    ubot.start()
+    LOGGER.info("Successfully started Julia[UBOT] !")
     main()
