@@ -3,6 +3,7 @@
 
 class VaryingString:
     """Represents a string with varying character representations."""
+
     def __init__(self, string, char_map={}):
         """
         Args:
@@ -26,7 +27,7 @@ class VaryingString:
                 self._min_len += min(lens)
                 self._max_len += max(lens)
             else:
-                self._char_combos.append((char, ))
+                self._char_combos.append((char,))
                 self._min_len += 1
                 self._max_len += 1
 

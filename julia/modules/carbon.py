@@ -677,7 +677,7 @@ CARBONLANG = "en"
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client["test"]
 approved_users = db.approve
 
 
@@ -685,16 +685,17 @@ async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 
         return isinstance(
-            (await
-             tbot(functions.channels.GetParticipantRequest(chat,
-                                                           user))).participant,
+            (
+                await tbot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
         ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
-                         )).full_chat.participants.participants
+        ps = (
+            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -707,10 +708,10 @@ async def carbon_api(e):
     """this method of approve system is made by @AyushChatterjee, god will curse your family if you kang it motherfucker"""
     approved_userss = approved_users.find({})
     for ch in approved_userss:
-        iid = ch['id']
-        userss = ch['user']
+        iid = ch["id"]
+        userss = ch["user"]
     if e.is_group:
-        if (await is_register_admin(e.input_chat, e.message.sender_id)):
+        if await is_register_admin(e.input_chat, e.message.sender_id):
             pass
         elif e.chat_id == iid and e.from_id == userss:
             pass
@@ -736,8 +737,7 @@ async def carbon_api(e):
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    driver = webdriver.Chrome(executable_path=CHROME_DRIVER,
-                              options=chrome_options)
+    driver = webdriver.Chrome(executable_path=CHROME_DRIVER, options=chrome_options)
     driver.get(url)
     await gg.edit("`Processing..\n50%`")
     download_path = "./"
@@ -747,10 +747,7 @@ async def carbon_api(e):
     )
     params = {
         "cmd": "Page.setDownloadBehavior",
-        "params": {
-            "behavior": "allow",
-            "downloadPath": download_path
-        },
+        "params": {"behavior": "allow", "downloadPath": download_path},
     }
     command_result = driver.execute("send_command", params)
     driver.find_element_by_xpath("//button[contains(text(),'Export')]").click()

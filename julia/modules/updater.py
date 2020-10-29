@@ -669,19 +669,23 @@ import heroku3
 from julia.events import register
 from julia import OWNER_ID
 import os
+
 UPSTREAM_REPO_URL = "https://github.com/MissJuliaRobot/MissJuliaRobot.git"
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
 requirements_path = path.join(
-    path.dirname(path.dirname(path.dirname(__file__))), 'requirements.txt')
+    path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
+)
 
 
 async def gen_chlog(repo, diff):
-    ch_log = ''
+    ch_log = ""
     d_form = "%d/%m/%y"
     for c in repo.iter_commits(diff):
-        ch_log += f'•[{c.committed_datetime.strftime(d_form)}]: {c.summary} by <{c.author}>\n'
+        ch_log += (
+            f"•[{c.committed_datetime.strftime(d_form)}]: {c.summary} by <{c.author}>\n"
+        )
     return ch_log
 
 
@@ -689,9 +693,10 @@ async def updateme_requirements():
     reqs = str(requirements_path)
     try:
         process = await asyncio.create_subprocess_shell(
-            ' '.join([sys.executable, "-m", "pip", "install", "-r", reqs]),
+            " ".join([sys.executable, "-m", "pip", "install", "-r", reqs]),
             stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE)
+            stderr=asyncio.subprocess.PIPE,
+        )
         await process.communicate()
         return process.returncode
     except Exception as e:
@@ -716,11 +721,11 @@ async def upstream(ups):
         txt += "please add heroku apikey, name`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await lol.edit(f'{txt}\n`directory {error} is not found`')
+        await lol.edit(f"{txt}\n`directory {error} is not found`")
         repo.__del__()
         return
     except GitCommandError as error:
-        await lol.edit(f'{txt}\n`Early failure! {error}`')
+        await lol.edit(f"{txt}\n`Early failure! {error}`")
         repo.__del__()
         return
     except InvalidGitRepositoryError as error:
@@ -731,40 +736,43 @@ async def upstream(ups):
             )
             return
         repo = Repo.init()
-        origin = repo.create_remote('upstream', off_repo)
+        origin = repo.create_remote("upstream", off_repo)
         origin.fetch()
         force_update = True
-        repo.create_head('master', origin.refs.master)
+        repo.create_head("master", origin.refs.master)
         repo.heads.master.set_tracking_branch(origin.refs.master)
         repo.heads.master.checkout(True)
 
     ac_br = repo.active_branch.name
-    if ac_br != 'master':
+    if ac_br != "master":
         await lol.edit(
-            f'**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). '
-            'in that case, Updater is unable to identify '
-            'which branch is to be merged. '
-            'please checkout to any official branch`')
+            f"**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). "
+            "in that case, Updater is unable to identify "
+            "which branch is to be merged. "
+            "please checkout to any official branch`"
+        )
         repo.__del__()
         return
 
     try:
-        repo.create_remote('upstream', off_repo)
+        repo.create_remote("upstream", off_repo)
     except BaseException:
         pass
 
-    ups_rem = repo.remote('upstream')
+    ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
 
-    changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
+    changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
 
     if not changelog and not force_update:
-        await lol.edit('\n`Your bot is`  **up-to-date**  \n')
+        await lol.edit("\n`Your bot is`  **up-to-date**  \n")
         repo.__del__()
         return
 
     if conf != "now" and not force_update:
-        changelog_str = f'**New UPDATE available for {ac_br}\n\nCHANGELOG:**\n`{changelog}`'
+        changelog_str = (
+            f"**New UPDATE available for {ac_br}\n\nCHANGELOG:**\n`{changelog}`"
+        )
         if len(changelog_str) > 4096:
             await lol.edit("`Changelog is too big, view the file to see it.`")
             file = open("output.txt", "w+")
@@ -778,14 +786,13 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await lol.edit(changelog_str)
-        await ups.respond('**do** `/update now` **to update**')
+        await ups.respond("**do** `/update now` **to update**")
         return
 
     if force_update:
-        await lol.edit(
-            '`Force-Syncing to latest master bot code, please wait...`')
+        await lol.edit("`Force-Syncing to latest master bot code, please wait...`")
     else:
-        await lol.edit('`Still Running ....`')
+        await lol.edit("`Still Running ....`")
 
     if HEROKU_API_KEY is not None:
         heroku = heroku3.from_key(HEROKU_API_KEY)
@@ -793,7 +800,7 @@ async def upstream(ups):
         heroku_applications = heroku.apps()
         if not HEROKU_APP_NAME:
             await lol.edit(
-                '`Please set up the HEROKU_APP_NAME variable to be able to update your bot.`'
+                "`Please set up the HEROKU_APP_NAME variable to be able to update your bot.`"
             )
             repo.__del__()
             return
@@ -803,17 +810,19 @@ async def upstream(ups):
                 break
         if heroku_app is None:
             await lol.edit(
-                f'{txt}\n`Invalid Heroku credentials for updating userbot dyno.`'
+                f"{txt}\n`Invalid Heroku credentials for updating userbot dyno.`"
             )
             repo.__del__()
             return
-        await lol.edit('`[Updater]\
-                        Your bot is being deployed, please wait for it to complete.\nIt may take upto 5 minutes `'
-                       )
+        await lol.edit(
+            "`[Updater]\
+                        Your bot is being deployed, please wait for it to complete.\nIt may take upto 5 minutes `"
+        )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
-            "https://", "https://api:" + HEROKU_API_KEY + "@")
+            "https://", "https://api:" + HEROKU_API_KEY + "@"
+        )
         if "heroku" in repo.remotes:
             remote = repo.remote("heroku")
             remote.set_url(heroku_git_url)
@@ -822,10 +831,10 @@ async def upstream(ups):
         try:
             remote.push(refspec="HEAD:refs/heads/master", force=True)
         except GitCommandError as error:
-            await lol.edit(f'{txt}\n`Here is the error log:\n{error}`')
+            await lol.edit(f"{txt}\n`Here is the error log:\n{error}`")
             repo.__del__()
             return
-        await lol.edit('Successfully Updated!\n' 'Restarting.......')
+        await lol.edit("Successfully Updated!\n" "Restarting.......")
     else:
         # Classic Updater, pretty straightforward.
         try:
@@ -833,7 +842,7 @@ async def upstream(ups):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await updateme_requirements()
-        await lol.edit('`Successfully Updated!\n' 'restarting......`')
+        await lol.edit("`Successfully Updated!\n" "restarting......`")
         # Spin a new instance of bot
         args = [sys.executable, "-m", "julia"]
         execle(sys.executable, *args, environ)

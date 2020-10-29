@@ -709,23 +709,23 @@ def mute(update, context):
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text(
-                "Well i'm not gonna stop an admin from talking!")
+            message.reply_text("Well i'm not gonna stop an admin from talking!")
 
         elif member.can_send_messages is None or member.can_send_messages:
             context.bot.restrict_chat_member(
-                chat.id,
-                user_id,
-                permissions=ChatPermissions(can_send_messages=False))
+                chat.id, user_id, permissions=ChatPermissions(can_send_messages=False)
+            )
             message.reply_text("👍🏻 muted! 🤐")
-            return ("<b>{}:</b>"
-                    "\n#MUTE"
-                    "\n<b>Admin:</b> {}"
-                    "\n<b>User:</b> {}".format(
-                        html.escape(chat.title),
-                        mention_html(user.id, user.first_name),
-                        mention_html(member.user.id, member.user.first_name),
-                    ))
+            return (
+                "<b>{}:</b>"
+                "\n#MUTE"
+                "\n<b>Admin:</b> {}"
+                "\n<b>User:</b> {}".format(
+                    html.escape(chat.title),
+                    mention_html(user.id, user.first_name),
+                    mention_html(member.user.id, member.user.first_name),
+                )
+            )
 
         else:
             message.reply_text("This user is already taped 🤐")
@@ -755,9 +755,12 @@ def unmute(update, context):
     member = chat.get_member(int(user_id))
 
     if member.status != "kicked" and member.status != "left":
-        if (member.can_send_messages and member.can_send_media_messages
-                and member.can_send_other_messages
-                and member.can_add_web_page_previews):
+        if (
+            member.can_send_messages
+            and member.can_send_media_messages
+            and member.can_send_other_messages
+            and member.can_add_web_page_previews
+        ):
             message.reply_text("This user already has the right to speak.")
         else:
             context.bot.restrict_chat_member(
@@ -775,18 +778,21 @@ def unmute(update, context):
                 ),
             )
             message.reply_text("Yep! this user can start talking again...")
-            return ("<b>{}:</b>"
-                    "\n#UNMUTE"
-                    "\n<b>Admin:</b> {}"
-                    "\n<b>User:</b> {}".format(
-                        html.escape(chat.title),
-                        mention_html(user.id, user.first_name),
-                        mention_html(member.user.id, member.user.first_name),
-                    ))
+            return (
+                "<b>{}:</b>"
+                "\n#UNMUTE"
+                "\n<b>Admin:</b> {}"
+                "\n<b>User:</b> {}".format(
+                    html.escape(chat.title),
+                    mention_html(user.id, user.first_name),
+                    mention_html(member.user.id, member.user.first_name),
+                )
+            )
     else:
         message.reply_text(
             "This user isn't even in the chat, unmuting them won't make them talk more than they "
-            "already do!")
+            "already do!"
+        )
 
     return ""
 
@@ -825,8 +831,7 @@ def temp_mute(update, context):
         return ""
 
     if not reason:
-        message.reply_text(
-            "You haven't specified a time to mute this user for!")
+        message.reply_text("You haven't specified a time to mute this user for!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -842,16 +847,18 @@ def temp_mute(update, context):
     if not mutetime:
         return ""
 
-    log = ("<b>{}:</b>"
-           "\n#TEMP MUTED"
-           "\n<b>Admin:</b> {}"
-           "\n<b>User:</b> {}"
-           "\n<b>Time:</b> {}".format(
-               html.escape(chat.title),
-               mention_html(user.id, user.first_name),
-               mention_html(member.user.id, member.user.first_name),
-               time_val,
-           ))
+    log = (
+        "<b>{}:</b>"
+        "\n#TEMP MUTED"
+        "\n<b>Admin:</b> {}"
+        "\n<b>User:</b> {}"
+        "\n<b>Time:</b> {}".format(
+            html.escape(chat.title),
+            mention_html(user.id, user.first_name),
+            mention_html(member.user.id, member.user.first_name),
+            time_val,
+        )
+    )
     if reason:
         log += "\n<b>Reason:</b> {}".format(reason)
 
@@ -870,8 +877,7 @@ def temp_mute(update, context):
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text("shut up! 🤐 Taped for {}!".format(time_val),
-                               quote=False)
+            message.reply_text("shut up! 🤐 Taped for {}!".format(time_val), quote=False)
             return log
         LOGGER.warning(update)
         LOGGER.exception(
@@ -888,18 +894,11 @@ def temp_mute(update, context):
 
 __mod_name__ = "Muting"
 
-MUTE_HANDLER = CommandHandler("mute",
-                              mute,
-                              pass_args=True,
-                              filters=Filters.group)
-UNMUTE_HANDLER = CommandHandler("unmute",
-                                unmute,
-                                pass_args=True,
-                                filters=Filters.group)
-TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"],
-                                  temp_mute,
-                                  pass_args=True,
-                                  filters=Filters.group)
+MUTE_HANDLER = CommandHandler("mute", mute, pass_args=True, filters=Filters.group)
+UNMUTE_HANDLER = CommandHandler("unmute", unmute, pass_args=True, filters=Filters.group)
+TEMPMUTE_HANDLER = CommandHandler(
+    ["tmute", "tempmute"], temp_mute, pass_args=True, filters=Filters.group
+)
 
 dispatcher.add_handler(MUTE_HANDLER)
 dispatcher.add_handler(UNMUTE_HANDLER)

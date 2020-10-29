@@ -688,6 +688,7 @@ from julia.modules import ALL_MODULES
 from julia.modules.helper_funcs.chat_status import is_user_admin
 from julia.modules.helper_funcs.chat_status import user_admin
 from julia.modules.helper_funcs.misc import paginate_modules
+
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 
@@ -695,23 +696,27 @@ PM_START_TEXT = """
 [#include <std/disclaimer.h>](https://telegra.ph/MissJulieRobot-10-24)
 """
 
-buttons = [[
-    InlineKeyboardButton(text="Add to Group 👥",
-                         url="t.me/MissJuliaRobot?startgroup=true"),
-    InlineKeyboardButton(text="Support Group 🎙️",
-                         url="https://t.me/MissJuliaRobotSupport"),
-]]
+buttons = [
+    [
+        InlineKeyboardButton(
+            text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+        ),
+        InlineKeyboardButton(
+            text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+        ),
+    ]
+]
 
-buttons += [[
-    InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
-    InlineKeyboardButton(
-        text="Source 🌐",
-        url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
-]]
+buttons += [
+    [
+        InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
+        InlineKeyboardButton(
+            text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+        ),
+    ]
+]
 
-buttons += [[
-    InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")
-]]
+buttons += [[InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")]]
 
 HELP_STRINGS = """
 [#include <std/disclaimer.h>](https://telegra.ph/MissJulieRobot-10-24)
@@ -738,8 +743,7 @@ for module_name in ALL_MODULES:
     if not imported_module.__mod_name__.lower() in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception(
-            "Can't have two modules with the same name! Please change one")
+        raise Exception("Can't have two modules with the same name! Please change one")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
@@ -774,10 +778,9 @@ for module_name in ALL_MODULES:
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
-    dispatcher.bot.send_message(chat_id=chat_id,
-                                text=text,
-                                parse_mode=ParseMode.MARKDOWN,
-                                reply_markup=keyboard)
+    dispatcher.bot.send_message(
+        chat_id=chat_id, text=text, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard
+    )
 
 
 @run_async
@@ -794,11 +797,9 @@ def start(update, context):
                 chat = dispatcher.bot.getChat(match.group(1))
 
                 if is_user_admin(chat, update.effective_user.id):
-                    send_settings(match.group(1), update.effective_user.id,
-                                  False)
+                    send_settings(match.group(1), update.effective_user.id, False)
                 else:
-                    send_settings(match.group(1), update.effective_user.id,
-                                  True)
+                    send_settings(match.group(1), update.effective_user.id, True)
 
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
@@ -826,23 +827,27 @@ def send_start(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     first_name = update.effective_user.first_name
     text = PM_START_TEXT
-    buttons = [[
-        InlineKeyboardButton(text="Add to Group 👥",
-                             url="t.me/MissJuliaRobot?startgroup=true"),
-        InlineKeyboardButton(text="Support Group 🎙️",
-                             url="https://t.me/MissJuliaRobotSupport"),
-    ]]
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+            ),
+            InlineKeyboardButton(
+                text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+            ),
+        ]
+    ]
 
-    buttons += [[
-        InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
-        InlineKeyboardButton(
-            text="Source 🌐",
-            url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
-    ]]
+    buttons += [
+        [
+            InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
+            InlineKeyboardButton(
+                text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+            ),
+        ]
+    ]
 
-    buttons += [[
-        InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")
-    ]]
+    buttons += [[InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")]]
 
     update.effective_message.reply_text(
         PM_START_TEXT,
@@ -864,9 +869,7 @@ def start_stop(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     first_name = update.effective_user.first_name
     text = "The menu is closed 🔒"
-    buttons = [[
-        InlineKeyboardButton(text="Reopen Menu 🔑", callback_data="bot_start")
-    ]]
+    buttons = [[InlineKeyboardButton(text="Reopen Menu 🔑", callback_data="bot_start")]]
 
     update.effective_message.reply_text(
         text,
@@ -881,34 +884,31 @@ def error_handler(update, context):
     """Log the error and send a telegram message to notify the developer."""
     # Log the error before we do anything else, so we can see it even if
     # something breaks.
-    LOGGER.error(msg="Exception while handling an update:",
-                 exc_info=context.error)
+    LOGGER.error(msg="Exception while handling an update:", exc_info=context.error)
 
     # traceback.format_exception returns the usual python message about an exception, but as a
     # list of strings rather than a single string, so we have to join them
     # together.
-    tb_list = traceback.format_exception(None, context.error,
-                                         context.error.__traceback__)
+    tb_list = traceback.format_exception(
+        None, context.error, context.error.__traceback__
+    )
     tb = "".join(tb_list)
 
     # Build the message with some markup and additional information about what
     # happened.
-    message = ("An exception was raised while handling an update\n"
-               "<pre>update = {}</pre>\n\n"
-               "<pre>{}</pre>").format(
-                   html.escape(
-                       json.dumps(update.to_dict(),
-                                  indent=2,
-                                  ensure_ascii=False)),
-                   html.escape(tb),
-               )
+    message = (
+        "An exception was raised while handling an update\n"
+        "<pre>update = {}</pre>\n\n"
+        "<pre>{}</pre>"
+    ).format(
+        html.escape(json.dumps(update.to_dict(), indent=2, ensure_ascii=False)),
+        html.escape(tb),
+    )
 
     if len(message) >= 4096:
         message = message[:4096]
     # Finally, send the message
-    context.bot.send_message(chat_id=OWNER_ID,
-                             text=message,
-                             parse_mode=ParseMode.HTML)
+    context.bot.send_message(chat_id=OWNER_ID, text=message, parse_mode=ParseMode.HTML)
 
 
 @run_async
@@ -921,15 +921,18 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = ("Here is the help for the *{}* module:\n".format(
-                HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
+            text = (
+                "Here is the help for the *{}* module:\n".format(
+                    HELPABLE[module].__mod_name__
+                )
+                + HELPABLE[module].__help__
+            )
             query.message.edit_text(
                 text=text,
                 parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton(text="🔙 Back",
-                                         callback_data="help_back")
-                ]]),
+                reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton(text="🔙 Back", callback_data="help_back")]]
+                ),
             )
 
         elif prev_match:
@@ -938,7 +941,8 @@ def help_button(update, context):
                 HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(curr_page - 1, HELPABLE, "help")),
+                    paginate_modules(curr_page - 1, HELPABLE, "help")
+                ),
             )
 
         elif next_match:
@@ -947,7 +951,8 @@ def help_button(update, context):
                 HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(next_page + 1, HELPABLE, "help")),
+                    paginate_modules(next_page + 1, HELPABLE, "help")
+                ),
             )
 
         elif back_match:
@@ -955,7 +960,8 @@ def help_button(update, context):
                 text=HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(0, HELPABLE, "help")),
+                    paginate_modules(0, HELPABLE, "help")
+                ),
             )
 
         # ensure no spinny white circle
@@ -984,25 +990,33 @@ def get_help(update, context):
 
         update.effective_message.reply_text(
             "Contact me in PM to get the list of possible commands.",
-            reply_markup=InlineKeyboardMarkup([[
-                InlineKeyboardButton(
-                    text="Help",
-                    url="t.me/{}?start=help".format(context.bot.username),
-                )
-            ]]),
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Help",
+                            url="t.me/{}?start=help".format(context.bot.username),
+                        )
+                    ]
+                ]
+            ),
         )
         return
 
     if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = ("Here is the available help for the *{}* module:\n".format(
-            HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
+        text = (
+            "Here is the available help for the *{}* module:\n".format(
+                HELPABLE[module].__mod_name__
+            )
+            + HELPABLE[module].__help__
+        )
         send_help(
             chat.id,
             text,
-            InlineKeyboardMarkup([[
-                InlineKeyboardButton(text="Back", callback_data="help_back")
-            ]]),
+            InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
+            ),
         )
 
     else:
@@ -1032,15 +1046,12 @@ def main():
     start_handler = CommandHandler("start", start, pass_args=True)
     help_handler = CommandHandler("help", get_help)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_")
-    start_callback_handler = CallbackQueryHandler(send_start,
-                                                  pattern=r"bot_start")
+    start_callback_handler = CallbackQueryHandler(send_start, pattern=r"bot_start")
     dispatcher.add_handler(start_callback_handler)
-    startstop_callback_handler = CallbackQueryHandler(start_stop,
-                                                      pattern=r"close_menu")
+    startstop_callback_handler = CallbackQueryHandler(start_stop, pattern=r"close_menu")
     dispatcher.add_handler(startstop_callback_handler)
 
-    migrate_handler = MessageHandler(Filters.status_update.migrate,
-                                     migrate_chats)
+    migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(help_callback_handler)

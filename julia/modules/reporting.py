@@ -704,12 +704,12 @@ def report_setting(update, context):
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text(
-                    "Turned off reporting! You wont get any reports.")
+                msg.reply_text("Turned off reporting! You wont get any reports.")
         else:
             msg.reply_text(
                 "Your current report preference is: `{}`".format(
-                    sql.user_should_report(chat.id)),
+                    sql.user_should_report(chat.id)
+                ),
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -719,7 +719,8 @@ def report_setting(update, context):
                 sql.set_chat_setting(chat.id, True)
                 msg.reply_text(
                     "Turned on reporting! Admins who have turned on reports will be notified when /report "
-                    "or @admin are called.")
+                    "or @admin are called."
+                )
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
@@ -729,7 +730,8 @@ def report_setting(update, context):
         else:
             msg.reply_text(
                 "This chat's current setting is: `{}`".format(
-                    sql.chat_should_report(chat.id)),
+                    sql.chat_should_report(chat.id)
+                ),
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -776,25 +778,21 @@ def report(update, context) -> str:
                 [
                     InlineKeyboardButton(
                         "💬 Message",
-                        url=
-                        f"https://t.me/{chat.username}/{message.reply_to_message.message_id}",
+                        url=f"https://t.me/{chat.username}/{message.reply_to_message.message_id}",
                     ),
                     InlineKeyboardButton(
                         "⚽ Kick",
-                        callback_data=
-                        f"report_{chat.id}=kick={reported_user.id}={reported_user.first_name}",
+                        callback_data=f"report_{chat.id}=kick={reported_user.id}={reported_user.first_name}",
                     ),
                 ],
                 [
                     InlineKeyboardButton(
                         "⛔️ Ban",
-                        callback_data=
-                        f"report_{chat.id}=banned={reported_user.id}={reported_user.first_name}",
+                        callback_data=f"report_{chat.id}=banned={reported_user.id}={reported_user.first_name}",
                     ),
                     InlineKeyboardButton(
                         "❎ Delete Message",
-                        callback_data=
-                        f"report_{chat.id}=delete={reported_user.id}={message.reply_to_message.message_id}",
+                        callback_data=f"report_{chat.id}=delete={reported_user.id}={message.reply_to_message.message_id}",
                     ),
                 ],
             ]
@@ -822,7 +820,7 @@ def report(update, context) -> str:
                         message.reply_to_message.forward(admin.user.id)
 
                         if (
-                                len(message.text.split()) > 1
+                            len(message.text.split()) > 1
                         ):  # If user is giving a reason, send his message too
                             message.forward(admin.user.id)
 
@@ -832,11 +830,11 @@ def report(update, context) -> str:
                     if excp.message == "Message_id_invalid":
                         pass
                     else:
-                        LOGGER.exception("Exception while reporting user " +
-                                         excp.message)
+                        LOGGER.exception(
+                            "Exception while reporting user " + excp.message
+                        )
 
-        message.reply_to_message.reply_text(reported,
-                                            parse_mode=ParseMode.HTML)
+        message.reply_to_message.reply_text(reported, parse_mode=ParseMode.HTML)
         return msg
 
     return ""
@@ -890,12 +888,14 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     return "This chat is setup to send user reports to admins, via /report and @admin: `{}`".format(
-        sql.chat_should_report(chat_id))
+        sql.chat_should_report(chat_id)
+    )
 
 
 def __user_settings__(user_id):
     return "You receive reports from chats you're admin in: `{}`.\nToggle this with /reports in PM.".format(
-        sql.user_should_report(user_id))
+        sql.user_should_report(user_id)
+    )
 
 
 __mod_name__ = "Reporting"
@@ -903,8 +903,7 @@ __mod_name__ = "Reporting"
 REPORT_HANDLER = CommandHandler("report", report, filters=Filters.group)
 SETTING_HANDLER = CommandHandler("reports", report_setting, pass_args=True)
 ADMIN_REPORT_HANDLER = MessageHandler(Filters.regex("(?i)@admin(s)?"), report)
-REPORT_BUTTON_HANDLER = CallbackQueryHandler(report_buttons,
-                                             pattern=r"report_")
+REPORT_BUTTON_HANDLER = CallbackQueryHandler(report_buttons, pattern=r"report_")
 
 dispatcher.add_handler(REPORT_HANDLER, REPORT_GROUP)
 dispatcher.add_handler(ADMIN_REPORT_HANDLER, REPORT_GROUP)

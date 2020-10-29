@@ -796,8 +796,9 @@ def bmoji(update, context):
     else:
         # choose a random character in the message to be substituted with 🅱️
         b_char = random.choice(message.reply_to_message.text).lower()
-        reply_text = message.reply_to_message.text.replace(
-            b_char, "🅱️").replace(b_char.upper(), "🅱️")
+        reply_text = message.reply_to_message.text.replace(b_char, "🅱️").replace(
+            b_char.upper(), "🅱️"
+        )
         message.reply_to_message.reply_text(reply_text)
 
 
@@ -822,8 +823,9 @@ def stretch(update, context):
         message.reply_text("I need a message to meme.")
     else:
         count = random.randint(3, 10)
-        reply_text = re.sub(r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵ])", (r"\1" * count),
-                            message.reply_to_message.text)
+        reply_text = re.sub(
+            r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵ])", (r"\1" * count), message.reply_to_message.text
+        )
         message.reply_to_message.reply_text(reply_text)
 
 
@@ -834,8 +836,7 @@ def vapor(update, context):
     args = context.args
     if not message.reply_to_message:
         if not args:
-            message.reply_text(
-                "I need a message to convert to vaporwave text.")
+            message.reply_text("I need a message to convert to vaporwave text.")
         else:
             noreply = True
             data = message.text.split(None, 1)[1]
@@ -863,8 +864,7 @@ def zalgotext(update, context):
     if message.reply_to_message:
         data = message.reply_to_message.text
     else:
-        data = str(
-            "Insolant human, you must reply to something to zalgofy it!")
+        data = str("Insolant human, you must reply to something to zalgofy it!")
 
     reply_text = zalgo.zalgo().zalgofy(data)
     message.reply_text(reply_text)
@@ -931,17 +931,14 @@ def deepfryer(update, context):
 
     # the following needs to be executed async (because dumb lib)
     loop = asyncio.new_event_loop()
-    loop.run_until_complete(
-        process_deepfry(image, message.reply_to_message, bot))
+    loop.run_until_complete(process_deepfry(image, message.reply_to_message, bot))
     loop.close()
 
 
 async def process_deepfry(image: Image, reply: Message, context):
     # DEEPFRY IT
     bot = context.bot
-    image = await deepfry(img=image,
-                          token=DEEPFRY_TOKEN,
-                          url_base="westeurope")
+    image = await deepfry(img=image, token=DEEPFRY_TOKEN, url_base="westeurope")
 
     bio = BytesIO()
     bio.name = "image.jpeg"

@@ -725,14 +725,16 @@ def promote(update, context):
     )
 
     message.reply_text("Promoted🧡")
-    return ("<b>{}:</b>"
-            "\n#PROMOTED"
-            "\n<b>Admin:</b> {}"
-            "\n<b>User:</b> {}".format(
-                html.escape(chat.title),
-                mention_html(user.id, user.first_name),
-                mention_html(user_member.user.id, user_member.user.first_name),
-            ))
+    return (
+        "<b>{}:</b>"
+        "\n#PROMOTED"
+        "\n<b>Admin:</b> {}"
+        "\n<b>User:</b> {}".format(
+            html.escape(chat.title),
+            mention_html(user.id, user.first_name),
+            mention_html(user_member.user.id, user_member.user.first_name),
+        )
+    )
 
 
 @run_async
@@ -758,7 +760,8 @@ def demote(update, context):
 
     if not user_member.status == "administrator":
         message.reply_text(
-            "How I'm supposed to demote someone who is not even an admin!")
+            "How I'm supposed to demote someone who is not even an admin!"
+        )
         return ""
 
     if user_id == context.bot.id:
@@ -778,20 +781,22 @@ def demote(update, context):
             can_pin_messages=False,
         )
         message.reply_text("Successfully demoted!")
-        return ("<b>{}:</b>"
-                "\n#DEMOTED"
-                "\n<b>Admin:</b> {}"
-                "\n<b>User:</b> {}".format(
-                    html.escape(chat.title),
-                    mention_html(user.id, user.first_name),
-                    mention_html(user_member.user.id,
-                                 user_member.user.first_name),
-                ))
+        return (
+            "<b>{}:</b>"
+            "\n#DEMOTED"
+            "\n<b>Admin:</b> {}"
+            "\n<b>User:</b> {}".format(
+                html.escape(chat.title),
+                mention_html(user.id, user.first_name),
+                mention_html(user_member.user.id, user_member.user.first_name),
+            )
+        )
 
     except BadRequest:
         message.reply_text(
             "Failed to demote. I might not be admin, or the admin status was appointed by another "
-            "user, so I can't act upon them!")
+            "user, so I can't act upon them!"
+        )
         return ""
 
 
@@ -812,24 +817,29 @@ def pin(update, context):
 
     is_silent = True
     if len(args) >= 1:
-        is_silent = not (args[0].lower() == "notify" or args[0].lower()
-                         == "loud" or args[0].lower() == "violent")
+        is_silent = not (
+            args[0].lower() == "notify"
+            or args[0].lower() == "loud"
+            or args[0].lower() == "violent"
+        )
 
     if prev_message and is_group:
         try:
-            context.bot.pinChatMessage(chat.id,
-                                       prev_message.message_id,
-                                       disable_notification=is_silent)
+            context.bot.pinChatMessage(
+                chat.id, prev_message.message_id, disable_notification=is_silent
+            )
         except BadRequest as excp:
             if excp.message == "Chat_not_modified":
                 pass
             else:
                 raise
-        return ("<b>{}:</b>"
-                "\n#PINNED"
-                "\n<b>Admin:</b> {}".format(
-                    html.escape(chat.title),
-                    mention_html(user.id, user.first_name)))
+        return (
+            "<b>{}:</b>"
+            "\n#PINNED"
+            "\n<b>Admin:</b> {}".format(
+                html.escape(chat.title), mention_html(user.id, user.first_name)
+            )
+        )
 
     return ""
 
@@ -851,11 +861,13 @@ def unpin(update, context):
         else:
             raise
 
-    return ("<b>{}:</b>"
-            "\n#UNPINNED"
-            "\n<b>Admin:</b> {}".format(html.escape(chat.title),
-                                        mention_html(user.id,
-                                                     user.first_name)))
+    return (
+        "<b>{}:</b>"
+        "\n#UNPINNED"
+        "\n<b>Admin:</b> {}".format(
+            html.escape(chat.title), mention_html(user.id, user.first_name)
+        )
+    )
 
 
 @run_async
@@ -892,8 +904,7 @@ def invite(update, context):
 @user_admin
 def adminlist(update, context):
     administrators = update.effective_chat.get_administrators()
-    text = "Admins in <b>{}</b>:".format(update.effective_chat.title
-                                         or "this chat")
+    text = "Admins in <b>{}</b>:".format(update.effective_chat.title or "this chat")
     for admin in administrators:
         user = admin.user
         status = admin.status
@@ -957,17 +968,16 @@ def set_title(update, context):
         )
 
     try:
-        context.bot.set_chat_administrator_custom_title(
-            chat.id, user_id, title)
+        context.bot.set_chat_administrator_custom_title(chat.id, user_id, title)
         message.reply_text(
             "Sucessfully set title for <b>{}</b> to <code>{}</code>!".format(
-                user_member.user.first_name or user_id, title[:16]),
+                user_member.user.first_name or user_id, title[:16]
+            ),
             parse_mode=ParseMode.HTML,
         )
 
     except BadRequest:
-        message.reply_text(
-            "I can't set custom title for admins that I didn't promote!")
+        message.reply_text("I can't set custom title for admins that I didn't promote!")
 
 
 @run_async
@@ -1055,12 +1065,12 @@ def set_sticker(update, context):
     if msg.reply_to_message:
         if not msg.reply_to_message.sticker:
             return msg.reply_text(
-                "You need to reply to some sticker to set chat sticker set!")
+                "You need to reply to some sticker to set chat sticker set!"
+            )
         stkr = msg.reply_to_message.sticker.set_name
         try:
             context.bot.set_chat_sticker_set(chat.id, stkr)
-            msg.reply_text(
-                f"Successfully set new group stickers in {chat.title}!")
+            msg.reply_text(f"Successfully set new group stickers in {chat.title}!")
         except BadRequest as excp:
             if excp.message == "Participants_too_few":
                 return msg.reply_text(
@@ -1068,8 +1078,7 @@ def set_sticker(update, context):
                 )
             msg.reply_text(f"Error! {excp.message}.")
     else:
-        msg.reply_text(
-            "You need to reply to some sticker to set chat sticker set!")
+        msg.reply_text("You need to reply to some sticker to set chat sticker set!")
 
 
 @run_async
@@ -1087,19 +1096,18 @@ def set_desc(update, context):
         return msg.reply_text("Setting empty description won't do anything!")
     try:
         if len(desc) > 255:
-            return msg.reply_text(
-                "Description must needs to be under 255 characters!")
+            return msg.reply_text("Description must needs to be under 255 characters!")
         context.bot.set_chat_description(chat.id, desc)
-        msg.reply_text(
-            f"Successfully updated chat description in {chat.title}!")
+        msg.reply_text(f"Successfully updated chat description in {chat.title}!")
     except BadRequest as excp:
         msg.reply_text(f"Error! {excp.message}.")
 
 
 def __chat_settings__(chat_id, user_id):
     return "You are *admin*: `{}`".format(
-        dispatcher.bot.get_chat_member(chat_id, user_id).status in (
-            "administrator", "creator"))
+        dispatcher.bot.get_chat_member(chat_id, user_id).status
+        in ("administrator", "creator")
+    )
 
 
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
@@ -1107,32 +1115,20 @@ UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
 
 INVITE_HANDLER = CommandHandler("invitelink", invite)
 CHAT_PIC_HANDLER = CommandHandler("setgpic", setchatpic, filters=Filters.group)
-DEL_CHAT_PIC_HANDLER = CommandHandler("delgpic",
-                                      rmchatpic,
-                                      filters=Filters.group)
-SETCHAT_TITLE_HANDLER = CommandHandler("setgtitle",
-                                       setchat_title,
-                                       filters=Filters.group)
-SETSTICKET_HANDLER = CommandHandler("setsticker",
-                                    set_sticker,
-                                    filters=Filters.group)
-SETDESC_HANDLER = CommandHandler("setdescription",
-                                 set_desc,
-                                 filters=Filters.group)
+DEL_CHAT_PIC_HANDLER = CommandHandler("delgpic", rmchatpic, filters=Filters.group)
+SETCHAT_TITLE_HANDLER = CommandHandler(
+    "setgtitle", setchat_title, filters=Filters.group
+)
+SETSTICKET_HANDLER = CommandHandler("setsticker", set_sticker, filters=Filters.group)
+SETDESC_HANDLER = CommandHandler("setdescription", set_desc, filters=Filters.group)
 
-PROMOTE_HANDLER = CommandHandler("promote",
-                                 promote,
-                                 pass_args=True,
-                                 filters=Filters.group)
-DEMOTE_HANDLER = CommandHandler("demote",
-                                demote,
-                                pass_args=True,
-                                filters=Filters.group)
+PROMOTE_HANDLER = CommandHandler(
+    "promote", promote, pass_args=True, filters=Filters.group
+)
+DEMOTE_HANDLER = CommandHandler("demote", demote, pass_args=True, filters=Filters.group)
 
 SET_TITLE_HANDLER = CommandHandler("settitle", set_title, pass_args=True)
-ADMINLIST_HANDLER = CommandHandler("adminlist",
-                                   adminlist,
-                                   filters=Filters.group)
+ADMINLIST_HANDLER = CommandHandler("adminlist", adminlist, filters=Filters.group)
 
 dispatcher.add_handler(PIN_HANDLER)
 dispatcher.add_handler(UNPIN_HANDLER)

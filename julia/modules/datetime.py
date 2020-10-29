@@ -33,8 +33,8 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 day_fmt = r"%A"
                 gmt_offset = zone["gmtOffset"]
                 timestamp = datetime.datetime.now(
-                    datetime.timezone.utc) + datetime.timedelta(
-                        seconds=gmt_offset)
+                    datetime.timezone.utc
+                ) + datetime.timedelta(seconds=gmt_offset)
                 current_date = timestamp.strftime(date_fmt)
                 current_time = timestamp.strftime(time_fmt)
                 current_day = timestamp.strftime(day_fmt)
@@ -42,13 +42,15 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 break
 
     try:
-        result = (f"<b>🌍Country :</b> <code>{country_name}</code>\n"
-                  f"<b>⏳Zone Name :</b> <code>{country_zone}</code>\n"
-                  f"<b>🗺Country Code :</b> <code>{country_code}</code>\n"
-                  f"<b>🌞Daylight saving :</b> <code>{daylight_saving}</code>\n"
-                  f"<b>🌅Day :</b> <code>{current_day}</code>\n"
-                  f"<b>⌚Current Time :</b> <code>{current_time}</code>\n"
-                  f"<b>📆Current Date :</b> <code>{current_date}</code>")
+        result = (
+            f"<b>🌍Country :</b> <code>{country_name}</code>\n"
+            f"<b>⏳Zone Name :</b> <code>{country_zone}</code>\n"
+            f"<b>🗺Country Code :</b> <code>{country_code}</code>\n"
+            f"<b>🌞Daylight saving :</b> <code>{daylight_saving}</code>\n"
+            f"<b>🌅Day :</b> <code>{current_day}</code>\n"
+            f"<b>⌚Current Time :</b> <code>{current_time}</code>\n"
+            f"<b>📆Current Date :</b> <code>{current_date}</code>"
+        )
     except BaseException:
         result = None
 
@@ -63,11 +65,11 @@ def gettime(update: Update, context: CallbackContext):
     try:
         query = message.text.strip().split(" ", 1)[1]
     except BaseException:
-        message.reply_text(
-            "Provide a country name/abbreviation/timezone to find.")
+        message.reply_text("Provide a country name/abbreviation/timezone to find.")
         return
     send_message = message.reply_text(
-        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML)
+        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML
+    )
 
     query_timezone = query.lower()
     if len(query_timezone) == 2:
@@ -77,8 +79,8 @@ def gettime(update: Update, context: CallbackContext):
 
     if not result:
         send_message.edit_text(
-            f"Timezone info not available for <b>{query}</b>",
-            parse_mode=ParseMode.HTML)
+            f"Timezone info not available for <b>{query}</b>", parse_mode=ParseMode.HTML
+        )
         return
 
     send_message.edit_text(result, parse_mode=ParseMode.HTML)

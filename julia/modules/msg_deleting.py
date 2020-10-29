@@ -673,13 +673,15 @@ async def can_del(message):
         functions.channels.GetParticipantRequest(
             channel=message.chat_id,
             user_id=message.sender_id,
-        ))
+        )
+    )
     p = result.participant
-    return isinstance(p, types.ChannelParticipantCreator) or (isinstance(
-        p, types.ChannelParticipantAdmin) and p.admin_rights.delete_messages)
+    return isinstance(p, types.ChannelParticipantCreator) or (
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.delete_messages
+    )
 
 
-#------ THANKS TO LONAMI ------#
+# ------ THANKS TO LONAMI ------#
 
 
 @tbot.on(events.NewMessage(pattern="^/purge$"))
@@ -693,8 +695,7 @@ async def purge_messages(event):
 
     reply_msg = await event.get_reply_message()
     if not reply_msg:
-        await event.reply(
-            "Reply to a message to select where to start purging from.")
+        await event.reply("Reply to a message to select where to start purging from.")
         return
     messages = []
     message_id = reply_msg.id
@@ -717,7 +718,7 @@ async def purge_messages(event):
         return
     time_ = time.perf_counter() - start
     text = f"Purged Successfully in {time_:0.2f} Second(s)"
-    await event.respond(text, parse_mode='markdown')
+    await event.respond(text, parse_mode="markdown")
 
 
 @tbot.on(events.NewMessage(pattern="^/del$"))

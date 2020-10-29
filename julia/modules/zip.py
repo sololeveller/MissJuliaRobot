@@ -673,7 +673,7 @@ from julia import MONGO_DB_URI
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client["test"]
 approved_users = db.approve
 
 
@@ -681,16 +681,17 @@ async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 
         return isinstance(
-            (await
-             tbot(functions.channels.GetParticipantRequest(chat,
-                                                           user))).participant,
+            (
+                await tbot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
         ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
-                         )).full_chat.participants.participants
+        ps = (
+            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -703,8 +704,7 @@ async def _(event):
     if event.fwd_from:
         return
     if event.is_group:
-        if (await is_register_admin(event.input_chat,
-                                    event.message.sender_id)):
+        if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -716,8 +716,8 @@ async def _(event):
         return
     approved_userss = approved_users.find({})
     for ch in approved_userss:
-        iid = ch['id']
-        userss = ch['user']
+        iid = ch["id"]
+        userss = ch["user"]
 
     mone = await event.reply("Processing ...")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -727,12 +727,14 @@ async def _(event):
         try:
             c_time = time.time()
             downloaded_file_name = await event.client.download_media(
-                reply_message, TEMP_DOWNLOAD_DIRECTORY)
+                reply_message, TEMP_DOWNLOAD_DIRECTORY
+            )
             directory_name = downloaded_file_name
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.reply(str(e))
-    zipfile.ZipFile(directory_name + ".zip", "w",
-                    zipfile.ZIP_DEFLATED).write(directory_name)
+    zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
+        directory_name
+    )
     await event.client.send_file(
         event.chat_id,
         directory_name + ".zip",

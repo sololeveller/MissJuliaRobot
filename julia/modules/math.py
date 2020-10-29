@@ -676,10 +676,10 @@ def simplify(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/simplify/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/simplify/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -689,10 +689,10 @@ def factor(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/factor/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/factor/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -702,10 +702,10 @@ def derive(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/derive/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/derive/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -715,10 +715,10 @@ def integrate(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/integrate/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/integrate/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -728,10 +728,10 @@ def zeroes(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/zeroes/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/zeroes/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -741,10 +741,10 @@ def tangent(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/tangent/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/tangent/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 
@@ -754,10 +754,10 @@ def area(update: Update, context: CallbackContext):
     arg = context.args
     args = "".join(arg)
     message = update.effective_message
-    response = requests.get(f'https://newton.now.sh/api/v2/area/{args}')
+    response = requests.get(f"https://newton.now.sh/api/v2/area/{args}")
     c = response.text
     obj = json.loads(c)
-    j = obj['result']
+    j = obj["result"]
     message.reply_text(j)
 
 

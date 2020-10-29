@@ -660,6 +660,7 @@
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
 import html
+
 # AI module using Intellivoid's Coffeehouse API by @TheRealPhoenix
 from time import sleep, time
 
@@ -671,8 +672,13 @@ from julia import LYDIA_API_KEY, OWNER_ID, dispatcher
 from julia.modules.helper_funcs.chat_status import user_can_change
 from julia.modules.log_channel import loggable
 from telegram import Update
-from telegram.ext import (CallbackContext, CommandHandler, Filters,
-                          MessageHandler, run_async)
+from telegram.ext import (
+    CallbackContext,
+    CommandHandler,
+    Filters,
+    MessageHandler,
+    run_async,
+)
 from telegram.utils.helpers import mention_html
 
 CoffeeHouseAPI = API(LYDIA_API_KEY)
@@ -694,9 +700,11 @@ def add_chat(update: Update, context: CallbackContext):
         expires = str(ses.expires)
         sql.set_ses(chat.id, ses_id, expires)
         msg.reply_text("AI successfully enabled for this chat!")
-        message = (f"<b>{html.escape(chat.title)}:</b>\n"
-                   f"#AI_ENABLED\n"
-                   f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
+        message = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#AI_ENABLED\n"
+            f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+        )
         return message
     msg.reply_text("AI is already enabled for this chat!")
     return ""
@@ -715,9 +723,11 @@ def remove_chat(update: Update, context: CallbackContext):
         return ""
     sql.rem_chat(chat.id)
     msg.reply_text("AI disabled successfully!")
-    message = (f"<b>{html.escape(chat.title)}:</b>\n"
-               f"#AI_DISABLED\n"
-               f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
+    message = (
+        f"<b>{html.escape(chat.title)}:</b>\n"
+        f"#AI_DISABLED\n"
+        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+    )
     return message
 
 
@@ -756,20 +766,21 @@ def chatbot(update: Update, context: CallbackContext):
         except ValueError:
             pass
         try:
-            bot.send_chat_action(chat_id, action='typing')
+            bot.send_chat_action(chat_id, action="typing")
             rep = api_client.think_thought(sesh, query)
             sleep(0.3)
             msg.reply_text(rep, timeout=60)
         except CFError as e:
-            bot.send_message(OWNER_ID,
-                             f"Chatbot error: {e} occurred in {chat_id}!")
+            bot.send_message(OWNER_ID, f"Chatbot error: {e} occurred in {chat_id}!")
 
 
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat)
 REMOVE_CHAT_HANDLER = CommandHandler("rmchat", remove_chat)
 CHATBOT_HANDLER = MessageHandler(
-    Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
-                    & ~Filters.regex(r"^\/")), chatbot)
+    Filters.text
+    & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!") & ~Filters.regex(r"^\/")),
+    chatbot,
+)
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(REMOVE_CHAT_HANDLER)

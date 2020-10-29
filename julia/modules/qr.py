@@ -675,30 +675,34 @@ from julia import MONGO_DB_URI
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client["test"]
 approved_users = db.approve
 
 
 def progress(current, total):
     """ Calculate and return the download progress with given arguments. """
-    print("Downloaded {} of {}\nCompleted {}".format(current, total,
-                                                     (current / total) * 100))
+    print(
+        "Downloaded {} of {}\nCompleted {}".format(
+            current, total, (current / total) * 100
+        )
+    )
 
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 
         return isinstance(
-            (await
-             tbot(functions.channels.GetParticipantRequest(chat,
-                                                           user))).participant,
+            (
+                await tbot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
         ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
-                         )).full_chat.participants.participants
+        ps = (
+            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -714,10 +718,10 @@ async def parseqr(qr_e):
 
     approved_userss = approved_users.find({})
     for ch in approved_userss:
-        iid = ch['id']
-        userss = ch['user']
+        iid = ch["id"]
+        userss = ch["user"]
 
-    if (await is_register_admin(qr_e.input_chat, qr_e.message.sender_id)):
+    if await is_register_admin(qr_e.input_chat, qr_e.message.sender_id):
         pass
     elif qr_e.chat_id == iid and qr_e.from_id == userss:
         pass
@@ -726,7 +730,8 @@ async def parseqr(qr_e):
 
     start = datetime.now()
     downloaded_file_name = await qr_e.client.download_media(
-        await qr_e.get_reply_message(), progress_callback=progress)
+        await qr_e.get_reply_message(), progress_callback=progress
+    )
     url = "https://api.qrserver.com/v1/read-qr-code/?outputformat=json"
     file = open(downloaded_file_name, "rb")
     files = {"file": file}
@@ -736,8 +741,9 @@ async def parseqr(qr_e):
     os.remove(downloaded_file_name)
     end = datetime.now()
     duration = (end - start).seconds
-    await qr_e.reply("Obtained QRCode contents in {} seconds.\n{}".format(
-        duration, qr_contents))
+    await qr_e.reply(
+        "Obtained QRCode contents in {} seconds.\n{}".format(duration, qr_contents)
+    )
 
 
 @register(pattern=r"^/makeqr(?: |$)([\s\S]*)")
@@ -747,10 +753,10 @@ async def make_qr(qrcode):
         return
     approved_userss = approved_users.find({})
     for ch in approved_userss:
-        iid = ch['id']
-        userss = ch['user']
+        iid = ch["id"]
+        userss = ch["user"]
 
-    if (await is_register_admin(qrcode.input_chat, qrcode.message.sender_id)):
+    if await is_register_admin(qrcode.input_chat, qrcode.message.sender_id):
         pass
     elif qrcode.chat_id == iid and qrcode.from_id == userss:
         pass
@@ -767,7 +773,8 @@ async def make_qr(qrcode):
         reply_msg_id = previous_message.id
         if previous_message.media:
             downloaded_file_name = await qrcode.client.download_media(
-                previous_message, progress_callback=progress)
+                previous_message, progress_callback=progress
+            )
             m_list = None
             with open(downloaded_file_name, "rb") as file:
                 m_list = file.readlines()

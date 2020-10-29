@@ -878,9 +878,11 @@ def toss(update, context):
 @user_admin
 def abuse(update, context):
     # reply to correct message
-    reply_text = (update.effective_message.reply_to_message.reply_text
-                  if update.effective_message.reply_to_message else
-                  update.effective_message.reply_text)
+    reply_text = (
+        update.effective_message.reply_to_message.reply_text
+        if update.effective_message.reply_to_message
+        else update.effective_message.reply_text
+    )
     reply_text(random.choice(ABUSE_STRINGS))
 
 
@@ -888,9 +890,11 @@ def abuse(update, context):
 @user_admin
 def bluetext(update, context):
     # reply to correct message
-    reply_text = (update.effective_message.reply_to_message.reply_text
-                  if update.effective_message.reply_to_message else
-                  update.effective_message.reply_text)
+    reply_text = (
+        update.effective_message.reply_to_message.reply_text
+        if update.effective_message.reply_to_message
+        else update.effective_message.reply_text
+    )
     reply_text(
         "BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS"
     )
@@ -925,7 +929,8 @@ def table(update, context):
         update.message.reply_text("Send money bsdk to buy new table to flip")
     else:
         update.message.reply_text(
-            "Go do some work instead of flippin tables you helpless fagit.")
+            "Go do some work instead of flippin tables you helpless fagit."
+        )
 
 
 ABUSE_HANDLER = CommandHandler("abuse", abuse)

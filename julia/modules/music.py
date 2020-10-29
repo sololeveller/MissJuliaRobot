@@ -672,7 +672,7 @@ from julia import MONGO_DB_URI
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client["test"]
 approved_users = db.approve
 
 
@@ -680,16 +680,17 @@ async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 
         return isinstance(
-            (await
-             tbot(functions.channels.GetParticipantRequest(chat,
-                                                           user))).participant,
+            (
+                await tbot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
         ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
-                         )).full_chat.participants.participants
+        ps = (
+            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+        ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
@@ -704,11 +705,10 @@ async def _(event):
     """this method of approve system is made by @AyushChatterjee, god will curse your family if you kang it motherfucker"""
     approved_userss = approved_users.find({})
     for ch in approved_userss:
-        iid = ch['id']
-        userss = ch['user']
+        iid = ch["id"]
+        userss = ch["user"]
     if event.is_group:
-        if (await is_register_admin(event.input_chat,
-                                    event.message.sender_id)):
+        if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -723,19 +723,20 @@ async def _(event):
     try:
         subprocess.run(["spotdl", "-s", cmnd, "-q", "best"])
         subprocess.run(
-            'for f in *.opus; do      mv -- "$f" "${f%.opus}.mp3"; done',
-            shell=True)
+            'for f in *.opus; do      mv -- "$f" "${f%.opus}.mp3"; done', shell=True
+        )
         l = glob.glob("*.mp3")
         loa = l[0]
         await event.reply("sending the song")
-        await event.client.send_file(event.chat_id,
-                                     loa,
-                                     force_document=False,
-                                     allow_cache=False,
-                                     supports_streaming=True,
-                                     caption=cmd,
-                                     reply_to=reply_to_id)
+        await event.client.send_file(
+            event.chat_id,
+            loa,
+            force_document=False,
+            allow_cache=False,
+            supports_streaming=True,
+            caption=cmd,
+            reply_to=reply_to_id,
+        )
         os.system("rm -rf *.mp3")
     except Exception:
-        await event.reply(
-            "I am getting too many requests !\nPlease try again later.")
+        await event.reply("I am getting too many requests !\nPlease try again later.")

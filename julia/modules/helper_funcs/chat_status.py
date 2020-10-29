@@ -674,7 +674,7 @@ from julia import MONGO_DB_URI
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client["test"]
 approved_users = db.approve
 
 
@@ -682,11 +682,12 @@ def can_delete(chat: Chat, bot_id: int) -> bool:
     return chat.get_member(bot_id).can_delete_messages
 
 
-def is_user_ban_protected(chat: Chat,
-                          user_id: int,
-                          member: ChatMember = None) -> bool:
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID)
-            or chat.all_members_are_administrators):
+def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if (
+        chat.type == "private"
+        or str(user_id) in str(OWNER_ID)
+        or chat.all_members_are_administrators
+    ):
         return True
 
     if not member:
@@ -698,13 +699,17 @@ def is_user_ban_protected(chat: Chat,
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     chats = approved_users.find({})
     for c in chats:
-        iid = c['id']
-        userss = c['user']
+        iid = c["id"]
+        userss = c["user"]
         if str(user_id) in str(userss) and str(chat.id) in str(iid):
             return True
 
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID)
-            or user_id == str(777000) or chat.all_members_are_administrators):
+    if (
+        chat.type == "private"
+        or str(user_id) in str(OWNER_ID)
+        or user_id == str(777000)
+        or chat.all_members_are_administrators
+    ):
         return True
 
     if not member:
@@ -713,9 +718,7 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     return member.status in ("administrator", "creator")
 
 
-def is_bot_admin(chat: Chat,
-                 bot_id: int,
-                 bot_member: ChatMember = None) -> bool:
+def is_bot_admin(chat: Chat, bot_id: int, bot_member: ChatMember = None) -> bool:
     if chat.type == "private" or chat.all_members_are_administrators:
         return True
 
@@ -752,8 +755,7 @@ def can_pin(func):
 def can_promote(func):
     @wraps(func)
     def promote_rights(update, context, *args, **kwargs):
-        if update.effective_chat.get_member(
-                context.bot.id).can_promote_members:
+        if update.effective_chat.get_member(context.bot.id).can_promote_members:
             return func(update, context, *args, **kwargs)
         return
 
@@ -763,8 +765,7 @@ def can_promote(func):
 def can_restrict(func):
     @wraps(func)
     def promote_rights(update, context, *args, **kwargs):
-        if update.effective_chat.get_member(
-                context.bot.id).can_restrict_members:
+        if update.effective_chat.get_member(context.bot.id).can_restrict_members:
             return func(update, context, *args, **kwargs)
         return
 
@@ -826,14 +827,14 @@ def user_not_admin(func):
 
 def user_can_ban(func):
     @wraps(func)
-    def user_is_banhammer(update: Update, context: CallbackContext, *args,
-                          **kwargs):
+    def user_is_banhammer(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_restrict_members or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_restrict_members or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 
@@ -844,14 +845,14 @@ def user_can_ban(func):
 
 def user_can_promote(func):
     @wraps(func)
-    def user_can_promotee(update: Update, context: CallbackContext, *args,
-                          **kwargs):
+    def user_can_promotee(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_promote_members or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_promote_members or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 
@@ -862,14 +863,14 @@ def user_can_promote(func):
 
 def user_can_pin(func):
     @wraps(func)
-    def user_can_pinn(update: Update, context: CallbackContext, *args,
-                      **kwargs):
+    def user_can_pinn(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_pin_messages or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_pin_messages or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 
@@ -880,14 +881,14 @@ def user_can_pin(func):
 
 def user_can_restrict(func):
     @wraps(func)
-    def user_can_restrictt(update: Update, context: CallbackContext, *args,
-                           **kwargs):
+    def user_can_restrictt(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_restrict_members or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_restrict_members or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 
@@ -898,14 +899,14 @@ def user_can_restrict(func):
 
 def user_can_change(func):
     @wraps(func)
-    def user_can_changee(update: Update, context: CallbackContext, *args,
-                         **kwargs):
+    def user_can_changee(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_change_info or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_change_info or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 
@@ -916,14 +917,14 @@ def user_can_change(func):
 
 def user_can_delete(func):
     @wraps(func)
-    def user_can_deletee(update: Update, context: CallbackContext, *args,
-                         **kwargs):
+    def user_can_deletee(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
 
-        if (not (member.can_delete_messages or member.status == "creator")
-                and str(user) not in str(OWNER_ID)):
+        if not (member.can_delete_messages or member.status == "creator") and str(
+            user
+        ) not in str(OWNER_ID):
 
             return
 

@@ -677,8 +677,8 @@ StartTime = time.time()
 
 # enable logging
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO)
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 
 LOGGER = logging.getLogger(__name__)
 ENV = bool(os.environ.get("ENV", True))
@@ -691,31 +691,23 @@ if ENV:
     try:
         SPAMMERS = {int(x) for x in os.environ.get("SPAMMERS", "").split()}
     except ValueError:
-        raise Exception(
-            "Your spammers users list does not contain valid integers.")
+        raise Exception("Your spammers users list does not contain valid integers.")
     MESSAGE_DUMP = os.environ.get("MESSAGE_DUMP", None)
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
     try:
         SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
     except ValueError:
-        raise Exception(
-            "Your sudo users list does not contain valid integers.")
+        raise Exception("Your sudo users list does not contain valid integers.")
     try:
-        SUPPORT_USERS = {
-            int(x)
-            for x in os.environ.get("SUPPORT_USERS", "").split()
-        }
+        SUPPORT_USERS = {int(x) for x in os.environ.get("SUPPORT_USERS", "").split()}
     except ValueError:
-        raise Exception(
-            "Your support users list does not contain valid integers.")
+        raise Exception("Your support users list does not contain valid integers.")
     try:
         WHITELIST_USERS = {
-            int(x)
-            for x in os.environ.get("WHITELIST_USERS", "").split()
+            int(x) for x in os.environ.get("WHITELIST_USERS", "").split()
         }
     except ValueError:
-        raise Exception(
-            "Your whitelisted users list does not contain valid integers.")
+        raise Exception("Your whitelisted users list does not contain valid integers.")
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
     URL = os.environ.get("URL", "")  # Does not contain token
     API_KEY = os.environ.get("API_KEY", None)
