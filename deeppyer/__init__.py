@@ -691,12 +691,12 @@ class Colours:
 
 
 async def deepfry(
-        img: Image,
-        *,
-        token: str = None,
-        url_base: str = "westcentralus",
-        session: aiohttp.ClientSession = None,
-        type=DeepfryTypes.RED,
+    img: Image,
+    *,
+    token: str = None,
+    url_base: str = "westcentralus",
+    session: aiohttp.ClientSession = None,
+    type=DeepfryTypes.RED,
 ) -> Image:
     """
     Deepfry an image.

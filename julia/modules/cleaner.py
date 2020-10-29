@@ -19,7 +19,6 @@ client = MongoClient(MONGO_DB_URI)
 db = client['test']
 approved_users = db.approve
 
-
 CMD_STARTERS = '/'
 
 BLUE_TEXT_CLEAN_GROUP = 15
@@ -29,21 +28,17 @@ CommandHandlerList = (
 )
 
 command_list = [
-    "cleanbluetext",
-    "ignorecleanbluetext",
-    "unignorecleanbluetext",
-    "listcleanbluetext",
-    "ignoreglobalcleanbluetext",
+    "cleanbluetext", "ignorecleanbluetext", "unignorecleanbluetext",
+    "listcleanbluetext", "ignoreglobalcleanbluetext",
     "unignoreglobalcleanbluetext"
-    "start",
-    "help",
-    "settings",
-    "donate"]
+    "start", "help", "settings", "donate"
+]
 
 for handler_list in dispatcher.handlers:
     for handler in dispatcher.handlers[handler_list]:
-        if any(isinstance(handler, cmd_handler)
-               for cmd_handler in CommandHandlerList):
+        if any(
+                isinstance(handler, cmd_handler)
+                for cmd_handler in CommandHandlerList):
             command_list += handler.command
 
 
@@ -72,8 +67,8 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
 
-            if len(fst_word) > 1 and any(fst_word.startswith(start)
-                                         for start in CMD_STARTERS):
+            if len(fst_word) > 1 and any(
+                    fst_word.startswith(start) for start in CMD_STARTERS):
 
                 command = fst_word[1:].split('@')
                 chat = update.effective_chat
@@ -244,21 +239,25 @@ __help__ = """
  - /profanity on/off: filters all explict/abusive words sent by non admins also filters explicit/porn images
 """
 
-SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "cleanbluetext", set_blue_text_must_click, pass_args=True)
-ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "ignorecleanbluetext", add_bluetext_ignore, pass_args=True)
-REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "unignorecleanbluetext", remove_bluetext_ignore, pass_args=True)
+SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("cleanbluetext",
+                                             set_blue_text_must_click,
+                                             pass_args=True)
+ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("ignorecleanbluetext",
+                                             add_bluetext_ignore,
+                                             pass_args=True)
+REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("unignorecleanbluetext",
+                                                remove_bluetext_ignore,
+                                                pass_args=True)
 ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
     "ignoreglobalcleanbluetext", add_bluetext_ignore_global, pass_args=True)
 REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
-    "unignoreglobalcleanbluetext", remove_bluetext_ignore_global, pass_args=True)
-LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "listcleanbluetext", bluetext_ignore_list)
-CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
-    Filters.command & Filters.group,
-    clean_blue_text_must_click)
+    "unignoreglobalcleanbluetext",
+    remove_bluetext_ignore_global,
+    pass_args=True)
+LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("listcleanbluetext",
+                                              bluetext_ignore_list)
+CLEAN_BLUE_TEXT_HANDLER = MessageHandler(Filters.command & Filters.group,
+                                         clean_blue_text_must_click)
 
 dispatcher.add_handler(SET_CLEAN_BLUE_TEXT_HANDLER)
 dispatcher.add_handler(ADD_CLEAN_BLUE_TEXT_HANDLER)

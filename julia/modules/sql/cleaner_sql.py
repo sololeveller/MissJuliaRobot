@@ -58,9 +58,10 @@ def set_cleanbt(chat_id, is_enable):
             curr.is_enabled = is_enable
 
         if str(chat_id) not in CLEANER_CHATS:
-            CLEANER_CHATS.setdefault(
-                str(chat_id), {
-                    "setting": False, "commands": set()})
+            CLEANER_CHATS.setdefault(str(chat_id), {
+                "setting": False,
+                "commands": set()
+            })
 
         CLEANER_CHATS[str(chat_id)]["setting"] = is_enable
 
@@ -77,9 +78,10 @@ def chat_ignore_command(chat_id, ignore):
         if not ignored:
 
             if str(chat_id) not in CLEANER_CHATS:
-                CLEANER_CHATS.setdefault(
-                    str(chat_id), {
-                        "setting": False, "commands": set()})
+                CLEANER_CHATS.setdefault(str(chat_id), {
+                    "setting": False,
+                    "commands": set()
+                })
 
             CLEANER_CHATS[str(chat_id)]["commands"].add(ignore)
 
@@ -100,9 +102,10 @@ def chat_unignore_command(chat_id, unignore):
         if unignored:
 
             if str(chat_id) not in CLEANER_CHATS:
-                CLEANER_CHATS.setdefault(
-                    str(chat_id), {
-                        "setting": False, "commands": set()})
+                CLEANER_CHATS.setdefault(str(chat_id), {
+                    "setting": False,
+                    "commands": set()
+                })
             if unignore in CLEANER_CHATS.get(str(chat_id)).get("commands"):
                 CLEANER_CHATS[str(chat_id)]["commands"].remove(unignore)
 
@@ -182,24 +185,28 @@ def __load_cleaner_list():
 
     try:
         GLOBAL_IGNORE_COMMANDS = {
-            int(x.command) for x in SESSION.query(CleanerBlueTextGlobal).all()}
+            int(x.command)
+            for x in SESSION.query(CleanerBlueTextGlobal).all()
+        }
     finally:
         SESSION.close()
 
     try:
         for x in SESSION.query(CleanerBlueTextChatSettings).all():
-            CLEANER_CHATS.setdefault(
-                x.chat_id, {
-                    "setting": False, "commands": set()})
+            CLEANER_CHATS.setdefault(x.chat_id, {
+                "setting": False,
+                "commands": set()
+            })
             CLEANER_CHATS[x.chat_id]["setting"] = x.is_enable
     finally:
         SESSION.close()
 
     try:
         for x in SESSION.query(CleanerBlueTextChat).all():
-            CLEANER_CHATS.setdefault(
-                x.chat_id, {
-                    "setting": False, "commands": set()})
+            CLEANER_CHATS.setdefault(x.chat_id, {
+                "setting": False,
+                "commands": set()
+            })
             CLEANER_CHATS[x.chat_id]["commands"].add(x.command)
     finally:
         SESSION.close()

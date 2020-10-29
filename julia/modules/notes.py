@@ -787,7 +787,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
                         escape(message.from_user.first_name),
                         escape(message.from_user.last_name),
                     ] if message.from_user.last_name else
-                        [escape(message.from_user.first_name)]),
+                                      [escape(message.from_user.first_name)]),
                     username="@" + escape(message.from_user.username)
                     if message.from_user.username else mention_html(
                         message.from_user.id, message.from_user.first_name),

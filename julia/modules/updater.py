@@ -660,7 +660,6 @@
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
 
-
 from os import remove, execle, path, environ
 import asyncio
 import sys
@@ -760,8 +759,7 @@ async def upstream(ups):
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
 
     if not changelog and not force_update:
-        await lol.edit(
-            '\n`Your bot is`  **up-to-date**  \n')
+        await lol.edit('\n`Your bot is`  **up-to-date**  \n')
         repo.__del__()
         return
 
@@ -827,8 +825,7 @@ async def upstream(ups):
             await lol.edit(f'{txt}\n`Here is the error log:\n{error}`')
             repo.__del__()
             return
-        await lol.edit('Successfully Updated!\n'
-                       'Restarting.......')
+        await lol.edit('Successfully Updated!\n' 'Restarting.......')
     else:
         # Classic Updater, pretty straightforward.
         try:
@@ -836,8 +833,7 @@ async def upstream(ups):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await updateme_requirements()
-        await lol.edit('`Successfully Updated!\n'
-                       'restarting......`')
+        await lol.edit('`Successfully Updated!\n' 'restarting......`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "julia"]
         execle(sys.executable, *args, environ)

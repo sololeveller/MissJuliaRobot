@@ -322,8 +322,8 @@ def reply_filter(update, context):
                                     reply_markup=keyboard,
                                 )
                             except BadRequest as excp:
-                                LOGGER.exception(
-                                    "Error in filters: ", excp.message)
+                                LOGGER.exception("Error in filters: ",
+                                                 excp.message)
                                 send_message(
                                     update.effective_message,
                                     get_exception(excp, filt, chat),
@@ -335,8 +335,8 @@ def reply_filter(update, context):
                                     get_exception(excp, filt, chat),
                                 )
                             except BadRequest as excp:
-                                LOGGER.exception(
-                                    "Failed to send message: ", excp.message)
+                                LOGGER.exception("Failed to send message: ",
+                                                 excp.message)
                 else:
                     ENUM_FUNC_MAP[filt.file_type](
                         chat.id,
@@ -383,8 +383,8 @@ def reply_filter(update, context):
                                 "again...",
                             )
                         except BadRequest as excp:
-                            LOGGER.exception(
-                                "Error in filters: ", excp.message)
+                            LOGGER.exception("Error in filters: ",
+                                             excp.message)
                     elif excp.message == "Reply message not found":
                         try:
                             context.bot.send_message(
@@ -395,8 +395,8 @@ def reply_filter(update, context):
                                 reply_markup=keyboard,
                             )
                         except BadRequest as excp:
-                            LOGGER.exception(
-                                "Error in filters: ", excp.message)
+                            LOGGER.exception("Error in filters: ",
+                                             excp.message)
                     else:
                         try:
                             send_message(
@@ -404,8 +404,8 @@ def reply_filter(update, context):
                                 "This message couldn't be sent as it's incorrectly formatted.",
                             )
                         except BadRequest as excp:
-                            LOGGER.exception(
-                                "Error in filters: ", excp.message)
+                            LOGGER.exception("Error in filters: ",
+                                             excp.message)
                         LOGGER.warning("Message %s could not be parsed",
                                        str(filt.reply))
                         LOGGER.exception(
@@ -460,8 +460,8 @@ def get_exception(excp, filt, chat):
     if excp.message == "Reply message not found":
         return "noreply"
     LOGGER.warning("Message %s could not be parsed", str(filt.reply))
-    LOGGER.exception("Could not parse filter %s in chat %s",
-                     str(filt.keyword), str(chat.id))
+    LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword),
+                     str(chat.id))
     return "This data could not be sent because it is incorrectly formatted."
 
 
@@ -506,9 +506,7 @@ STOP_HANDLER = CommandHandler("stop", stop_filter)
 RMALLFILTER_HANDLER = CommandHandler("rmallfilter",
                                      rmall_filters,
                                      filters=Filters.group)
-LIST_HANDLER = CommandHandler("filters",
-                              list_handlers,
-                              admin_ok=True)
+LIST_HANDLER = CommandHandler("filters", list_handlers, admin_ok=True)
 CUST_FILTER_HANDLER = MessageHandler(
     CustomFilters.has_text & ~Filters.update.edited_message, reply_filter)
 

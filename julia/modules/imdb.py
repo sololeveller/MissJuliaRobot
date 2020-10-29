@@ -672,7 +672,6 @@ from julia.events import register
 
 langi = "en"
 
-
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
 db = client['test']

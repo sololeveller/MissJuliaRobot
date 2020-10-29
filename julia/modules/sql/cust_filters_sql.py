@@ -1360,20 +1360,20 @@ class CustomFilters(BASE):
     file_id = Column(UnicodeText, default=None)
 
     def __init__(
-            self,
-            chat_id,
-            keyword,
-            reply,
-            is_sticker=False,
-            is_document=False,
-            is_image=False,
-            is_audio=False,
-            is_voice=False,
-            is_video=False,
-            has_buttons=False,
-            reply_text=None,
-            file_type=1,
-            file_id=None,
+        self,
+        chat_id,
+        keyword,
+        reply,
+        is_sticker=False,
+        is_document=False,
+        is_image=False,
+        is_audio=False,
+        is_voice=False,
+        is_video=False,
+        has_buttons=False,
+        reply_text=None,
+        file_type=1,
+        file_id=None,
     ):
         self.chat_id = str(chat_id)  # ensure string
         self.keyword = keyword
@@ -1457,16 +1457,16 @@ def get_all_filters():
 
 
 def add_filter(
-        chat_id,
-        keyword,
-        reply,
-        is_sticker=False,
-        is_document=False,
-        is_image=False,
-        is_audio=False,
-        is_voice=False,
-        is_video=False,
-        buttons=None,
+    chat_id,
+    keyword,
+    reply,
+    is_sticker=False,
+    is_document=False,
+    is_image=False,
+    is_audio=False,
+    is_voice=False,
+    is_video=False,
+    buttons=None,
 ):
     global CHAT_FILTERS
 

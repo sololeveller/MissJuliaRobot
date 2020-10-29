@@ -677,7 +677,6 @@ client = MongoClient(MONGO_DB_URI)
 db = client['test']
 approved_users = db.approve
 
-
 GITHUB = "https://github.com"
 
 
@@ -711,7 +710,8 @@ async def magisk(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -719,9 +719,7 @@ async def magisk(event):
             return
     url = 'https://raw.githubusercontent.com/topjohnwu/magisk_files/'
     releases = '**Latest Magisk Releases:**\n'
-    variant = [
-        'master/stable', 'master/beta', 'canary/debug'
-    ]
+    variant = ['master/stable', 'master/beta', 'canary/debug']
     for variants in variant:
         fetch = get(url + variants + '.json')
         data = json.loads(fetch.content)
@@ -757,7 +755,8 @@ async def device_info(request):
         iid = ch['id']
         userss = ch['user']
     if request.is_group:
-        if (await is_register_admin(request.input_chat, request.message.sender_id)):
+        if (await is_register_admin(request.input_chat,
+                                    request.message.sender_id)):
             pass
         elif request.chat_id == iid and request.from_id == userss:
             pass
@@ -795,7 +794,8 @@ async def codename_info(request):
         iid = ch['id']
         userss = ch['user']
     if request.is_group:
-        if (await is_register_admin(request.input_chat, request.message.sender_id)):
+        if (await is_register_admin(request.input_chat,
+                                    request.message.sender_id)):
             pass
         elif request.chat_id == iid and request.from_id == userss:
             pass
@@ -845,7 +845,8 @@ async def devices_specifications(request):
         iid = ch['id']
         userss = ch['user']
     if request.is_group:
-        if (await is_register_admin(request.input_chat, request.message.sender_id)):
+        if (await is_register_admin(request.input_chat,
+                                    request.message.sender_id)):
             pass
         elif request.chat_id == iid and request.from_id == userss:
             pass
@@ -910,7 +911,8 @@ async def twrp(request):
         iid = ch['id']
         userss = ch['user']
     if request.is_group:
-        if (await is_register_admin(request.input_chat, request.message.sender_id)):
+        if (await is_register_admin(request.input_chat,
+                                    request.message.sender_id)):
             pass
         elif request.chat_id == iid and request.from_id == userss:
             pass

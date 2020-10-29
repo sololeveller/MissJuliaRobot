@@ -697,7 +697,8 @@ def afk(update: Update, context: CallbackContext):
     fname = update.effective_user.first_name
     try:
         update.effective_message.reply_text("*{} is now AFK !*\n\n{}".format(
-            fname, notice), parse_mode=ParseMode.MARKDOWN)
+            fname, notice),
+                                            parse_mode=ParseMode.MARKDOWN)
     except BadRequest:
         pass
 
@@ -717,8 +718,8 @@ def no_longer_afk(update: Update, context: CallbackContext):
         firstname = update.effective_user.first_name
         try:
             text = "*{} is no longer AFK !*".format(firstname)
-            update.effective_message.reply_text(
-                text, parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(text,
+                                                parse_mode=ParseMode.MARKDOWN)
         except BaseException:
             return
 
@@ -730,7 +731,7 @@ def reply_afk(update: Update, context: CallbackContext):
     userc = update.effective_user
     userc_id = userc.id
     if message.entities and message.parse_entities(
-            [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]):
+        [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]):
         entities = message.parse_entities(
             [MessageEntity.TEXT_MENTION, MessageEntity.MENTION])
 
@@ -759,8 +760,8 @@ def reply_afk(update: Update, context: CallbackContext):
                 try:
                     chat = bot.get_chat(user_id)
                 except BadRequest:
-                    print("Error: Could not fetch userid {} for AFK module"
-                          .format(user_id))
+                    print("Error: Could not fetch userid {} for AFK module".
+                          format(user_id))
                     return
                 fst_name = chat.first_name
 
@@ -786,8 +787,8 @@ def check_afk(update, context, user_id, fst_name, userc_id):
             if int(userc_id) == int(user_id):
                 return
             res = "*{} is AFK !*\n\n*Last seen*: {}".format(fst_name, final)
-            update.effective_message.reply_text(
-                res, parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(res,
+                                                parse_mode=ParseMode.MARKDOWN)
         else:
             etime = user.start_time
             elapsed_time = time.time() - float(etime)
@@ -797,8 +798,8 @@ def check_afk(update, context, user_id, fst_name, userc_id):
                 return
             res = "*{} is AFK !*\n\n*Reason*: {}\n\n*Last seen*: {}".format(
                 fst_name, user.reason, final)
-            update.effective_message.reply_text(
-                res, parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(res,
+                                                parse_mode=ParseMode.MARKDOWN)
 
 
 AFK_HANDLER = CommandHandler("afk", afk)

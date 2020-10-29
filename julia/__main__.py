@@ -702,14 +702,16 @@ buttons = [[
                          url="https://t.me/MissJuliaRobotSupport"),
 ]]
 
-buttons += [[InlineKeyboardButton(text="Commands ❓",
-                                  callback_data="help_back"),
-             InlineKeyboardButton(text="Source 🌐",
-                                  url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
-             ]]
+buttons += [[
+    InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
+    InlineKeyboardButton(
+        text="Source 🌐",
+        url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
+]]
 
-buttons += [[InlineKeyboardButton(text="Close Menu 🔒",
-                                  callback_data="close_menu")]]
+buttons += [[
+    InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")
+]]
 
 HELP_STRINGS = """
 [#include <std/disclaimer.h>](https://telegra.ph/MissJulieRobot-10-24)
@@ -831,14 +833,16 @@ def send_start(update, context):
                              url="https://t.me/MissJuliaRobotSupport"),
     ]]
 
-    buttons += [[InlineKeyboardButton(text="Commands ❓",
-                                      callback_data="help_back"),
-                 InlineKeyboardButton(text="Source 🌐",
-                                      url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
-                 ]]
+    buttons += [[
+        InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
+        InlineKeyboardButton(
+            text="Source 🌐",
+            url="https://github.com/MissJuliaRobot/MissJuliaRobot"),
+    ]]
 
-    buttons += [[InlineKeyboardButton(text="Close Menu 🔒",
-                                      callback_data="close_menu")]]
+    buttons += [[
+        InlineKeyboardButton(text="Close Menu 🔒", callback_data="close_menu")
+    ]]
 
     update.effective_message.reply_text(
         PM_START_TEXT,
@@ -860,8 +864,9 @@ def start_stop(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     first_name = update.effective_user.first_name
     text = "The menu is closed 🔒"
-    buttons = [[InlineKeyboardButton(text="Reopen Menu 🔑",
-                                     callback_data="bot_start")]]
+    buttons = [[
+        InlineKeyboardButton(text="Reopen Menu 🔑", callback_data="bot_start")
+    ]]
 
     update.effective_message.reply_text(
         text,
@@ -896,7 +901,7 @@ def error_handler(update, context):
                                   indent=2,
                                   ensure_ascii=False)),
                    html.escape(tb),
-    )
+               )
 
     if len(message) >= 4096:
         message = message[:4096]
@@ -1027,11 +1032,11 @@ def main():
     start_handler = CommandHandler("start", start, pass_args=True)
     help_handler = CommandHandler("help", get_help)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_")
-    start_callback_handler = CallbackQueryHandler(
-        send_start, pattern=r"bot_start")
+    start_callback_handler = CallbackQueryHandler(send_start,
+                                                  pattern=r"bot_start")
     dispatcher.add_handler(start_callback_handler)
-    startstop_callback_handler = CallbackQueryHandler(
-        start_stop, pattern=r"close_menu")
+    startstop_callback_handler = CallbackQueryHandler(start_stop,
+                                                      pattern=r"close_menu")
     dispatcher.add_handler(startstop_callback_handler)
 
     migrate_handler = MessageHandler(Filters.status_update.migrate,

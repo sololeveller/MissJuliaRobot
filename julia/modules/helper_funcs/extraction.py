@@ -716,7 +716,8 @@ def extract_user_and_text(message: Message,
         if not user_id:
             message.reply_text(
                 "I don't have that user in my db. You'll be able to interact with them if "
-                "you reply to that person's message instead, or forward one of that user's messages.")
+                "you reply to that person's message instead, or forward one of that user's messages."
+            )
             return None, None
         user_id = user_id
         res = message.text.split(None, 2)
@@ -787,7 +788,8 @@ def extract_unt_fedban(message: Message,
         if not user_id and not str(user_id).isdigit():
             message.reply_text(
                 "I don't have this user's information in my database so, you'll not be able to interact with them"
-                "Try replying to that person's msg or forward their message so i can act upon them")
+                "Try replying to that person's msg or forward their message so i can act upon them"
+            )
             return None, None
         user_id = user_id
         res = message.text.split(None, 2)

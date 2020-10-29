@@ -711,7 +711,8 @@ async def _(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass

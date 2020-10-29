@@ -684,7 +684,6 @@ thumb_image_path = TEMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 if not os.path.isdir(extracted):
     os.makedirs(extracted)
 
-
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
 db = client['test']
@@ -722,7 +721,8 @@ async def _(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass

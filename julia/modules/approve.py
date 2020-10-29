@@ -660,10 +660,8 @@
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
 
-
 #  This is made by @MissJulia_Robot
 #  If you kang this without credits I swear ur mom will die
-
 
 from pymongo import MongoClient
 from julia import MONGO_DB_URI, tbot
@@ -678,13 +676,14 @@ approved_users = db.approve
 
 
 async def can_approve_users(message):
-    result = await tbot(functions.channels.GetParticipantRequest(
-        channel=message.chat_id,
-        user_id=message.sender_id,
-    ))
+    result = await tbot(
+        functions.channels.GetParticipantRequest(
+            channel=message.chat_id,
+            user_id=message.sender_id,
+        ))
     p = result.participant
-    return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.add_admins)
+    return isinstance(p, types.ChannelParticipantCreator) or (isinstance(
+        p, types.ChannelParticipantAdmin) and p.admin_rights.add_admins)
 
 
 async def is_register_admin(chat, user):
@@ -706,6 +705,7 @@ async def is_register_admin(chat, user):
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
         )
     return None
+
 
 #------ THANKS TO LONAMI ------#
 
@@ -734,7 +734,8 @@ async def approve(event):
         input = ik.replace("@", "")
 
     if not input:
-        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply("Reply To Someone's Message Or Provide Some Input")
+        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply(
+            "Reply To Someone's Message Or Provide Some Input")
     elif input:
         cunt = input
         dent = await tbot.get_entity(cunt)
@@ -792,7 +793,8 @@ async def disapprove(event):
         input = ik.replace("@", "")
 
     if not input:
-        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply("Reply To Someone's Message Or Provide Some Input")
+        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply(
+            "Reply To Someone's Message Or Provide Some Input")
     elif input:
         cunt = input
         dent = await tbot.get_entity(cunt)
@@ -849,7 +851,8 @@ async def checkst(event):
         input = ik.replace("@", "")
 
     if not input:
-        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply("Reply To Someone's Message Or Provide Some Input")
+        iid = reply_msg.from_id if event.reply_to_msg_id else await event.reply(
+            "Reply To Someone's Message Or Provide Some Input")
     elif input:
         cunt = input
         dent = await tbot.get_entity(cunt)

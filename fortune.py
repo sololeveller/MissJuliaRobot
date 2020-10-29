@@ -751,8 +751,11 @@ def main():
     """
     usage = 'Usage: %prog [OPTIONS] [fortune_file]'
     arg_parser = OptionParser(usage=usage)
-    arg_parser.add_option('-V', '--version', action='store_true',
-                          dest='show_version', help='Show version and exit.')
+    arg_parser.add_option('-V',
+                          '--version',
+                          action='store_true',
+                          dest='show_version',
+                          help='Show version and exit.')
     arg_parser.epilog = 'If fortune_file is omitted, fortune looks at the ' \
                         'FORTUNE_FILE environment variable for the path.'
 

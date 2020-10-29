@@ -707,7 +707,8 @@ async def _(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -727,14 +728,14 @@ async def _(event):
         l = glob.glob("*.mp3")
         loa = l[0]
         await event.reply("sending the song")
-        await event.client.send_file(
-            event.chat_id,
-            loa,
-            force_document=False,
-            allow_cache=False,
-            supports_streaming=True,
-            caption=cmd,
-            reply_to=reply_to_id)
+        await event.client.send_file(event.chat_id,
+                                     loa,
+                                     force_document=False,
+                                     allow_cache=False,
+                                     supports_streaming=True,
+                                     caption=cmd,
+                                     reply_to=reply_to_id)
         os.system("rm -rf *.mp3")
     except Exception:
-        await event.reply("I am getting too many requests !\nPlease try again later.")
+        await event.reply(
+            "I am getting too many requests !\nPlease try again later.")

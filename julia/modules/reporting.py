@@ -768,28 +768,33 @@ def report(update, context) -> str:
             msg = (
                 f"<b>Report from: </b>{html.escape(chat.title)}\n"
                 f"<b> × Report by:</b> {mention_html(user.id, user.first_name)}(<code>{user.id}</code>)\n"
-                f"<b> × Reported user:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n")
+                f"<b> × Reported user:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n"
+            )
             link = f'<b> × Reported message:</b> <a href="https://t.me/{chat.username}/{message.reply_to_message.message_id}">click here</a>'
             should_forward = False
             keyboard = [
                 [
                     InlineKeyboardButton(
                         "💬 Message",
-                        url=f"https://t.me/{chat.username}/{message.reply_to_message.message_id}",
+                        url=
+                        f"https://t.me/{chat.username}/{message.reply_to_message.message_id}",
                     ),
                     InlineKeyboardButton(
                         "⚽ Kick",
-                        callback_data=f"report_{chat.id}=kick={reported_user.id}={reported_user.first_name}",
+                        callback_data=
+                        f"report_{chat.id}=kick={reported_user.id}={reported_user.first_name}",
                     ),
                 ],
                 [
                     InlineKeyboardButton(
                         "⛔️ Ban",
-                        callback_data=f"report_{chat.id}=banned={reported_user.id}={reported_user.first_name}",
+                        callback_data=
+                        f"report_{chat.id}=banned={reported_user.id}={reported_user.first_name}",
                     ),
                     InlineKeyboardButton(
                         "❎ Delete Message",
-                        callback_data=f"report_{chat.id}=delete={reported_user.id}={message.reply_to_message.message_id}",
+                        callback_data=
+                        f"report_{chat.id}=delete={reported_user.id}={message.reply_to_message.message_id}",
                     ),
                 ],
             ]

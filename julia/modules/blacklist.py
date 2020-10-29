@@ -738,9 +738,10 @@ def add_blacklist(update, context):
 
     if len(words) > 1:
         text = words[1]
-        to_blacklist = list(
-            {trigger.strip() for trigger in text.split("\n")
-                if trigger.strip()})
+        to_blacklist = list({
+            trigger.strip()
+            for trigger in text.split("\n") if trigger.strip()
+        })
         for trigger in to_blacklist:
             sql.add_to_blacklist(chat_id, trigger.lower())
 
@@ -782,9 +783,10 @@ def unblacklist(update, context):
 
     if len(words) > 1:
         text = words[1]
-        to_unblacklist = list(
-            {trigger.strip() for trigger in text.split("\n")
-                if trigger.strip()})
+        to_unblacklist = list({
+            trigger.strip()
+            for trigger in text.split("\n") if trigger.strip()
+        })
         successful = 0
         for trigger in to_unblacklist:
             success = sql.rm_from_blacklist(chat_id, trigger.lower())
@@ -948,9 +950,7 @@ def blacklist_mode(update, context):
         settypeblacklist = "temporarily mute for {}".format(getvalue)
 
     text = "Current blacklistmode: *{}*.".format(settypeblacklist)
-    send_message(update.effective_message,
-                 text,
-                 parse_mode=ParseMode.MARKDOWN)
+    send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
     return ""
 
 
@@ -1001,20 +1001,26 @@ def del_blacklist(update, context):
                         permissions=ChatPermissions(can_send_messages=False),
                     )
                     bot.sendMessage(
-                        chat.id, f"Muted {user.first_name} for using Blacklisted word: {trigger}!", )
+                        chat.id,
+                        f"Muted {user.first_name} for using Blacklisted word: {trigger}!",
+                    )
                     return
                 elif getmode == 4:
                     message.delete()
                     res = chat.unban_member(update.effective_user.id)
                     if res:
                         bot.sendMessage(
-                            chat.id, f"Kicked {user.first_name} for using Blacklisted word: {trigger}!", )
+                            chat.id,
+                            f"Kicked {user.first_name} for using Blacklisted word: {trigger}!",
+                        )
                     return
                 elif getmode == 5:
                     message.delete()
                     chat.kick_member(user.id)
                     bot.sendMessage(
-                        chat.id, f"Banned {user.first_name} for using Blacklisted word: {trigger}", )
+                        chat.id,
+                        f"Banned {user.first_name} for using Blacklisted word: {trigger}",
+                    )
                     return
                 elif getmode == 6:
                     message.delete()

@@ -773,8 +773,7 @@ def gban(update, context):
             return
 
         old_reason = sql.update_gban_reason(
-            user_id, user_chat.username or user_chat.first_name, reason
-        )
+            user_id, user_chat.username or user_chat.first_name, reason)
         user_id, new_reason = extract_user_and_text(message, args)
 
         if old_reason:
@@ -794,9 +793,8 @@ def gban(update, context):
                 "\n<b>Previous Reason:</b> {}"
                 "\n<b>New Reason:</b> {}".format(
                     mention_html(banner.id, banner.first_name),
-                    mention_html(
-                        user_chat.id, user_chat.first_name or "Deleted Account"
-                    ),
+                    mention_html(user_chat.id, user_chat.first_name
+                                 or "Deleted Account"),
                     user_chat.id,
                     old_reason,
                     new_reason,
@@ -808,8 +806,7 @@ def gban(update, context):
                 "This user is already gbanned, for the following reason:\n"
                 "<code>{}</code>\n"
                 "I've gone and updated it with your new reason!".format(
-                    html.escape(old_reason)
-                ),
+                    html.escape(old_reason)),
                 parse_mode=ParseMode.HTML,
             )
 
@@ -878,9 +875,8 @@ def ungban(update, context):
 
     banner = update.effective_user  # type: Optional[User]
 
-    message.reply_text(
-        "I'll give {} a second chance, globally.".format(user_chat.first_name)
-    )
+    message.reply_text("I'll give {} a second chance, globally.".format(
+        user_chat.first_name))
 
     context.bot.sendMessage(
         MESSAGE_DUMP,
@@ -914,11 +910,11 @@ def ungban(update, context):
             if excp.message in UNGBAN_ERRORS:
                 pass
             else:
-                message.reply_text(
-                    "Could not un-gban due to: {}".format(excp.message))
+                message.reply_text("Could not un-gban due to: {}".format(
+                    excp.message))
                 context.bot.send_message(
-                    OWNER_ID, "Could not un-gban due to: {}".format(excp.message)
-                )
+                    OWNER_ID,
+                    "Could not un-gban due to: {}".format(excp.message))
                 return
         except TelegramError:
             pass
@@ -928,8 +924,7 @@ def ungban(update, context):
     context.bot.sendMessage(
         MESSAGE_DUMP,
         "User {} has been successfully un-gbanned!".format(
-            mention_html(user_chat.id, user_chat.first_name)
-        ),
+            mention_html(user_chat.id, user_chat.first_name)),
         parse_mode=ParseMode.HTML,
     )
     message.reply_text("Person has been un-gbanned.")
@@ -941,8 +936,7 @@ def gbanlist(update, context):
 
     if not banned_users:
         update.effective_message.reply_text(
-            "There aren't any gbanned users! You're kinder than I expected..."
-        )
+            "There aren't any gbanned users! You're kinder than I expected...")
         return
 
     banfile = "List of retards.\n"
@@ -980,10 +974,9 @@ def check_and_ban(update, user_id, should_message=True):
 @run_async
 def enforce_gban(update, context):
     # Not using @restrict handler to avoid spamming - just ignore if cant gban.
-    if (
-        sql.does_chat_gban(update.effective_chat.id)
-        and update.effective_chat.get_member(context.bot.id).can_restrict_members
-    ):
+    if (sql.does_chat_gban(update.effective_chat.id)
+            and update.effective_chat.get_member(
+                context.bot.id).can_restrict_members):
         user = update.effective_user
         chat = update.effective_chat
         msg = update.effective_message
@@ -1011,8 +1004,7 @@ def gbanstat(update, context):
             sql.enable_gbans(update.effective_chat.id)
             update.effective_message.reply_text(
                 "I've enabled Gbans in this group. This will help protect you "
-                "from spammers, unsavoury characters, and the biggest trolls."
-            )
+                "from spammers, unsavoury characters, and the biggest trolls.")
         elif args[0].lower() in ["off", "no"]:
             sql.disable_gbans(update.effective_chat.id)
             update.effective_message.reply_text(
@@ -1025,8 +1017,7 @@ def gbanstat(update, context):
             "Your current setting is: {}\n"
             "When True, any gbans that happen will also happen in your group. "
             "When False, they won't, leaving you at the possible mercy of "
-            "spammers.".format(sql.does_chat_gban(update.effective_chat.id))
-        )
+            "spammers.".format(sql.does_chat_gban(update.effective_chat.id)))
 
 
 def __stats__():
@@ -1078,8 +1069,10 @@ GBAN_LIST = CommandHandler(
     filters=CustomFilters.sudo_filter,
 )
 
-GBAN_STATUS = CommandHandler(
-    "gbanstat", gbanstat, pass_args=True, filters=Filters.group)
+GBAN_STATUS = CommandHandler("gbanstat",
+                             gbanstat,
+                             pass_args=True,
+                             filters=Filters.group)
 
 GBAN_ENFORCER = MessageHandler(Filters.all & Filters.group, enforce_gban)
 

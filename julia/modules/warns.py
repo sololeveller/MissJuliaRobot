@@ -821,8 +821,8 @@ def button(update, context):
                                      user_member.user.first_name),
                         user_member.user.id,
                     ))
-        update.effective_message.edit_text(
-            "This user already has no warns.", parse_mode=ParseMode.HTML)
+        update.effective_message.edit_text("This user already has no warns.",
+                                           parse_mode=ParseMode.HTML)
 
     return ""
 

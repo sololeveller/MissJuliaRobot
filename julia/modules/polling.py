@@ -671,7 +671,6 @@ from pymongo import MongoClient
 from julia import MONGO_DB_URI
 from julia import tbot
 
-
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
 db = client['test']
@@ -679,24 +678,24 @@ approved_users = db.approve
 dbb = client['poll']
 poll_id = dbb.pollid
 
+
 #------ THANKS TO LONAMI ------#
-
-
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
-            (await tbot(functions.channels.GetParticipantRequest(chat, user))).participant,
-            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator)
-        )
+            (await
+             tbot(functions.channels.GetParticipantRequest(chat,
+                                                           user))).participant,
+            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator))
     if isinstance(chat, types.InputPeerChat):
         ui = await tbot.get_peer_id(user)
         ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id))) \
             .full_chat.participants.participants
-        return isinstance(
-            next((p for p in ps if p.user_id == ui), None),
-            (types.ChatParticipantAdmin, types.ChatParticipantCreator)
-        )
+        return isinstance(next(
+            (p for p in ps if p.user_id == ui),
+            None), (types.ChatParticipantAdmin, types.ChatParticipantCreator))
     return None
+
 
 # syntax : /poll 12345 | am i cool? | False False False yes no
 # syntax : /poll 12345 | am i cool? | True@1 False False yes no
@@ -709,7 +708,8 @@ async def _(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -735,7 +735,7 @@ async def _(event):
         return
 
     count = 0
-    while(int(secret) > 0):
+    while (int(secret) > 0):
         count = count + 1
         secret = int(secret) // 10
 
@@ -746,7 +746,8 @@ async def _(event):
     allpoll = poll_id.find({})
     for c in allpoll:
         if event.from_id == c['user'] and secret == c['pollid']:
-            await event.reply("Please give another poll id, this id is already used")
+            await event.reply(
+                "Please give another poll id, this id is already used")
             return
         poll_id.insert_one({'user': event.from_id, 'pollid': secret})
 
@@ -759,7 +760,9 @@ async def _(event):
             one, two = quiz.split("@")
             rightone = two.strip()
         else:
-            await event.reply("You need to select the right answer with question number like True@1, True@3 etc..")
+            await event.reply(
+                "You need to select the right answer with question number like True@1, True@3 etc.."
+            )
             return
 
         quizoptionss = []
@@ -885,63 +888,59 @@ async def _(event):
         st = None
 
     if pvoty is False and quizy is False and mchoicee is False:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=optionss,
-                quiz=False)))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(
+                id=12345, question=ques, answers=optionss, quiz=False)))
 
     if pvoty is True and quizy is False and mchoicee is True:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=optionss,
-                quiz=False,
-                multiple_choice=True,
-                public_voters=True)))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(id=12345,
+                                                 question=ques,
+                                                 answers=optionss,
+                                                 quiz=False,
+                                                 multiple_choice=True,
+                                                 public_voters=True)))
 
     if pvoty is False and quizy is False and mchoicee is True:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=optionss,
-                quiz=False,
-                multiple_choice=True,
-                public_voters=False)))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(id=12345,
+                                                 question=ques,
+                                                 answers=optionss,
+                                                 quiz=False,
+                                                 multiple_choice=True,
+                                                 public_voters=False)))
 
     if pvoty is True and quizy is False and mchoicee is False:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=optionss,
-                quiz=False,
-                multiple_choice=False,
-                public_voters=True)))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(id=12345,
+                                                 question=ques,
+                                                 answers=optionss,
+                                                 quiz=False,
+                                                 multiple_choice=False,
+                                                 public_voters=True)))
 
     if pvoty is False and quizy is True and mchoicee is False:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=quizoptionss,
-                quiz=True
-            ),
-            correct_answers=[f"{rightone}"]))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(id=12345,
+                                                 question=ques,
+                                                 answers=quizoptionss,
+                                                 quiz=True),
+                                 correct_answers=[f"{rightone}"]))
 
     if pvoty is True and quizy is True and mchoicee is False:
-        await tbot.send_file(event.chat_id, types.InputMediaPoll(
-            poll=types.Poll(
-                id=12345,
-                question=ques,
-                answers=quizoptionss,
-                quiz=True,
-                public_voters=True
-            ),
-            correct_answers=[f"{rightone}"]))
+        await tbot.send_file(
+            event.chat_id,
+            types.InputMediaPoll(poll=types.Poll(id=12345,
+                                                 question=ques,
+                                                 answers=quizoptionss,
+                                                 quiz=True,
+                                                 public_voters=True),
+                                 correct_answers=[f"{rightone}"]))
 
     if pvoty is True and quizy is True and mchoicee is True:
         await event.reply("You can't use multiple voting with quiz mode")
@@ -959,7 +958,8 @@ async def stop(event):
         iid = ch['id']
         userss = ch['user']
     if event.is_group:
-        if (await is_register_admin(event.input_chat, event.message.sender_id)):
+        if (await is_register_admin(event.input_chat,
+                                    event.message.sender_id)):
             pass
         elif event.chat_id == iid and event.from_id == userss:
             pass
@@ -973,7 +973,7 @@ async def stop(event):
         return
 
     count = 0
-    while(int(secret) > 0):
+    while (int(secret) > 0):
         count = count + 1
         secret = int(secret) // 10
 
@@ -987,26 +987,27 @@ async def stop(event):
     try:
         msg = await event.get_reply_message()
         if str(msg.from_id) != "PeerUser(user_id=1246850012)":
-            await event.reply("I can't do this operation on this poll.\nProbably it's not created by me")
+            await event.reply(
+                "I can't do this operation on this poll.\nProbably it's not created by me"
+            )
             return
         if msg.poll:
             allpoll = poll_id.find({})
             for c in allpoll:
                 if not event.from_id == c['user'] and secret == c['pollid']:
-                    await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
+                    await event.reply(
+                        "Oops, either you haven't created this poll or you have given wrong poll id"
+                    )
                     return
-                poll_id.delete_one(
-                    {'user': event.from_id, 'pollid': secret})
+                poll_id.delete_one({'user': event.from_id, 'pollid': secret})
                 pollid = msg.poll.poll.id
-                await msg.edit(file=types.InputMediaPoll(
-                    poll=types.Poll(
-                        id=pollid,
-                        question="",
-                        answers=[],
-                        closed=True)))
+                await msg.edit(file=types.InputMediaPoll(poll=types.Poll(
+                    id=pollid, question="", answers=[], closed=True)))
                 await event.reply("Successfully stopped the poll")
         else:
             await event.reply("This isn't a poll")
     except Exception:
-        await event.reply("I can't do this operation on this poll.\nProbably it's already closed")
+        await event.reply(
+            "I can't do this operation on this poll.\nProbably it's already closed"
+        )
         return

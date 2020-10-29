@@ -807,11 +807,8 @@ def set_flood(update, context) -> str:
                 return ""
             sql.set_flood(chat_id, amount)
             text = message.reply_text(
-                "Successfully updated anti-flood limit to {}!".format(
-                    amount))
-            send_message(update.effective_message,
-                         text,
-                         parse_mode="markdown")
+                "Successfully updated anti-flood limit to {}!".format(amount))
+            send_message(update.effective_message, text, parse_mode="markdown")
             return ("<b>{}:</b>"
                     "\n#SETFLOOD"
                     "\n<b>Admin:</b> {}"
@@ -826,7 +823,8 @@ def set_flood(update, context) -> str:
                 "Invalid argument please use a number, 'off' or 'no'")
     else:
         message.reply_text(
-            ("Use `/setflood number` to enable anti-flood.\nOr use `/setflood off` to disable antiflood!."),
+            ("Use `/setflood number` to enable anti-flood.\nOr use `/setflood off` to disable antiflood!."
+             ),
             parse_mode="markdown",
         )
     return ""
@@ -853,8 +851,8 @@ def flood(update, context):
         send_message(update.effective_message, text, parse_mode="markdown")
     else:
         text = msg.reply_text(
-            "I'm currently restricting members after {} consecutive messages."
-            .format(limit))
+            "I'm currently restricting members after {} consecutive messages.".
+            format(limit))
         send_message(update.effective_message, text, parse_mode="markdown")
 
 
@@ -938,11 +936,9 @@ def set_flood_mode(update, context):
         settypeflood = "tmute for {}".format(getvalue)
 
     text = msg.reply_text(
-        "Sending more message than flood limit will result in {}.".
-        format(settypeflood))
-    send_message(update.effective_message,
-                 text,
-                 parse_mode=ParseMode.MARKDOWN)
+        "Sending more message than flood limit will result in {}.".format(
+            settypeflood))
+    send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
     return ""
 
 

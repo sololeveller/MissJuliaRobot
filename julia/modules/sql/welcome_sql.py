@@ -671,13 +671,9 @@ from sqlalchemy import (BigInteger, Boolean, Column, Integer, String,
 DEFAULT_WELCOME = 'Hey {first}, how are you?'
 DEFAULT_GOODBYE = 'Bye {first}, nice knowing you!'
 
-DEFAULT_WELCOME_MESSAGES = [
-    'Hey {first}, how are you?'
-]
+DEFAULT_WELCOME_MESSAGES = ['Hey {first}, how are you?']
 
-DEFAULT_GOODBYE_MESSAGES = [
-    'Bye {first}, nice knowing you!'
-]
+DEFAULT_GOODBYE_MESSAGES = ['Bye {first}, nice knowing you!']
 
 
 class Welcome(BASE):
@@ -687,12 +683,12 @@ class Welcome(BASE):
     should_goodbye = Column(Boolean, default=True)
     custom_content = Column(UnicodeText, default=None)
 
-    custom_welcome = Column(
-        UnicodeText, default=random.choice(DEFAULT_WELCOME_MESSAGES))
+    custom_welcome = Column(UnicodeText,
+                            default=random.choice(DEFAULT_WELCOME_MESSAGES))
     welcome_type = Column(Integer, default=Types.TEXT.value)
 
-    custom_leave = Column(
-        UnicodeText, default=random.choice(DEFAULT_GOODBYE_MESSAGES))
+    custom_leave = Column(UnicodeText,
+                          default=random.choice(DEFAULT_GOODBYE_MESSAGES))
     leave_type = Column(Integer, default=Types.TEXT.value)
 
     clean_welcome = Column(BigInteger)
@@ -777,7 +773,6 @@ GoodbyeButtons.__table__.create(checkfirst=True)
 WelcomeMute.__table__.create(checkfirst=True)
 WelcomeMuteUsers.__table__.create(checkfirst=True)
 CleanServiceSetting.__table__.create(checkfirst=True)
-
 
 INSERTION_LOCK = threading.RLock()
 WELC_BTN_LOCK = threading.RLock()
