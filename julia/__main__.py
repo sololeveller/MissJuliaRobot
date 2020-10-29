@@ -671,25 +671,19 @@ from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
 from telegram import Message
 from telegram import ParseMode
-from telegram import User
 from telegram.ext import CallbackQueryHandler
 from telegram.ext import CommandHandler
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.ext.dispatcher import run_async
-from telegram.utils.helpers import escape_markdown
 from sys import argv
-from julia import CERT_PATH
 from julia import dispatcher
 from julia import LOGGER
 from julia import OWNER_ID
-from julia import PORT
 from julia import tbot, ubot
 from julia import TOKEN
 from julia import updater
-from julia import URL
-from julia import WEBHOOK
 from julia.modules import ALL_MODULES
 from julia.modules.helper_funcs.chat_status import is_user_admin
 from julia.modules.helper_funcs.chat_status import user_admin

@@ -668,7 +668,6 @@ from telegram import Chat
 from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
 from telegram import Message
-from telegram.ext import BaseFilter
 from telegram import ParseMode
 from telegram import User
 from telegram.error import BadRequest
