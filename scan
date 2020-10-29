@@ -690,15 +690,14 @@ for c in cnts:
     approx = cv2.approxPolyDP(c, 0.02 * peri, True)
 
     if len(approx) == 4:
-       screenCnt = approx
+        screenCnt = approx
 
-       print("STEP 2: Find contours of paper")
+        print("STEP 2: Find contours of paper")
 
-       warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
-       warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-       T = threshold_local(warped, 11, offset = 10, method = "gaussian")
-       warped = (warped > T).astype("uint8") * 255
+        warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
+        warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+        T = threshold_local(warped, 11, offset=10, method="gaussian")
+        warped = (warped > T).astype("uint8") * 255
 
-
-       print("STEP 3: Done")
-       cv2.imwrite("scanned.jpg", imutils.resize(warped, height=650))
+        print("STEP 3: Done")
+        cv2.imwrite("scanned.jpg", imutils.resize(warped, height=650))

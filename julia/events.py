@@ -754,7 +754,6 @@ def juliabot(**args):
         if not ignore_unsafe:
             args['pattern'] = args['pattern'].replace('^.', unsafe_pattern, 1)
 
-
     def decorator(func):
         ubot.add_event_handler(func, events.NewMessage(**args))
         return func

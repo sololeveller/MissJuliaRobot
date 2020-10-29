@@ -672,12 +672,13 @@ DEFAULT_WELCOME = 'Hey {first}, how are you?'
 DEFAULT_GOODBYE = 'Bye {first}, nice knowing you!'
 
 DEFAULT_WELCOME_MESSAGES = [
-'Hey {first}, how are you?'
-] 
+    'Hey {first}, how are you?'
+]
 
 DEFAULT_GOODBYE_MESSAGES = [
-'Bye {first}, nice knowing you!'
+    'Bye {first}, nice knowing you!'
 ]
+
 
 class Welcome(BASE):
     __tablename__ = "welcome_pref"

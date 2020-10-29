@@ -760,11 +760,11 @@ if ENV:
 
     STRING_SESSION = os.environ.get("STRING_SESSION", None)
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    
+
     if STRING_SESSION:
         ubot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
     else:
-        LOGGER.info("Failed to start Julia[USERBOT] !")    
+        LOGGER.info("Failed to start Julia[USERBOT] !")
         sys.exit(1)
 else:
     sys.exit(1)

@@ -719,7 +719,7 @@ def no_longer_afk(update: Update, context: CallbackContext):
             text = "*{} is no longer AFK !*".format(firstname)
             update.effective_message.reply_text(
                 text, parse_mode=ParseMode.MARKDOWN)
-        except:
+        except BaseException:
             return
 
 

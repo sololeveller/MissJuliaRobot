@@ -381,7 +381,7 @@ def check_not_bot(member, chat_id, message_id, context):
     if not member_status:
         try:
             bot.unban_chat_member(chat_id, member.id)
-        except:
+        except BaseException:
             pass
 
         try:
@@ -390,7 +390,7 @@ def check_not_bot(member, chat_id, message_id, context):
                 chat_id=chat_id,
                 message_id=message_id,
             )
-        except:
+        except BaseException:
             pass
 
 

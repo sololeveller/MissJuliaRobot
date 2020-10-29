@@ -725,7 +725,7 @@ async def approve(event):
         if not await can_approve_users(message=event):
             return
     if event.is_channel:
-       return
+        return
 
     ik = event.pattern_match.group(1)
     if ik.isdigit():
@@ -783,7 +783,7 @@ async def disapprove(event):
         if not await can_approve_users(message=event):
             return
     if event.is_channel:
-       return
+        return
 
     ik = event.pattern_match.group(1)
     if ik.isdigit():
@@ -840,7 +840,7 @@ async def checkst(event):
         if not await can_approve_users(message=event):
             return
     if event.is_channel:
-       return
+        return
 
     ik = event.pattern_match.group(1)
     if ik.isdigit():
@@ -890,7 +890,7 @@ async def apprlst(event):
         if not await can_approve_users(message=event):
             return
     if event.is_channel:
-       return
+        return
 
     autos = approved_users.find({})
     pp = ""

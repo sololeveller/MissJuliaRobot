@@ -777,6 +777,7 @@ def send_help(chat_id, text, keyboard=None):
                                 parse_mode=ParseMode.MARKDOWN,
                                 reply_markup=keyboard)
 
+
 @run_async
 @user_admin
 def start(update, context):
@@ -1002,6 +1003,7 @@ def get_help(update, context):
     else:
         send_help(chat.id, HELP_STRINGS)
 
+
 def migrate_chats(update, context):
     msg = update.effective_message  # type: Optional[Message]
     if msg.migrate_to_chat_id:
@@ -1053,9 +1055,8 @@ def main():
     updater.idle()
 
 
-
-if __name__ == "__main__":   
-    tbot.start(bot_token=TOKEN) 
+if __name__ == "__main__":
+    tbot.start(bot_token=TOKEN)
     LOGGER.info("Successfully started Julia[TBOT] !")
     ubot.start()
     LOGGER.info("Successfully started Julia[UBOT] !")

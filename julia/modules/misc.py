@@ -2122,6 +2122,7 @@ async def _(event):
 
 # Simple lyrics module using tswift by @TheRealPhoenix
 
+
 @run_async
 @user_admin
 def lyrics(update: Update, context: CallbackContext):
@@ -2311,6 +2312,7 @@ async def fortunate(event):
     jit = subprocess.check_output(["python", "fortune"])
     pit = jit.decode()
     await event.reply(pit)
+
 
 @register(pattern=r"^/phone (.*)")
 async def phone(event):
@@ -4029,6 +4031,7 @@ async def sticklet(event):
         await event.reply("I only understand by on or off")
         return
 
+
 @register(pattern="")
 async def spam_update(event):
     if not event:
@@ -4042,14 +4045,14 @@ async def spam_update(event):
     sender = await event.get_sender()
     chats = spammers.find({})
     for c in chats:
-        if event.chat_id == c['id']:    
-           if event.is_group:
-              if (await is_register_admin(event.chat_id, event.from_id)):
-                  return
-              else:
-                  pass
+        if event.chat_id == c['id']:
+            if event.is_group:
+                if (await is_register_admin(event.chat_id, event.from_id)):
+                    return
+                else:
+                    pass
 
-           if event.text:
+            if event.text:
                 msg = str(event.text)
                 if profanity.contains_profanity(msg):
                     await event.delete()
@@ -4062,8 +4065,8 @@ async def spam_update(event):
                         final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
-                    await dev.delete()          
-           if event.photo:
+                    await dev.delete()
+            if event.photo:
                 await event.client.download_media(event.photo, "nudes.jpg")
                 if nude.is_nude('./nudes.jpg'):
                     await event.delete()

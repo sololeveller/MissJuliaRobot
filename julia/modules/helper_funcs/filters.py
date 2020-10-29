@@ -9,7 +9,8 @@ class CustomFilters(object):
 
         @staticmethod
         def filter(message: Message):
-            return bool(message.from_user and message.from_user.id in SUDO_USERS)
+            return bool(
+                message.from_user and message.from_user.id in SUDO_USERS)
 
     sudo_filter = _Sudoers()
 

@@ -699,6 +699,8 @@ WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
 # Not async
+
+
 def warn(user: User,
          chat: Chat,
          reason: str,
@@ -1192,7 +1194,7 @@ LIST_WARN_HANDLER = CommandHandler(["warnlist", "warnfilters"],
                                    admin_ok=True)
 
 WARN_FILTER_HANDLER = MessageHandler(CustomFilters.has_text & Filters.group,
-                                     reply_filter)                                          
+                                     reply_filter)
 
 WARN_LIMIT_HANDLER = CommandHandler("warnlimit",
                                     set_warn_limit,

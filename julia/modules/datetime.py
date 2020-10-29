@@ -83,5 +83,6 @@ def gettime(update: Update, context: CallbackContext):
 
     send_message.edit_text(result, parse_mode=ParseMode.HTML)
 
+
 TIME_HANDLER = CommandHandler("datetime", gettime)
 dispatcher.add_handler(TIME_HANDLER)
