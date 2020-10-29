@@ -4060,6 +4060,7 @@ async def sticklet(event):
     if not input == "on" or input == "off":
         await event.reply("I only understand by on or off")
         return
+
 import nude
 
 @register(pattern="")
@@ -4083,6 +4084,7 @@ async def spam_update(event):
                   pass
 
            if event.text:
+                msg = str(event.text)
                 if profanity.contains_profanity(msg):
                     await event.delete()
                     if sender.username is None:
