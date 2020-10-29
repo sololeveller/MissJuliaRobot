@@ -990,7 +990,7 @@ async def stop(event):
         else:
             return
     
-    if not input:
+    if input is None:
         await event.reply("Where is the poll id ?")
         return
 
