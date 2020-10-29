@@ -7,7 +7,7 @@
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/MissJuliaRobot/MissJuliaRobot/?ref=repository-badge)
 [![Updates channel!](https://img.shields.io/badge/Join%20News%20Channel-✓-red)](https://t.me/MissJuliaRobotNews)
 ![Total Size](https://github-size-badge.herokuapp.com/MissJuliaRobot/MissJuliaRobot.svg)
-![version](https://img.shields.io/github/pipenv/locked/python-version/MissJuliaRobot/MissJuliaRobot)
+[![Python 3.8](https://img.shields.io/badge/python->=3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 **A modular telegram bot written in python coupled with SQL and MongoDB**
