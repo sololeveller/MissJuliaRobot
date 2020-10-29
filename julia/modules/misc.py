@@ -2309,7 +2309,7 @@ async def fortunate(event):
             pass
         else:
             return
-    jit = subprocess.check_output(["python", "fortune"])
+    jit = subprocess.check_output(["python", "fortune.py"])
     pit = jit.decode()
     await event.reply(pit)
 
@@ -2437,7 +2437,7 @@ async def asciiart(event):
     reply_msg = await event.get_reply_message()
     downloaded_file_name = await event.client.download_media(reply_msg, "./")
     let = f"{downloaded_file_name}"
-    subprocess.run(["python", "scan", "--image", let])
+    subprocess.run(["python", "scan.py", "--image", let])
     fuck = await event.client.upload_file("./scanned.jpg")
     await event.client.send_file(event.chat_id, fuck)
     directory = "./"
