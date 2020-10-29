@@ -46,7 +46,7 @@ class Profanity:
         self._default_wordlist_filename = get_complete_path_of_file(
             "profanity_wordlist.txt"
         )
-        if type(words) == str:
+        if type(words) is str:
             self.load_censor_words_from_file(words)
         else:
             self.load_censor_words(custom_words=words)
