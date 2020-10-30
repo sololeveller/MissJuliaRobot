@@ -4087,11 +4087,13 @@ async def spam_update(event):
     for c in chats:
         if event.chat_id == c["id"]:
             if event.is_group:
-                if await is_register_admin(event.chat_id, event.from_id):
-                    return
-                pass
+              if await is_register_admin(event.chat_id, event.from_id):
+                  return
+              elif str(event.from_id) in str(OWNER_ID):
+                  return
+              pass
 
-            if event.text:
+              if event.text:
                 msg = str(event.text)
                 if profanity.contains_profanity(msg):
                     await event.delete()
@@ -4105,7 +4107,7 @@ async def spam_update(event):
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
                     await dev.delete()
-            if event.photo:
+              if event.text:
                 await event.client.download_media(event.photo, "nudes.jpg")
                 if nude.is_nude("./nudes.jpg"):
                     await event.delete()
