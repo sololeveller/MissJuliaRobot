@@ -662,7 +662,7 @@
 import html
 import importlib
 import json
-import re
+import re, os
 import traceback
 from typing import Optional
 
@@ -1062,7 +1062,7 @@ def main():
     #  updater.start_polling(timeout=15, read_latency=4, clean=True)
    
     updater.start_webhook(listen="0.0.0.0", # should listen to localhost server
-                          port="8443", # faster port
+                          port=PORT, # heroku's choice
                           url_path=TOKEN)
 
     updater.bot.set_webhook(url=URL+TOKEN)
