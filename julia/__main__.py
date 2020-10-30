@@ -681,9 +681,9 @@ from sys import argv
 from julia import dispatcher
 from julia import LOGGER
 from julia import OWNER_ID
-from julia import tbot, ubot, PORT
+from julia import tbot, ubot
 from julia import TOKEN
-from julia import updater, URL
+from julia import updater
 from julia.modules import ALL_MODULES
 from julia.modules.helper_funcs.chat_status import is_user_admin
 from julia.modules.helper_funcs.chat_status import user_admin
@@ -1058,15 +1058,7 @@ def main():
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_error_handler(error_handler)
      
-    # FUCK YOU LONG POLLING 🖕😠
-    #  updater.start_polling(timeout=15, read_latency=4, clean=True)
-   
-    updater.start_webhook(listen="0.0.0.0", # should listen to localhost server
-                          port=PORT, # heroku's choice
-                          url_path=TOKEN)
-
-    updater.bot.set_webhook(url=URL+TOKEN)
-
+    updater.start_polling(timeout=15, read_latency=4, clean=True)
     LOGGER.info("Successfully started Julia[PTB] !")
 
     if len(argv) not in (1, 3, 4):
