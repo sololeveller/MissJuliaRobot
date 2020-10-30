@@ -1061,11 +1061,12 @@ def main():
     # FUCK YOU LONG POLLING 🖕😠
     #  updater.start_polling(timeout=15, read_latency=4, clean=True)
    
-    updater.start_webhook(listen="0.0.0.0",
+    updaterr = Updater(TOKEN)
+    updaterr.start_webhook(listen="0.0.0.0",
                           port="8443",
                           url_path=TOKEN)
 
-    updater.bot.set_webhook("https://missjuliarobot.herokuapp.com/" + TOKEN)
+    updaterr.bot.set_webhook("https://missjuliarobot.herokuapp.com/" + TOKEN)
 
     LOGGER.info("Successfully started Julia[PTB] !")
 
