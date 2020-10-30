@@ -4074,7 +4074,7 @@ async def sticklet(event):
 import nude
 from nude import Nude
 
-@register(patteen="")      
+@register(pattern="")      
 async def spam_update(event):
   if event.fwd_from:
     return  
