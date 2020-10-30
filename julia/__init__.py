@@ -708,12 +708,11 @@ if ENV:
         }
     except ValueError:
         raise Exception("Your whitelisted users list does not contain valid integers.")
-    WEBHOOK = bool(os.environ.get("WEBHOOK", False))
+    
     URL = os.environ.get("URL", "")  # Does not contain token
     API_KEY = os.environ.get("API_KEY", None)
     API_HASH = os.environ.get("API_HASH", None)
-    PORT = int(os.environ.get("PORT", None))
-    CERT_PATH = os.environ.get("CERT_PATH", None)
+    
     OPENWEATHERMAP_ID = os.environ.get("OPENWEATHERMAP_ID", None)
     DB_URI = os.environ.get("DATABASE_URL")
     LOAD = os.environ.get("LOAD", "").split()
