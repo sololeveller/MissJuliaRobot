@@ -681,7 +681,7 @@ from sys import argv
 from julia import dispatcher
 from julia import LOGGER
 from julia import OWNER_ID
-from julia import tbot, ubot
+from julia import tbot, ubot, PORT
 from julia import TOKEN
 from julia import updater, URL
 from julia.modules import ALL_MODULES
