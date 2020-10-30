@@ -709,7 +709,7 @@ if ENV:
     except ValueError:
         raise Exception("Your whitelisted users list does not contain valid integers.")
     
-    URL = os.environ.get("URL", "")  # Does not contain token
+    URL = os.environ.get("URL", None)  # Does not contain token
     API_KEY = os.environ.get("API_KEY", None)
     API_HASH = os.environ.get("API_HASH", None)
     
