@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcc0521bc1f543d793daba6415fba933)](https://app.codacy.com/gh/MissJuliaRobot/MissJuliaRobot?utm_source=github.com&utm_medium=referral&utm_content=MissJuliaRobot/MissJuliaRobot&utm_campaign=Badge_Grade)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Updates channel!](https://img.shields.io/badge/Join%20News%20Channel-✓-red)](https://t.me/MissJuliaRobotNews)
-![Total Size](https://github-size-badge.herokuapp.com/MissJuliaRobot/MissJuliaRobot.svg)
+[![Total Size](https://github-size-badge.herokuapp.com/MissJuliaRobot/MissJuliaRobot.svg)](https://github.com/MissJuliaRobot/MissJuliaRobot)
 [![Python 3.8](https://img.shields.io/badge/python->=3.8.3-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![HitCount](http://hits.dwyl.com/MissJuliaRobot/MissJuliaRobot.svg)](http://hits.dwyl.com/MissJuliaRobot/MissJuliaRobot)
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
