@@ -144,9 +144,4 @@
       "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
     }
   ],
-  "Global Variables": [
-    {
-      "WEBHOOK": "False"
-    }
-  ]
 }
