@@ -683,7 +683,7 @@ from julia import LOGGER
 from julia import OWNER_ID
 from julia import tbot, ubot
 from julia import TOKEN
-from julia import updater
+from julia import updater, URL
 from julia.modules import ALL_MODULES
 from julia.modules.helper_funcs.chat_status import is_user_admin
 from julia.modules.helper_funcs.chat_status import user_admin
@@ -1061,12 +1061,11 @@ def main():
     # FUCK YOU LONG POLLING 🖕😠
     #  updater.start_polling(timeout=15, read_latency=4, clean=True)
    
-    updaterr = Updater(TOKEN)
-    updaterr.start_webhook(listen="0.0.0.0",
-                          port="8443",
+    updater.start_webhook(listen="0.0.0.0",
+                          port="5000",
                           url_path=TOKEN)
 
-    updaterr.bot.set_webhook("https://missjuliarobot.herokuapp.com/" + TOKEN)
+    updater.bot.set_webhook(url=URL+TOKEN)
 
     LOGGER.info("Successfully started Julia[PTB] !")
 
