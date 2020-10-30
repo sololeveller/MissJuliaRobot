@@ -1061,8 +1061,8 @@ def main():
     # FUCK YOU LONG POLLING 🖕😠
     #  updater.start_polling(timeout=15, read_latency=4, clean=True)
    
-    updater.start_webhook(listen="0.0.0.0",
-                          port="5000",
+    updater.start_webhook(listen="0.0.0.0", # should listen to localhost server
+                          port="8443", # faster port
                           url_path=TOKEN)
 
     updater.bot.set_webhook(url=URL+TOKEN)
