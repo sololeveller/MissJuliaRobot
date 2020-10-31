@@ -664,6 +664,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 from telegram.ext import CommandHandler
 from telegram.ext import run_async
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from julia import dispatcher
 from julia.modules.helper_funcs.chat_status import user_admin
