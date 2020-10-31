@@ -660,6 +660,7 @@
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
 from functools import wraps
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from julia.modules.helper_funcs.misc import is_module_loaded
 
