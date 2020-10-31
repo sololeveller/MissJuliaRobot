@@ -680,6 +680,7 @@ from julia.modules.helper_funcs.chat_status import user_can_change, is_user_admi
 from julia.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from julia.modules.helper_funcs.filters import CustomFilters
 from julia.modules.sql.users_sql import get_all_chats
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 GBAN_ENFORCE_GROUP = 6
 
