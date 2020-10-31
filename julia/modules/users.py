@@ -668,6 +668,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext.dispatcher import run_async
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import julia.modules.sql.users_sql as sql
 from julia import dispatcher
