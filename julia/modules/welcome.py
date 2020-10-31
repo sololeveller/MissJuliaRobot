@@ -3,6 +3,7 @@ import random
 import re
 import time
 from functools import partial
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from telegram import ChatPermissions
 from telegram import InlineKeyboardButton
