@@ -729,7 +729,7 @@ if is_module_loaded(FILENAME):
                 )
 
     @run_async
-@spamcheck
+    @spamcheck
     @user_can_change
     def logging(update, context):
         message = update.effective_message  # type: Optional[Message]
@@ -749,7 +749,7 @@ if is_module_loaded(FILENAME):
             message.reply_text("No log channel has been set for this group!")
 
     @run_async
-@spamcheck
+    @spamcheck
     @user_can_change
     def setlog(update, context):
         message = update.effective_message  # type: Optional[Message]
@@ -795,7 +795,7 @@ if is_module_loaded(FILENAME):
             )
 
     @run_async
-@spamcheck
+    @spamcheck
     @user_can_change
     def unsetlog(update, context):
         message = update.effective_message  # type: Optional[Message]
