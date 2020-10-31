@@ -683,6 +683,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import run_async
 from telegram.utils.helpers import mention_html
 from telegram.utils.helpers import mention_markdown
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import julia.modules.sql.feds_sql as sql
 from julia import dispatcher
