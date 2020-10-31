@@ -675,6 +675,7 @@ from julia.modules.helper_funcs.chat_status import bot_admin
 from julia.modules.helper_funcs.chat_status import can_pin
 from julia.modules.helper_funcs.chat_status import can_promote
 from julia.modules.helper_funcs.chat_status import user_admin
+from julia.modules.helper_funcs.chat_status import spamcheck
 from julia.modules.helper_funcs.chat_status import user_can_change
 from julia.modules.helper_funcs.chat_status import user_can_pin
 from julia.modules.helper_funcs.chat_status import user_can_promote
