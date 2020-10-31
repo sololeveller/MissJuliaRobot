@@ -947,6 +947,7 @@ def spamcheck(func):
           if not str(final) >= "24":                
               return
           else:
+              timerr = time.time()
               leechers.delete_one({"id": event.from_id, "time": timerr})
               pass
 
