@@ -673,6 +673,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import Filters
 from telegram.ext import run_async
 from telegram.utils.helpers import escape_markdown
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import julia.modules.sql.rules_sql as sql
 from julia import dispatcher
