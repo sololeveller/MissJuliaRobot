@@ -664,6 +664,7 @@ import re
 import urllib
 from urllib.error import HTTPError
 from urllib.error import URLError
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import requests
 from bs4 import BeautifulSoup
