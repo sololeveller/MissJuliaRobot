@@ -666,6 +666,7 @@ from emoji import UNICODE_EMOJI
 from googletrans import Translator
 from telegram.ext import CommandHandler
 from telegram.ext import run_async
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from julia import dispatcher
 from julia.modules.helper_funcs.chat_status import user_admin
