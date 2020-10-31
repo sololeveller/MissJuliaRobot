@@ -940,14 +940,12 @@ def spamcheck(func):
         
         users = leechers.find({})
         for c in users:
-        if user.id == c["id"]:
+         if user.id == c["id"]:
           timer = c["time"]            
           elapsed_time = time.time() - float(timer)
           final = time.strftime("%H", time.gmtime(elapsed_time))
           if not str(final) >= "24":                
               return
-          else:
-              pass
 
         return func(update, context, *args, **kwargs)
 
