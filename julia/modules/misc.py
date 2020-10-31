@@ -781,9 +781,11 @@ client = MongoClient(MONGO_DB_URI)
 db = client["test"]
 approved_users = db.approve
 
+from telethon.errors.rpcerrorlist.UserNotParticipantError
 
 # ------ THANKS TO LONAMI ------#
 async def is_register_admin(chat, user):
+  try:
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
             (
@@ -800,10 +802,13 @@ async def is_register_admin(chat, user):
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
         )
-    return None
+    return False
+  except UserNotParticipantError:
+    return False
 
 
 async def can_ban_users(message):
+  try:
     result = await tbot(
         functions.channels.GetParticipantRequest(
             channel=message.chat_id,
@@ -814,6 +819,8 @@ async def can_ban_users(message):
     return isinstance(p, types.ChannelParticipantCreator) or (
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users
     )
+  except UserNotParticipantError:
+    return False
 
 
 # ------ THANKS TO LONAMI ------#
