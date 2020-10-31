@@ -783,42 +783,42 @@ approved_users = db.approve
 
 # ------ THANKS TO LONAMI ------#
 async def is_register_admin(chat, user):
-  try:
-    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
-        return isinstance(
-            (
-                await tbot(functions.channels.GetParticipantRequest(chat, user))
-            ).participant,
-            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
-        )
-    if isinstance(chat, types.InputPeerChat):
-        ui = await tbot.get_peer_id(user)
-        ps = (
-            await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
-        ).full_chat.participants.participants
-        return isinstance(
-            next((p for p in ps if p.user_id == ui), None),
-            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
-        )
-    return False
-  except Exception:
-    return False
+    try:
+        if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+            return isinstance(
+                (
+                    await tbot(functions.channels.GetParticipantRequest(chat, user))
+                ).participant,
+                (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
+            )
+        if isinstance(chat, types.InputPeerChat):
+            ui = await tbot.get_peer_id(user)
+            ps = (
+                await tbot(functions.messages.GetFullChatRequest(chat.chat_id))
+            ).full_chat.participants.participants
+            return isinstance(
+                next((p for p in ps if p.user_id == ui), None),
+                (types.ChatParticipantAdmin, types.ChatParticipantCreator),
+            )
+        return False
+    except Exception:
+        return False
 
 
 async def can_ban_users(message):
-  try:
-    result = await tbot(
-        functions.channels.GetParticipantRequest(
-            channel=message.chat_id,
-            user_id=message.sender_id,
+    try:
+        result = await tbot(
+            functions.channels.GetParticipantRequest(
+                channel=message.chat_id,
+                user_id=message.sender_id,
+            )
         )
-    )
-    p = result.participant
-    return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users
-    )
-  except Exception:
-    return False
+        p = result.participant
+        return isinstance(p, types.ChannelParticipantCreator) or (
+            isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users
+        )
+    except Exception:
+        return False
 
 
 # ------ THANKS TO LONAMI ------#
@@ -3021,9 +3021,7 @@ async def emoji_fetch(emoji):
             urllib.request.urlretrieve(img, "resources/emoji.png")[0]
         )
     img = emojis["⛔"]
-    return await transparent(
-        urllib.request.urlretrieve(img, "resources/emoji.png")[0]
-    )
+    return await transparent(urllib.request.urlretrieve(img, "resources/emoji.png")[0])
 
 
 async def transparent(emoji):
@@ -4076,56 +4074,57 @@ async def sticklet(event):
         await event.reply("I only understand by on or off")
         return
 
+
 import nude
 from nude import Nude
 
-@register(pattern="")      
+
+@register(pattern="")
 async def spam_update(event):
-  if str(event.from_id) in str(OWNER_ID):
-   return
-  if event.is_private:  	
-   return
-  if MONGO_DB_URI is None:
-   return
-  msg = str(event.text)
-  sender = await event.get_sender()
-  let = sender.username
-  if event.is_group:
-    if (await is_register_admin(event.input_chat, event.message.sender_id)):
-       return
-    else:
-       pass     
-  chats = spammers.find({})
-  for c in chats:
-   if event.text: 
-    if event.chat_id == c['id']:
-     if profanity.contains_profanity(msg) == True:
-        await event.delete()
-        if sender.username == None:
-           st = sender.first_name
-           hh = sender.id
-           final = f"[{st}](tg://user?id={hh}) **{msg}** is detected as a slang word and your message has been deleted"
+    if str(event.from_id) in str(OWNER_ID):
+        return
+    if event.is_private:
+        return
+    if MONGO_DB_URI is None:
+        return
+    msg = str(event.text)
+    sender = await event.get_sender()
+    let = sender.username
+    if event.is_group:
+        if await is_register_admin(event.input_chat, event.message.sender_id):
+            return
         else:
-           final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-        dev = await event.respond(final)
-        await asyncio.sleep(10)
-        await dev.delete()
-   if event.photo:
-     if event.chat_id == c['id']:
-        await event.client.download_media(event.photo, "nudes.jpg")
-        if nude.is_nude('./nudes.jpg') == True:
-           await event.delete()
-           if sender.username == None:
-             st = sender.first_name
-             hh = sender.id
-             final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
-           else:
-             final = f'@{let} your message has been deleted due to pornographic content'
-           dev = await event.respond(final)
-           await asyncio.sleep(10)
-           await dev.delete()
-           os.remove("nudes.jpg")
-    
+            pass
+    chats = spammers.find({})
+    for c in chats:
+        if event.text:
+            if event.chat_id == c["id"]:
+                if profanity.contains_profanity(msg) == True:
+                    await event.delete()
+                    if sender.username == None:
+                        st = sender.first_name
+                        hh = sender.id
+                        final = f"[{st}](tg://user?id={hh}) **{msg}** is detected as a slang word and your message has been deleted"
+                    else:
+                        final = f"@{let} **{msg}** is detected as a slang word and your message has been deleted"
+                    dev = await event.respond(final)
+                    await asyncio.sleep(10)
+                    await dev.delete()
+        if event.photo:
+            if event.chat_id == c["id"]:
+                await event.client.download_media(event.photo, "nudes.jpg")
+                if nude.is_nude("./nudes.jpg") == True:
+                    await event.delete()
+                    if sender.username == None:
+                        st = sender.first_name
+                        hh = sender.id
+                        final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
+                    else:
+                        final = f"@{let} your message has been deleted due to pornographic content"
+                    dev = await event.respond(final)
+                    await asyncio.sleep(10)
+                    await dev.delete()
+                    os.remove("nudes.jpg")
 
 
 @register(pattern="^/eval")

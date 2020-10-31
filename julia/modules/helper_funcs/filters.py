@@ -3,7 +3,7 @@ from telegram import Message
 from telegram.ext import BaseFilter
 
 
-class CustomFilters():
+class CustomFilters:
     class _Sudoers(BaseFilter):
         @staticmethod
         def filter(message: Message):

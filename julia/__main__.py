@@ -1057,7 +1057,7 @@ def main():
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_error_handler(error_handler)
-     
+
     updater.start_polling(timeout=15, read_latency=4, clean=True)
     LOGGER.info("Successfully started Julia[PTB] !")
 

@@ -708,10 +708,10 @@ if ENV:
         }
     except ValueError:
         raise Exception("Your whitelisted users list does not contain valid integers.")
-    
+
     API_KEY = os.environ.get("API_KEY", None)
     API_HASH = os.environ.get("API_HASH", None)
-    
+
     OPENWEATHERMAP_ID = os.environ.get("OPENWEATHERMAP_ID", None)
     DB_URI = os.environ.get("DATABASE_URL")
     LOAD = os.environ.get("LOAD", "").split()

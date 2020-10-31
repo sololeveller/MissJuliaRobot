@@ -679,6 +679,7 @@ approved_users = db.approve
 dbb = client["leecher"]
 leechers = dbb.leecher
 
+
 def can_delete(chat: Chat, bot_id: int) -> bool:
     return chat.get_member(bot_id).can_delete_messages
 
@@ -933,22 +934,21 @@ def user_can_delete(func):
 
     return user_can_deletee
 
+
 def spamcheck(func):
     @wraps(func)
     def spamchecker(update: Update, context: CallbackContext, *args, **kwargs):
         user = update.effective_user
-        
+
         users = leechers.find({})
         for c in users:
-         if user.id == c["id"]:
-          timer = c["time"]            
-          elapsed_time = time.time() - float(timer)
-          final = time.strftime("%H", time.gmtime(elapsed_time))
-          if not str(final) >= "24":                
-              return
+            if user.id == c["id"]:
+                timer = c["time"]
+                elapsed_time = time.time() - float(timer)
+                final = time.strftime("%H", time.gmtime(elapsed_time))
+                if not str(final) >= "24":
+                    return
 
         return func(update, context, *args, **kwargs)
 
     return spamchecker
-
-
