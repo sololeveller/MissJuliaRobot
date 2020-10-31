@@ -9,6 +9,7 @@ from telegram.ext import (
     CallbackContext,
 )
 from julia import dispatcher, CustomCommandHandler
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from julia.modules.helper_funcs.chat_status import bot_can_delete, user_can_change
 from julia.modules.sql import cleaner_sql as sql
