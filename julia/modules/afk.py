@@ -665,6 +665,8 @@ from julia.modules.sql import afk_sql as sql
 from julia.modules.users import get_user_id
 from telegram import MessageEntity, Update
 from telegram.error import BadRequest
+from julia.modules.helper_funcs.chat_status import spamcheck
+
 from telegram.ext import (
     CallbackContext,
     Filters,
