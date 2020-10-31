@@ -668,6 +668,7 @@ from telegram.ext import run_async
 import json
 from julia import dispatcher
 from julia.modules.helper_funcs.chat_status import user_admin
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 
 @run_async
