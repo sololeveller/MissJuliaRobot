@@ -720,7 +720,7 @@ async def approve(event):
     if MONGO_DB_URI is None:
         return
     chat_id = event.chat.id
-    sender = event.from_id
+    sender = event.sender_id
     reply_msg = await event.get_reply_message()
     approved_userss = approved_users.find({})
 
@@ -738,7 +738,7 @@ async def approve(event):
 
     if not input:
         iid = (
-            reply_msg.from_id
+            reply_msg.sender_id
             if event.reply_to_msg_id
             else await event.reply("Reply To Someone's Message Or Provide Some Input")
         )
@@ -755,12 +755,12 @@ async def approve(event):
         await event.reply("Why will I approve an admin ?")
         return
 
-    if iid == event.from_id or iid == event.from_id:
+    if iid == event.sender_id or iid == event.sender_id:
         await event.reply("Why are you trying to approve yourself ?")
         print("6")
         return
 
-    if event.from_id == 1246850012 or iid == 1246850012:
+    if event.sender_id == 1246850012 or iid == 1246850012:
         await event.reply("I am not gonna approve myself")
         print("7")
         return
@@ -782,7 +782,7 @@ async def disapprove(event):
     if MONGO_DB_URI is None:
         return
     chat_id = event.chat.id
-    sender = event.from_id
+    sender = event.sender_id
     reply_msg = await event.get_reply_message()
     approved_userss = approved_users.find({})
 
@@ -800,7 +800,7 @@ async def disapprove(event):
 
     if not input:
         iid = (
-            reply_msg.from_id
+            reply_msg.sender_id
             if event.reply_to_msg_id
             else await event.reply("Reply To Someone's Message Or Provide Some Input")
         )
@@ -817,12 +817,12 @@ async def disapprove(event):
         await event.reply("Why will I disapprove an admin ?")
         return
 
-    if iid == event.from_id or iid == event.from_id:
+    if iid == event.sender_id or iid == event.sender_id:
         await event.reply("Why are you trying to disapprove yourself ?")
         print("6")
         return
 
-    if event.from_id == 1246850012 or iid == 1246850012:
+    if event.sender_id == 1246850012 or iid == 1246850012:
         await event.reply("I am not gonna disapprove myself")
         print("7")
         return
@@ -843,7 +843,7 @@ async def checkst(event):
     if MONGO_DB_URI is None:
         return
     chat_id = event.chat.id
-    sender = event.from_id
+    sender = event.sender_id
     reply_msg = await event.get_reply_message()
     approved_userss = approved_users.find({})
 
@@ -861,7 +861,7 @@ async def checkst(event):
 
     if not input:
         iid = (
-            reply_msg.from_id
+            reply_msg.sender_id
             if event.reply_to_msg_id
             else await event.reply("Reply To Someone's Message Or Provide Some Input")
         )
@@ -878,7 +878,7 @@ async def checkst(event):
         await event.reply("Why will check status of an admin ?")
         return
 
-    if event.from_id == 1246850012 or iid == 1246850012:
+    if event.sender_id == 1246850012 or iid == 1246850012:
         await event.reply("I am not gonna check my status")
         print("7")
         return
@@ -898,7 +898,7 @@ async def apprlst(event):
     if MONGO_DB_URI is None:
         return
     chat_id = event.chat.id
-    sender = event.from_id
+    sender = event.sender_id
     reply_msg = await event.get_reply_message()
 
     if event.is_group:

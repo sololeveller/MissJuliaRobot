@@ -723,7 +723,7 @@ async def parseqr(qr_e):
 
     if await is_register_admin(qr_e.input_chat, qr_e.message.sender_id):
         pass
-    elif qr_e.chat_id == iid and qr_e.from_id == userss:
+    elif qr_e.chat_id == iid and qr_e.sender_id == userss:
         pass
     else:
         return
@@ -758,7 +758,7 @@ async def make_qr(qrcode):
 
     if await is_register_admin(qrcode.input_chat, qrcode.message.sender_id):
         pass
-    elif qrcode.chat_id == iid and qrcode.from_id == userss:
+    elif qrcode.chat_id == iid and qrcode.sender_id == userss:
         pass
     else:
         return

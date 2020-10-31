@@ -687,7 +687,7 @@ async def can_del(message):
 @tbot.on(events.NewMessage(pattern="^/purge$"))
 async def purge_messages(event):
     start = time.perf_counter()
-    if event.from_id is None:
+    if event.sender_id is None:
         return
 
     if not await can_del(message=event):
@@ -723,7 +723,7 @@ async def purge_messages(event):
 
 @tbot.on(events.NewMessage(pattern="^/del$"))
 async def delete_messages(event):
-    if event.from_id is None:
+    if event.sender_id is None:
         return
 
     if not await can_del(message=event):

@@ -1280,7 +1280,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1335,7 +1335,7 @@ async def wiki(wiki_q):
     if wiki_q.is_group:
         if await is_register_admin(wiki_q.input_chat, wiki_q.message.sender_id):
             pass
-        elif wiki_q.chat_id == iid and wiki_q.from_id == userss:
+        elif wiki_q.chat_id == iid and wiki_q.sender_id == userss:
             pass
         else:
             return
@@ -1376,7 +1376,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1409,7 +1409,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1466,7 +1466,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-    elif event.chat_id == iid and event.from_id == userss:
+    elif event.chat_id == iid and event.sender_id == userss:
         pass
     else:
         return
@@ -1492,7 +1492,7 @@ async def figlet(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1512,7 +1512,7 @@ async def img_sampler(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1606,7 +1606,7 @@ async def yts_search(video_q):
     if video_q.is_group:
         if await is_register_admin(video_q.input_chat, video_q.message.sender_id):
             pass
-        elif video_q.chat_id == iid and video_q.from_id == userss:
+        elif video_q.chat_id == iid and video_q.sender_id == userss:
             pass
         else:
             return
@@ -1686,7 +1686,7 @@ async def get_users(show):
     if show.is_group:
         if await is_register_admin(show.input_chat, show.message.sender_id):
             pass
-        elif show.chat_id == iid and show.from_id == userss:
+        elif show.chat_id == iid and show.sender_id == userss:
             pass
         else:
             return
@@ -1719,7 +1719,7 @@ async def apk(e):
     if e.is_group:
         if await is_register_admin(e.input_chat, e.message.sender_id):
             pass
-        elif e.chat_id == iid and e.from_id == userss:
+        elif e.chat_id == iid and e.sender_id == userss:
             pass
         else:
             return
@@ -1798,7 +1798,7 @@ async def univsaye(cowmsg):
     if cowmsg.is_group:
         if await is_register_admin(cowmsg.input_chat, cowmsg.message.sender_id):
             pass
-        elif cowmsg.chat_id == iid and cowmsg.from_id == userss:
+        elif cowmsg.chat_id == iid and cowmsg.sender_id == userss:
             pass
         else:
             return
@@ -1828,7 +1828,7 @@ async def rm_deletedacc(show):
         return
 
     if show.is_group:
-        if str(show.from_id) in str(OWNER_ID):
+        if str(show.sender_id) in str(OWNER_ID):
             pass
         else:
             if not await can_ban_users(message=show):
@@ -1924,7 +1924,7 @@ async def get_ocr_languages(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1968,7 +1968,7 @@ async def parse_ocr_space_api(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2026,7 +2026,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2120,7 +2120,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2147,7 +2147,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2174,7 +2174,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2238,7 +2238,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2344,7 +2344,7 @@ async def tor_search(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2374,7 +2374,7 @@ async def fortunate(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2392,7 +2392,7 @@ async def phone(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2488,7 +2488,7 @@ async def _(event):
 async def asciiart(event):
     if event.fwd_from:
         return
-    if not event.from_id:
+    if not event.sender_id:
         await event.reply("Reply To A Image Plox..")
         return
     approved_userss = approved_users.find({})
@@ -2498,7 +2498,7 @@ async def asciiart(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2539,7 +2539,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -2594,7 +2594,7 @@ async def _(event):
         return
 
     if event.is_group:
-        if str(event.from_id) in str(OWNER_ID):
+        if str(event.sender_id) in str(OWNER_ID):
             pass
         else:
             if not await can_ban_users(message=event):
@@ -2631,7 +2631,7 @@ async def _(event):
         await event.reply("You can use this command in groups but not in PM's")
         return
     if event.is_group:
-        if str(event.from_id) in str(OWNER_ID):
+        if str(event.sender_id) in str(OWNER_ID):
             pass
         else:
             if not await can_ban_users(message=event):
@@ -3090,7 +3090,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3162,7 +3162,7 @@ async def stickerizer(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3217,7 +3217,7 @@ async def savel(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3240,7 +3240,7 @@ async def sticklet(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3324,7 +3324,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3640,7 +3640,7 @@ async def howdoi(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3693,7 +3693,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3730,7 +3730,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3768,7 +3768,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3806,7 +3806,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3844,7 +3844,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3882,7 +3882,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3920,7 +3920,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3958,7 +3958,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -3996,7 +3996,7 @@ async def ramdomgamess(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -4063,7 +4063,7 @@ async def sticklet(event):
         return
     if input in "on":
         if event.is_group:
-            if str(event.from_id) in str(OWNER_ID):
+            if str(event.sender_id) in str(OWNER_ID):
                 pass
             else:
                 if not await can_change_info(message=event):
@@ -4079,7 +4079,7 @@ async def sticklet(event):
             await event.reply("Profanity filter turned on for this chat.")
     if input in "off":
         if event.is_group:
-            if str(event.from_id) in str(OWNER_ID):
+            if str(event.sender_id) in str(OWNER_ID):
                 pass
             else:
                 if not await can_change_info(message=event):
@@ -4102,7 +4102,7 @@ from nude import Nude
 
 @register(pattern="")
 async def spam_update(event):
-    if str(event.from_id) in str(OWNER_ID):
+    if str(event.sender_id) in str(OWNER_ID):
         return
     if event.is_private:
         return

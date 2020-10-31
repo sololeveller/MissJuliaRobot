@@ -31,14 +31,14 @@ def max_seconds(max_seconds, *, interval=1):
 
 @register(pattern="")
 async def leechers(event):
-    if str(event.from_id) in str(OWNER_ID):
+    if str(event.sender_id) in str(OWNER_ID):
       return
-    sender = await event.from_id()
+    sender = await event.sender_id()
     let = sender.username
     USERSPAM = []
     check = sender
     if len(USERSPAM) >= 1:
-        if event.from_id == USERSPAM[0]:
+        if event.sender_id == USERSPAM[0]:
             pass
         else:
             USERSPAM = []
@@ -47,7 +47,7 @@ async def leechers(event):
         USERSPAM.append(check)  # lock the user id
     for sec in max_seconds(3):
         if len(event) > 5:
-         if event.from_id == USERSPAM[0]:
+         if event.sender_id == USERSPAM[0]:
             VALID = True
             if sender.username == None:
                 st = sender.first_name
@@ -68,7 +68,7 @@ async def leechers(event):
                 try:
                     MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
                     await event.client(
-                        EditBannedRequest(event.chat_id, event.from_id, MUTE_RIGHTS)
+                        EditBannedRequest(event.chat_id, event.sender_id, MUTE_RIGHTS)
                     )
                     await dev.edit("\nYou are now muted !")
                 except Exception:

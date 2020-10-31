@@ -713,7 +713,7 @@ async def _(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -747,10 +747,10 @@ async def _(event):
 
     allpoll = poll_id.find({})
     for c in allpoll:
-        if event.from_id == c["user"] and secret == c["pollid"]:
+        if event.sender_id == c["user"] and secret == c["pollid"]:
             await event.reply("Please give another poll id, this id is already used")
             return
-        poll_id.insert_one({"user": event.from_id, "pollid": secret})
+        poll_id.insert_one({"user": event.sender_id, "pollid": secret})
 
     ques = quess.strip()
     option = options.strip()
@@ -985,7 +985,7 @@ async def stop(event):
     if event.is_group:
         if await is_register_admin(event.input_chat, event.message.sender_id):
             pass
-        elif event.chat_id == iid and event.from_id == userss:
+        elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
             return
@@ -1013,7 +1013,7 @@ async def stop(event):
         await event.reply("Please reply to a poll to stop it")
         return
     msg = await event.get_reply_message()
-    if str(msg.from_id) != "PeerUser(user_id=1246850012)":
+    if str(msg.sender_id) != "PeerUser(user_id=1246850012)":
         await event.reply(
             "I can't do this operation on this poll.\nProbably it's not created by me"
         )
@@ -1022,8 +1022,8 @@ async def stop(event):
         try:
             allpoll = poll_id.find({})
             for c in allpoll:
-                if event.from_id == c["user"] and secret == c["pollid"]:
-                    poll_id.delete_one({"user": event.from_id, "pollid": secret})
+                if event.sender_id == c["user"] and secret == c["pollid"]:
+                    poll_id.delete_one({"user": event.sender_id, "pollid": secret})
                     pollid = msg.poll.poll.id
                     await msg.edit(
                         file=types.InputMediaPoll(

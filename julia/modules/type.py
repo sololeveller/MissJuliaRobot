@@ -705,7 +705,7 @@ async def typewriter(typew):
     if typew.is_group:
         if await is_register_admin(typew.input_chat, typew.message.sender_id):
             pass
-        elif typew.chat_id == iid and typew.from_id == userss:
+        elif typew.chat_id == iid and typew.sender_id == userss:
             pass
         else:
             return
