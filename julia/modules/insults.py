@@ -665,6 +665,7 @@ from telegram.ext import run_async
 
 from julia import dispatcher
 from julia.modules.helper_funcs.chat_status import user_admin
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 SFW_STRINGS = (
     "Owww ... Such a stupid idiot.",
