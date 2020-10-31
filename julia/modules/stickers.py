@@ -663,6 +663,7 @@ import math
 import os
 import urllib.request as urllib
 from html import escape
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import requests
 from bs4 import BeautifulSoup as bs
