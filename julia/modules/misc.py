@@ -3999,8 +3999,8 @@ profanity.load_censor_words()
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client["spam"]
-spammers = db.spammer
+dbb = client["spam"]
+spammers = dbb.spammer
 
 
 async def can_change_info(message):
@@ -4081,8 +4081,8 @@ from nude import Nude
 
 @register(pattern="")      
 async def spam_update(event):
-  if event.fwd_from:
-    return  
+  if str(event.from_id) in str(OWNER_ID):
+   return
   if event.is_private:  	
    return
   if MONGO_DB_URI is None:
