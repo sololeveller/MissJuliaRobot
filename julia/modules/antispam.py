@@ -51,7 +51,7 @@ async def (event):
            pass
        else:
            USERSPAM = []
-           USERSPAM.append(check) 
+           USERSPAM.append(check) # lock the user id
   else:     
        USERSPAM.append(check) # lock the user id
   for sec in max_seconds(5):
