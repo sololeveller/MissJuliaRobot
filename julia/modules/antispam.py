@@ -37,7 +37,7 @@ db = client["leccher"]
 leechers = db.leecher
 
 @register(pattern="")      
-async def(event):
+async def leechers(event):
   if event.fwd_from:
     return  
   if event.is_private:  	
