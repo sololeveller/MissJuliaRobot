@@ -667,6 +667,7 @@ import re
 import string
 from io import BytesIO
 from pathlib import Path
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 import nltk  # shitty lib, but it does work
 from PIL import Image
