@@ -3,7 +3,7 @@ from julia.events import register
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 from pymongo import MongoClient
-from julia import MONGO_DB_URI, tbot
+from julia import MONGO_DB_URI, tbot, OWNER_ID
 from julia.events import register
 from telethon import types
 from telethon.tl import functions
@@ -31,10 +31,8 @@ def max_seconds(max_seconds, *, interval=1):
 
 @register(pattern="")
 async def leechers(event):
-    if event.fwd_from:
-        return
-    if event.is_private:
-        return
+    if str(event.from_id) in str(OWNER_ID):
+      return
     sender = await event.from_id()
     let = sender.username
     USERSPAM = []
