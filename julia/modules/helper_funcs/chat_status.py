@@ -936,7 +936,7 @@ def user_can_delete(func):
 def spamcheck(func):
     @wraps(func)
     def spamchecker(update: Update, context: CallbackContext, *args, **kwargs):
-        user = update.effective_user.id
+        user = update.effective_user
         
         users = leechers.find({})
         for c in users:
@@ -947,8 +947,6 @@ def spamcheck(func):
           if not str(final) >= "24":                
               return
           else:
-              timerr = time.time()
-              leechers.delete_one({"id": event.from_id, "time": timerr})
               pass
 
         return func(update, context, *args, **kwargs)
