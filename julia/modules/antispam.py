@@ -33,7 +33,7 @@ def max_seconds(max_seconds, *, interval=1):
 async def leechers(event):
     if str(event.sender_id) in str(OWNER_ID):
       return
-    sender = await event.sender_id()
+    sender = event.sender_id
     let = sender.username
     USERSPAM = []
     check = sender
