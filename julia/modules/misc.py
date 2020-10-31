@@ -746,6 +746,7 @@ from julia.events import register
 from julia.modules.helper_funcs.chat_status import is_user_admin
 from julia.modules.helper_funcs.chat_status import user_admin
 from julia.modules.helper_funcs.extraction import extract_user
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 USERS_GROUP = 4
 
