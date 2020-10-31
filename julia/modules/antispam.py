@@ -1,22 +1,17 @@
 import time
 from julia.events import register
-from telethon.tl.functions.channels import (
-    EditAdminRequest,
-    EditBannedRequest,
-    EditPhotoRequest,
-)
-from telethon.tl.functions.messages import (
-    EditChatDefaultBannedRightsRequest,
-    UpdatePinnedMessageRequest,
-)
-from telethon.tl.types import (
-    ChannelParticipantsAdmins,
-    ChatAdminRights,
-    ChatBannedRights,
-    MessageEntityMentionName,
-    MessageMediaPhoto,
-)
+from telethon.tl.functions.channels import EditBannedRequest
+from telethon.tl.types import ChatBannedRights
+from pymongo import MongoClient
+from julia import MONGO_DB_URI, tbot
+from julia.events import register
+from telethon import types
+from telethon.tl import functions
 
+client = MongoClient()
+client = MongoClient(MONGO_DB_URI)
+db = client["leccher"]
+leechers = db.leecher
 
 def max_seconds(max_seconds, *, interval=1):
     interval = int(interval)
@@ -32,18 +27,6 @@ def max_seconds(max_seconds, *, interval=1):
         yield int(round(time.time() - start_time))
         if int(round(time.time() + interval)) > int(round(end_time)):
             return
-
-
-from pymongo import MongoClient
-from julia import MONGO_DB_URI, tbot
-from julia.events import register
-from telethon import types
-from telethon.tl import functions
-
-client = MongoClient()
-client = MongoClient(MONGO_DB_URI)
-db = client["leccher"]
-leechers = db.leecher
 
 
 @register(pattern="")
