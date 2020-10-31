@@ -34,7 +34,7 @@ async def leechers(event):
     if str(event.sender_id) in str(OWNER_ID):
       return
     sender = event.sender_id
-    let = sender.username
+    senderr = await tbot.get_entity(sender)
     USERSPAM = []
     check = sender
     if len(USERSPAM) >= 1:
@@ -49,12 +49,14 @@ async def leechers(event):
         if len(event) > 5:
          if event.sender_id == USERSPAM[0]:
             VALID = True
-            if sender.username == None:
-                st = sender.first_name
-                hh = sender.id
+            
+            if senderr.username == None:
+                st = senderr.first_name
+                hh = senderr.id
                 final = f"[{st}](tg://user?id={hh}) you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
             else:
-                final = f"@{let} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
+                st = senderr.username
+                final = f"@{st} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
         else:
             VALID = False
     if VALID == True:
