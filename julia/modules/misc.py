@@ -781,8 +781,6 @@ client = MongoClient(MONGO_DB_URI)
 db = client["test"]
 approved_users = db.approve
 
-from telethon.errors.rpcerrorlist import UserNotParticipantError
-
 # ------ THANKS TO LONAMI ------#
 async def is_register_admin(chat, user):
   try:
@@ -803,7 +801,7 @@ async def is_register_admin(chat, user):
             (types.ChatParticipantAdmin, types.ChatParticipantCreator),
         )
     return False
-  except UserNotParticipantError:
+  except Exception:
     return False
 
 
@@ -819,7 +817,7 @@ async def can_ban_users(message):
     return isinstance(p, types.ChannelParticipantCreator) or (
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users
     )
-  except UserNotParticipantError:
+  except Exception:
     return False
 
 
