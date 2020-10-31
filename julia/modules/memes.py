@@ -691,6 +691,7 @@ WIDE_MAP[0x20] = 0x3000
 
 
 @run_async
+@spamcheck
 @user_admin
 def owo(update, context):
     message = update.effective_message
@@ -732,6 +733,7 @@ def owo(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def copypasta(update, context):
     message = update.effective_message
@@ -789,6 +791,7 @@ def copypasta(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def bmoji(update, context):
     message = update.effective_message
@@ -804,6 +807,7 @@ def bmoji(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def clapmoji(update, context):
     message = update.effective_message
@@ -817,6 +821,7 @@ def clapmoji(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def stretch(update, context):
     message = update.effective_message
@@ -831,6 +836,7 @@ def stretch(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def vapor(update, context):
     message = update.effective_message
@@ -859,6 +865,7 @@ def vapor(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def zalgotext(update, context):
     message = update.effective_message
@@ -876,6 +883,7 @@ def zalgotext(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def forbesify(update, context):
     message = update.effective_message
@@ -905,6 +913,7 @@ def forbesify(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def deepfryer(update, context):
     message = update.effective_message
@@ -956,6 +965,7 @@ async def process_deepfry(image: Image, reply: Message, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def shout(update, context):
     args = context.args
@@ -977,6 +987,7 @@ def shout(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def angrymoji(update, context):
     message = update.effective_message
@@ -991,6 +1002,7 @@ def angrymoji(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def crymoji(update, context):
     message = update.effective_message

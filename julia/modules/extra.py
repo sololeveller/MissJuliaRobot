@@ -866,6 +866,7 @@ TOSS = (
 
 
 @run_async
+@spamcheck
 @user_admin
 def roll(update, context):
     update.message.reply_text(random.choice(range(1, 7)))
@@ -876,6 +877,7 @@ def toss(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def abuse(update, context):
     # reply to correct message
@@ -888,6 +890,7 @@ def abuse(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def bluetext(update, context):
     # reply to correct message
@@ -902,6 +905,7 @@ def bluetext(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def rlg(update, context):
     # reply to correct message

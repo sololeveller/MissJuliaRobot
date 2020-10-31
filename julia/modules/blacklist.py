@@ -687,6 +687,7 @@ BLACKLIST_GROUP = 11
 
 
 @run_async
+@spamcheck
 @user_can_change
 def blacklist(update, context):
     chat = update.effective_chat
@@ -724,6 +725,7 @@ def blacklist(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def add_blacklist(update, context):
     msg = update.effective_message
@@ -770,6 +772,7 @@ def add_blacklist(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def unblacklist(update, context):
     msg = update.effective_message
@@ -842,6 +845,7 @@ def unblacklist(update, context):
 
 
 @run_async
+@spamcheck
 @loggable
 @user_can_change
 def blacklist_mode(update, context):
@@ -962,6 +966,7 @@ def findall(p, s):
 
 
 @run_async
+@spamcheck
 @user_not_admin
 def del_blacklist(update, context):
     chat = update.effective_chat

@@ -672,6 +672,7 @@ from julia.modules.helper_funcs.chat_status import user_admin
 
 
 @run_async
+@spamcheck
 @user_admin
 def gtrans(update, context):
     msg = update.effective_message
@@ -701,6 +702,7 @@ URL = "http://services.gingersoftware.com/Ginger/correct/json/GingerTheText"
 
 
 @run_async
+@spamcheck
 @user_admin
 def spellcheck(update, context):
     if update.effective_message.reply_to_message:

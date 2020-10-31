@@ -682,6 +682,7 @@ opener.addheaders = [("User-agent", useragent)]
 
 
 @run_async
+@spamcheck
 def reverse(update, context):
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")

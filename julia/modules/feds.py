@@ -742,6 +742,7 @@ UNFBAN_ERRORS = {
 
 
 @run_async
+@spamcheck
 def new_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -794,6 +795,7 @@ def new_fed(update, context):
 
 
 @run_async
+@spamcheck
 def del_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -841,6 +843,7 @@ def del_fed(update, context):
 
 
 @run_async
+@spamcheck
 def fed_chat(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     fed_id = sql.get_fed_id(chat.id)
@@ -866,6 +869,7 @@ def fed_chat(update, context):
 
 
 @run_async
+@spamcheck
 def join_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -927,6 +931,7 @@ def join_fed(update, context):
 
 
 @run_async
+@spamcheck
 def leave_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -968,6 +973,7 @@ def leave_fed(update, context):
 
 
 @run_async
+@spamcheck
 def user_join_fed(update, context):
     chat = update.effective_chat
     user = update.effective_user
@@ -1032,6 +1038,7 @@ def user_join_fed(update, context):
 
 
 @run_async
+@spamcheck
 def user_demote_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -1092,6 +1099,7 @@ def user_demote_fed(update, context):
 
 
 @run_async
+@spamcheck
 def fed_info(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -1141,6 +1149,7 @@ def fed_info(update, context):
 
 
 @run_async
+@spamcheck
 def fed_admin(update, context):
 
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1190,6 +1199,7 @@ def fed_admin(update, context):
 
 
 @run_async
+@spamcheck
 def fed_ban(update, context):
 
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1591,6 +1601,7 @@ def fed_ban(update, context):
 
 
 @run_async
+@spamcheck
 def unfban(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -1811,6 +1822,7 @@ def unfban(update, context):
 
 
 @run_async
+@spamcheck
 def set_frules(update, context):
 
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1871,6 +1883,7 @@ def set_frules(update, context):
 
 
 @run_async
+@spamcheck
 def get_frules(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     args = context.args
@@ -1894,6 +1907,7 @@ def get_frules(update, context):
 
 
 @run_async
+@spamcheck
 def fed_broadcast(update, context):
     msg = update.effective_message  # type: Optional[Message]
     user = update.effective_user  # type: Optional[User]
@@ -1955,6 +1969,7 @@ def fed_broadcast(update, context):
 
 
 @run_async
+@spamcheck
 @send_action(ChatAction.UPLOAD_DOCUMENT)
 def fed_ban_list(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2135,6 +2150,7 @@ def fed_ban_list(update, context):
 
 
 @run_async
+@spamcheck
 def fed_notif(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2170,6 +2186,7 @@ def fed_notif(update, context):
 
 
 @run_async
+@spamcheck
 def fed_chats(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2234,6 +2251,7 @@ def fed_chats(update, context):
 
 
 @run_async
+@spamcheck
 def fed_import_bans(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2452,6 +2470,7 @@ def fed_import_bans(update, context):
 
 
 @run_async
+@spamcheck
 def del_fed_button(update, context):
     query = update.callback_query
     fed_id = query.data.split("_")[1]
@@ -2473,6 +2492,7 @@ def del_fed_button(update, context):
 
 
 @run_async
+@spamcheck
 def fed_stat_user(update, context):
     user = update.effective_user  # type: Optional[User]
     msg = update.effective_message  # type: Optional[Message]
@@ -2580,6 +2600,7 @@ def fed_stat_user(update, context):
 
 
 @run_async
+@spamcheck
 def set_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2620,6 +2641,7 @@ def set_fed_log(update, context):
 
 
 @run_async
+@spamcheck
 def unset_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2661,6 +2683,7 @@ def unset_fed_log(update, context):
 
 
 @run_async
+@spamcheck
 def subs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2726,6 +2749,7 @@ def subs_feds(update, context):
 
 
 @run_async
+@spamcheck
 def unsubs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2791,6 +2815,7 @@ def unsubs_feds(update, context):
 
 
 @run_async
+@spamcheck
 def get_myfedsubs(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2836,6 +2861,7 @@ def get_myfedsubs(update, context):
 
 
 @run_async
+@spamcheck
 def get_myfeds_list(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -2875,6 +2901,7 @@ def is_user_fed_owner(fed_id, user_id):
 
 
 @run_async
+@spamcheck
 def welcome_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]

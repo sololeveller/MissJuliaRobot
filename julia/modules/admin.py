@@ -685,6 +685,7 @@ from julia.modules.log_channel import loggable
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_promote
 @user_admin
@@ -739,6 +740,7 @@ def promote(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_promote
 @user_admin
@@ -802,6 +804,7 @@ def demote(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_pin
 @user_can_pin
@@ -846,6 +849,7 @@ def pin(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_pin
 @loggable
@@ -872,6 +876,7 @@ def unpin(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_admin
 def invite(update, context):
@@ -902,6 +907,7 @@ def invite(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin
 def adminlist(update, context):
     administrators = update.effective_chat.get_administrators()
@@ -923,6 +929,7 @@ def adminlist(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_promote
 @user_can_change
@@ -982,6 +989,7 @@ def set_title(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_change
 def setchatpic(update, context):
@@ -1015,6 +1023,7 @@ def setchatpic(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_change
 def rmchatpic(update, context):
@@ -1031,6 +1040,7 @@ def rmchatpic(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_change
 def setchat_title(update, context):
@@ -1056,6 +1066,7 @@ def setchat_title(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_change
 def set_sticker(update, context):
@@ -1083,6 +1094,7 @@ def set_sticker(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_change
 def set_desc(update, context):

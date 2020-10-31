@@ -54,6 +54,7 @@ for handler_list in dispatcher.handlers:
 
 
 @run_async
+@spamcheck
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
     # sourcery skip: merge-nested-ifs, move-assign
 
@@ -94,6 +95,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @bot_can_delete
 @user_can_change
 def set_blue_text_must_click(update: Update, context: CallbackContext):
@@ -129,6 +131,7 @@ def set_blue_text_must_click(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def add_bluetext_ignore(update: Update, context: CallbackContext):
     args = context.args
@@ -152,6 +155,7 @@ def add_bluetext_ignore(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def remove_bluetext_ignore(update: Update, context: CallbackContext):
     args = context.args
@@ -177,6 +181,7 @@ def remove_bluetext_ignore(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def add_bluetext_ignore_global(update: Update, context: CallbackContext):
     args = context.args
@@ -198,6 +203,7 @@ def add_bluetext_ignore_global(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
     args = context.args
@@ -219,6 +225,7 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def bluetext_ignore_list(update: Update, _):
     message = update.effective_message

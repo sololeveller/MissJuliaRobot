@@ -685,6 +685,7 @@ from julia.modules.log_channel import loggable
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @user_can_ban
@@ -762,6 +763,7 @@ def ban(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @user_can_ban
@@ -855,6 +857,7 @@ def temp_ban(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @user_can_ban
@@ -918,6 +921,7 @@ def kick(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @loggable
@@ -942,6 +946,7 @@ def banme(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 def kickme(update, context):
@@ -958,6 +963,7 @@ def kickme(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @user_can_ban

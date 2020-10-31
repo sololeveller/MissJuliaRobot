@@ -726,6 +726,7 @@ UNGBAN_ERRORS = {
 
 
 @run_async
+@spamcheck
 def gban(update, context):
     message = update.effective_message
     chat = update.effective_chat
@@ -858,6 +859,7 @@ def gban(update, context):
 
 
 @run_async
+@spamcheck
 def ungban(update, context):
     message = update.effective_message
     args = context.args
@@ -934,6 +936,7 @@ def ungban(update, context):
 
 
 @run_async
+@spamcheck
 def gbanlist(update, context):
     banned_users = sql.get_gban_list()
 
@@ -976,6 +979,7 @@ def check_and_ban(update, user_id, should_message=True):
 
 
 @run_async
+@spamcheck
 def enforce_gban(update, context):
     # Not using @restrict handler to avoid spamming - just ignore if cant gban.
     if (
@@ -1001,6 +1005,7 @@ def enforce_gban(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def gbanstat(update, context):
     args = context.args

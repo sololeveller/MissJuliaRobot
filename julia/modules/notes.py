@@ -874,6 +874,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 
 
 @run_async
+@spamcheck
 def cmd_get(update, context):
     args = context.args
     if len(args) >= 2 and args[1].lower() == "noformat":
@@ -885,6 +886,7 @@ def cmd_get(update, context):
 
 
 @run_async
+@spamcheck
 def hash_get(update, context):
     message = update.effective_message.text
     fst_word = message.split()[0]
@@ -893,6 +895,7 @@ def hash_get(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def save(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -929,6 +932,7 @@ def save(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def clear(update, context):
     args = context.args
@@ -963,6 +967,7 @@ def clear(update, context):
 
 
 @run_async
+@spamcheck
 def list_notes(update, context):
     chat_id = update.effective_chat.id
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1000,6 +1005,7 @@ def list_notes(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def clear_notes(update, context):
     chat = update.effective_chat
@@ -1035,6 +1041,7 @@ def clear_notes(update, context):
 
 
 @run_async
+@spamcheck
 @user_admin_no_reply
 def rmbutton(update, context):
     query = update.callback_query

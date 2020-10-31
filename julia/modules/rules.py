@@ -682,6 +682,7 @@ from julia.modules.helper_funcs.string_handling import markdown_parser
 
 
 @run_async
+@spamcheck
 def get_rules(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     send_rules(update, chat_id)
@@ -737,6 +738,7 @@ def send_rules(update, chat_id, from_pm=False):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def set_rules(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
@@ -755,6 +757,7 @@ def set_rules(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def clear_rules(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id

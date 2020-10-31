@@ -801,6 +801,7 @@ def warn(
 
 
 @run_async
+@spamcheck
 @user_admin_no_reply
 @bot_admin
 @loggable
@@ -839,6 +840,7 @@ def button(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_restrict
 @can_restrict
 @loggable
@@ -867,6 +869,7 @@ def warn_user(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_restrict
 @bot_admin
 @loggable
@@ -897,6 +900,7 @@ def reset_warns(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_restrict
 @bot_admin
 @loggable
@@ -928,6 +932,7 @@ def remove_warns(update, context):
 
 
 @run_async
+@spamcheck
 def warns(update, context):
     message = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1032,6 +1037,7 @@ def remove_warn_filter(update, context):
 
 
 @run_async
+@spamcheck
 def list_warn_filters(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     all_handlers = sql.get_chat_warn_triggers(chat.id)
@@ -1054,6 +1060,7 @@ def list_warn_filters(update, context):
 
 
 @run_async
+@spamcheck
 @loggable
 def reply_filter(update, context) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1073,6 +1080,7 @@ def reply_filter(update, context) -> str:
 
 
 @run_async
+@spamcheck
 @user_can_change
 @loggable
 def set_warn_limit(update, context) -> str:
@@ -1107,6 +1115,7 @@ def set_warn_limit(update, context) -> str:
 
 
 @run_async
+@spamcheck
 @user_can_change
 def set_warn_strength(update, context):
     chat = update.effective_chat  # type: Optional[Chat]

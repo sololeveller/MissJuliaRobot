@@ -672,6 +672,7 @@ from julia import dispatcher
 
 
 @run_async
+@spamcheck
 def convert(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(" ")
 

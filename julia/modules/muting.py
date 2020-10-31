@@ -686,6 +686,7 @@ from julia.modules.log_channel import loggable
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_ban
 @loggable
@@ -737,6 +738,7 @@ def mute(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @user_can_ban
 @loggable
@@ -799,6 +801,7 @@ def unmute(update, context):
 
 
 @run_async
+@spamcheck
 @bot_admin
 @can_restrict
 @user_can_ban

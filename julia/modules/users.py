@@ -710,6 +710,7 @@ def get_user_id(username):
 
 
 @run_async
+@spamcheck
 def broadcast(update, context):
     to_send = update.effective_message.text.split(None, 1)
     if len(to_send) >= 2:
@@ -734,6 +735,7 @@ def broadcast(update, context):
 
 
 @run_async
+@spamcheck
 def log_user(update, context):
     chat = update.effective_chat
     msg = update.effective_message
@@ -753,6 +755,7 @@ def log_user(update, context):
 
 
 @run_async
+@spamcheck
 def chats(update, context):
     all_chats = sql.get_all_chats() or []
     chatfile = "List of chats.\n"
@@ -769,6 +772,7 @@ def chats(update, context):
 
 
 @run_async
+@spamcheck
 def chat_checker(update, context):
     if (
         update.effective_message.chat.get_member(context.bot.id).can_send_messages

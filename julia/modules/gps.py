@@ -674,6 +674,7 @@ GMAPS_LOC = "https://maps.googleapis.com/maps/api/geocode/json"
 
 
 @run_async
+@spamcheck
 @user_admin
 def gps(update: Update, context):
     message = update.effective_message

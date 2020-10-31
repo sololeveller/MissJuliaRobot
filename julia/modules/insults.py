@@ -739,6 +739,7 @@ SFW_STRINGS = (
 
 
 @run_async
+@spamcheck
 @user_admin
 def insult(update, context):
     # Bot typing before send messages

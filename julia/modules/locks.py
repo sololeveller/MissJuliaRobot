@@ -796,6 +796,7 @@ def unrestr_members(
 
 
 @run_async
+@spamcheck
 def locktypes(update, context):
     update.effective_message.reply_text(
         "\n × ".join(
@@ -806,6 +807,7 @@ def locktypes(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 @loggable
 def lock(update, context) -> str:
@@ -896,6 +898,7 @@ def lock(update, context) -> str:
 
 
 @run_async
+@spamcheck
 @user_can_change
 @loggable
 def unlock(update, context) -> str:
@@ -979,6 +982,7 @@ def unlock(update, context) -> str:
 
 
 @run_async
+@spamcheck
 @user_not_admin
 def del_lockables(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1117,6 +1121,7 @@ def build_lock_message(chat_id):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def list_locks(update, context):
     chat = update.effective_chat  # type: Optional[Chat]

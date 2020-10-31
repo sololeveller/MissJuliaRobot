@@ -827,6 +827,7 @@ async def can_ban_users(message):
 
 @user_admin
 @run_async
+@spamcheck
 def runs(update, context):
     RUNIT = [
         "Now you see me, now you don't.",
@@ -854,6 +855,7 @@ def runs(update, context):
 
 @user_admin
 @run_async
+@spamcheck
 def get_id(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
@@ -898,6 +900,7 @@ def get_id(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 def stats(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
         "Current stats:\n" + "\n".join([mod.__stats__() for mod in STATS])
@@ -914,6 +917,7 @@ approved_users = db.approve
 
 @user_admin
 @run_async
+@spamcheck
 def info(update, context):
     args = context.args
     msg = update.effective_message  # type: Optional[Message]
@@ -1016,6 +1020,7 @@ def info(update, context):
 
 @user_admin
 @run_async
+@spamcheck
 def reply_keyboard_remove(update: Update, context: CallbackContext):
     reply_keyboard = []
     reply_keyboard.append([ReplyKeyboardRemove(remove_keyboard=True)])
@@ -1033,6 +1038,7 @@ def reply_keyboard_remove(update: Update, context: CallbackContext):
 
 @user_admin
 @run_async
+@spamcheck
 def gdpr(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
         update.effective_chat.id, "Deleting identifiable data..."
@@ -1079,6 +1085,7 @@ def markdown_help_sender(update: Update):
 
 
 @run_async
+@spamcheck
 @user_admin
 def markdown_help(update: Update, context: CallbackContext):
     if update.effective_chat.type != "private":
@@ -1100,6 +1107,7 @@ def markdown_help(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def github(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -1130,6 +1138,7 @@ def github(update: Update, context: CallbackContext):
 
 @user_admin
 @run_async
+@spamcheck
 def repo(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
@@ -1148,6 +1157,7 @@ BASE_URL = "https://del.dog"
 
 @user_admin
 @run_async
+@spamcheck
 def paste(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
@@ -1183,6 +1193,7 @@ def paste(update: Update, context: CallbackContext):
 
 @user_admin
 @run_async
+@spamcheck
 def get_paste_content(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
@@ -1220,6 +1231,7 @@ def get_paste_content(update: Update, context: CallbackContext):
 
 @user_admin
 @run_async
+@spamcheck
 def get_paste_stats(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
@@ -1525,6 +1537,7 @@ async def img_sampler(event):
 
 
 @run_async
+@spamcheck
 @user_admin
 def shrug(update: Update, context: CallbackContext):
     default_msg = r"¯\_(ツ)_/¯"
@@ -1539,6 +1552,7 @@ dictionary = PyDictionary()
 
 
 @run_async
+@spamcheck
 @user_admin
 def define(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -1553,6 +1567,7 @@ def define(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def synonyms(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -1567,6 +1582,7 @@ def synonyms(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def antonyms(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -2178,6 +2194,7 @@ async def _(event):
 
 
 @run_async
+@spamcheck
 @user_admin
 def lyrics(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -3327,6 +3344,7 @@ async def _(event):
 
 
 @run_async
+@spamcheck
 @user_admin
 def echo(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(None, 1)
@@ -3506,6 +3524,7 @@ HIT = (
 
 
 @run_async
+@spamcheck
 @user_admin
 def slap(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
@@ -3591,6 +3610,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 @run_async
+@spamcheck
 @user_admin
 def ping(update: Update, context: CallbackContext):
     msg = update.effective_message

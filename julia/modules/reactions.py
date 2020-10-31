@@ -940,6 +940,7 @@ reactions = [
 
 
 @run_async
+@spamcheck
 def react(update: Update, context: CallbackContext):
     message = update.effective_message
     react = random.choice(reactions)
@@ -950,6 +951,7 @@ def react(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def rhappy(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -961,6 +963,7 @@ def rhappy(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def rangry(update: Update, context: CallbackContext):
     message = update.effective_message

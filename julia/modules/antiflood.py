@@ -687,6 +687,7 @@ FLOOD_GROUP = 3
 
 
 @run_async
+@spamcheck
 @loggable
 def check_flood(update, context) -> str:
     user = update.effective_user  # type: Optional[User]
@@ -767,6 +768,7 @@ def check_flood(update, context) -> str:
 
 
 @run_async
+@spamcheck
 @user_can_change
 @loggable
 def set_flood(update, context) -> str:
@@ -840,6 +842,7 @@ def set_flood(update, context) -> str:
 
 
 @run_async
+@spamcheck
 def flood(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -868,6 +871,7 @@ def flood(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 @loggable
 def set_flood_mode(update, context):

@@ -684,6 +684,7 @@ combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
 
 @run_async
+@spamcheck
 @user_admin
 def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -706,6 +707,7 @@ def stickerid(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def cb_sticker(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -744,6 +746,7 @@ def getsticker(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def kang(update: Update, context: CallbackContext):
     msg = update.effective_message

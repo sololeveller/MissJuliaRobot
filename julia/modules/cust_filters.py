@@ -45,6 +45,7 @@ ENUM_FUNC_MAP = {
 
 
 @run_async
+@spamcheck
 def list_handlers(update, context):
     chat = update.effective_chat
     user = update.effective_user
@@ -245,6 +246,7 @@ def stop_filter(update, context):
 
 
 @run_async
+@spamcheck
 def reply_filter(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     message = update.effective_message  # type: Optional[Message]
@@ -431,6 +433,7 @@ def reply_filter(update, context):
 
 
 @run_async
+@spamcheck
 @user_can_change
 def rmall_filters(update, context):
     chat = update.effective_chat

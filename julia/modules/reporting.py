@@ -689,6 +689,7 @@ REPORT_GROUP = 5
 
 
 @run_async
+@spamcheck
 @user_can_change
 def report_setting(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -738,6 +739,7 @@ def report_setting(update, context):
 
 
 @run_async
+@spamcheck
 @user_not_admin
 @loggable
 def report(update, context) -> str:

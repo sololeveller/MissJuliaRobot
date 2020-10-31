@@ -672,6 +672,7 @@ from julia.modules.helper_funcs.chat_status import spamcheck
 
 
 @run_async
+@spamcheck
 @user_admin
 def simplify(update: Update, context: CallbackContext):
     arg = context.args
@@ -685,6 +686,7 @@ def simplify(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def factor(update: Update, context: CallbackContext):
     arg = context.args
@@ -698,6 +700,7 @@ def factor(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def derive(update: Update, context: CallbackContext):
     arg = context.args
@@ -711,6 +714,7 @@ def derive(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def integrate(update: Update, context: CallbackContext):
     arg = context.args
@@ -724,6 +728,7 @@ def integrate(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def zeroes(update: Update, context: CallbackContext):
     arg = context.args
@@ -737,6 +742,7 @@ def zeroes(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def tangent(update: Update, context: CallbackContext):
     arg = context.args
@@ -750,6 +756,7 @@ def tangent(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def area(update: Update, context: CallbackContext):
     arg = context.args
@@ -763,6 +770,7 @@ def area(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def cos(update: Update, context: CallbackContext):
     args = context.args
@@ -771,6 +779,7 @@ def cos(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def sin(update: Update, context: CallbackContext):
     args = context.args
@@ -779,6 +788,7 @@ def sin(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def tan(update: Update, context: CallbackContext):
     args = context.args
@@ -787,6 +797,7 @@ def tan(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def arccos(update: Update, context: CallbackContext):
     args = context.args
@@ -795,6 +806,7 @@ def arccos(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def arcsin(update: Update, context: CallbackContext):
     args = context.args
@@ -803,6 +815,7 @@ def arcsin(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def arctan(update: Update, context: CallbackContext):
     args = context.args
@@ -811,6 +824,7 @@ def arctan(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def abs(update: Update, context: CallbackContext):
     args = context.args
@@ -819,6 +833,7 @@ def abs(update: Update, context: CallbackContext):
 
 
 @run_async
+@spamcheck
 @user_admin
 def log(update: Update, context: CallbackContext):
     args = context.args

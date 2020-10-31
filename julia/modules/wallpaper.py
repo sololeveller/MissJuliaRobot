@@ -674,6 +674,7 @@ from julia.modules.helper_funcs.chat_status import user_admin
 
 
 @run_async
+@spamcheck
 @user_admin
 def wall(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
