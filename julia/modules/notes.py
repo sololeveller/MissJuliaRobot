@@ -682,6 +682,7 @@ import julia.modules.sql.notes_sql as sql
 from julia import dispatcher
 from julia import LOGGER
 from julia import MESSAGE_DUMP
+from julia.modules.helper_funcs.chat_status import spamcheck
 
 from julia.modules.helper_funcs.chat_status import user_admin_no_reply
 from julia.modules.helper_funcs.chat_status import user_can_change
