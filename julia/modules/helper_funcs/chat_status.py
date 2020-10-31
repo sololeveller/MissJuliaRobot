@@ -677,7 +677,7 @@ client = MongoClient(MONGO_DB_URI)
 db = client["test"]
 approved_users = db.approve
 dbb = client["leecher"]
-leechers = db.leecher
+leechers = dbb.leecher
 
 def can_delete(chat: Chat, bot_id: int) -> bool:
     return chat.get_member(bot_id).can_delete_messages
