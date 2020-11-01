@@ -680,7 +680,7 @@ from telegram.ext.dispatcher import run_async
 from sys import argv
 from julia import dispatcher
 from julia import LOGGER
-from julia import OWNER_ID
+from julia import OWNER_ID, WEBGOOK, URL, PORT, CERT_PATH
 from julia import tbot, ubot
 from julia import TOKEN
 from julia import updater
