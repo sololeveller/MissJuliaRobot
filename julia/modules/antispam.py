@@ -10,8 +10,8 @@ from telethon.tl import functions
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client["leccher"]
-leechers = db.leecher
+dbb = client["leccher"]
+leechers = dbb.leecher
 
 def max_seconds(max_seconds, *, interval=1):
     interval = int(interval)
