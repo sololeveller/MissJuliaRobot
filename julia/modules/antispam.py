@@ -28,11 +28,11 @@ def max_seconds(max_seconds, *, interval=1):
         if int(round(time.time() + interval)) > int(round(end_time)):
             return
 
-global_var = 0
+global spamcounter = 0
 
 @register(pattern="")
 async def leechers(event):
-    global_var += 1
+    spamcounter += 1
     if str(event.sender_id) in str(OWNER_ID):
       return
     sender = event.sender_id
