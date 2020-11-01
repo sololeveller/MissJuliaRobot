@@ -760,7 +760,7 @@ if ENV:
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
 
     # Load at end to ensure all prev variables have been set
-    from alexa.modules.helper_funcs.handlers import CustomCommandHandler
+    from julia.modules.helper_funcs.handlers import CustomCommandHandler
     
     tg.CommandHandler = CustomCommandHandler
     
