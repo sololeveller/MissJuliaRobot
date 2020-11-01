@@ -1013,7 +1013,7 @@ async def stop(event):
         await event.reply("Please reply to a poll to stop it")
         return
     msg = await event.get_reply_message()
-    if str(msg.sender_id) != "PeerUser(user_id=1246850012)":
+    if str(msg.sender_id) != "1496659189":
         await event.reply(
             "I can't do this operation on this poll.\nProbably it's not created by me"
         )
