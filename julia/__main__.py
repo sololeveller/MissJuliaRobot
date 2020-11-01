@@ -1075,13 +1075,10 @@ def main():
            tbot.disconnect()
         else:
            tbot.run_until_disconnected()
-        LOGGER.info("Successfully Started Lillybot⚡ !")
     updater.idle()
 
 
 if __name__ == "__main__":
     tbot.start(bot_token=TOKEN)
-    LOGGER.info("Successfully started Julia[TBOT] !")
-    ubot.start()
-    LOGGER.info("Successfully started Julia[UBOT] !")
+    LOGGER.info("Successfully started Julia !")
     main()
