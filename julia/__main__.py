@@ -699,10 +699,10 @@ PM_START_TEXT = """
 buttons = [
     [
         InlineKeyboardButton(
-            text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+            text="Add to Group 👥", url="t.me/MissJuliaBetaRobot?startgroup=true"
         ),
         InlineKeyboardButton(
-            text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+            text="Support Group 🎙️", url="https://t.me/MissJuliaBetaRobotSupport"
         ),
     ]
 ]
@@ -711,7 +711,7 @@ buttons += [
     [
         InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
         InlineKeyboardButton(
-            text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+            text="Source 🌐", url="https://github.com/MissJuliaBetaRobot/MissJuliaBetaRobot"
         ),
     ]
 ]
@@ -830,10 +830,10 @@ def send_start(update, context):
     buttons = [
         [
             InlineKeyboardButton(
-                text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+                text="Add to Group 👥", url="t.me/MissJuliaBetaRobot?startgroup=true"
             ),
             InlineKeyboardButton(
-                text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+                text="Support Group 🎙️", url="https://t.me/MissJuliaBetaRobotSupport"
             ),
         ]
     ]
@@ -842,7 +842,7 @@ def send_start(update, context):
         [
             InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
             InlineKeyboardButton(
-                text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+                text="Source 🌐", url="https://github.com/MissJuliaBetaRobot/MissJuliaBetaRobot"
             ),
         ]
     ]

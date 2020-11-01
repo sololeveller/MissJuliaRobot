@@ -1532,7 +1532,7 @@ async def img_sampler(event):
     for files in types:
         files_grabbed.extend(glob.glob(files))
     await event.client.send_file(event.chat_id, files_grabbed, reply_to=event.id)
-    os.chdir("/app/MissJuliaRobot/MissJuliaRobot")
+    os.chdir("/app/MissJuliaBetaRobot/MissJuliaBetaRobot")
     os.system("rm -rf store")
 
 
@@ -1781,7 +1781,7 @@ async def apk(e):
             + app_link
             + "'>View in Play Store</a>"
         )
-        app_details += "\n\n===> @MissJuliaRobot <==="
+        app_details += "\n\n===> @MissJuliaBetaRobot <==="
         await e.reply(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
         await e.reply("No result found in search. Please enter **Valid app name**")
@@ -3678,7 +3678,7 @@ async def ramdomgames(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "1+"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3716,7 +3716,7 @@ async def ramdomgamess(event):
 async def ramdomgamesk(event):
     if event.fwd_from:
         return
-    await (await inline_query(ubot, "@gamee", "MotoFX"))[0].click("MissJuliaRobot")
+    await (await inline_query(ubot, "@gamee", "MotoFX"))[0].click("MissJuliaBetaRobot")
 
 
 @register(pattern="^/motofx$")
@@ -3753,7 +3753,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Penalty"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3791,7 +3791,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "F1"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3829,7 +3829,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Karate"))[1].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3867,7 +3867,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Football"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3905,7 +3905,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Neon"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3943,7 +3943,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Disco"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
@@ -3981,7 +3981,7 @@ async def ramdomgamesk(event):
     if event.fwd_from:
         return
     await (await inline_query(ubot, "@gamee", "Gravity"))[0].click(
-        "MissJuliaRobot", hide_via=True
+        "MissJuliaBetaRobot", hide_via=True
     )
 
 
