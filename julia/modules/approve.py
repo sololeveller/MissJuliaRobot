@@ -727,7 +727,7 @@ async def approve(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -789,7 +789,7 @@ async def disapprove(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -850,7 +850,7 @@ async def checkst(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -908,8 +908,7 @@ async def apprlst(event):
         if not await can_approve_users(message=event):
             print("3")
             return
-    if event.is_channel:
-        print("4")
+    else:
         return
 
     autos = approved_users.find({})
