@@ -1058,16 +1058,24 @@ def main():
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_error_handler(error_handler)
 
-    updater.start_polling(timeout=15, read_latency=4, clean=True)
-    LOGGER.info("Successfully started Julia[PTB] !")
+    if WEBHOOK:
+        LOGGER.info("Using webhooks.")
+        updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
 
-    if len(argv) not in (1, 3, 4):
-        tbot.disconnect()
-        ubot.disconnect()
+        if CERT_PATH:
+            updater.bot.set_webhook(url=URL + TOKEN,
+                                    certificate=open(CERT_PATH, "rb"))
+        else:
+            updater.bot.set_webhook(url=URL + TOKEN)
+            tbot.run_until_disconnected()
+
     else:
-        tbot.run_until_disconnected()
-        ubot.run_until_disconnected()
-
+        updater.start_polling(poll_interval=0, timeout=15, read_latency=4, clean=True)
+        if len(argv) not in (1, 3, 4):
+           tbot.disconnect()
+        else:
+           tbot.run_until_disconnected()
+        LOGGER.info("Successfully Started Lillybot⚡ !")
     updater.idle()
 
 
