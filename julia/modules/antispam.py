@@ -71,8 +71,8 @@ async def leechers(event):
             for c in users:
                 if USERSPAM[0] == c["id"]:
                     return
-            timerr = time.time()
-            leechers.insert_one({"id": USERSPAM[0], "time": timerr})
+                timerr = time.time()
+                leechers.insert_one({"id": USERSPAM[0], "time": timerr})
             try:
                     MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
                     await event.client(
