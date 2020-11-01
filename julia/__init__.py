@@ -817,13 +817,11 @@ if ENV:
 
     MONGOCLIENT = MongoClient(MONGO_DB_URI, 27017, serverSelectionTimeoutMS=1)
     
-    def is_mongo_alive():
-     try:
+    try:
         MONGOCLIENT.server_info()
-     except BaseException as e:
+    except BaseException as e:
         print(e)
-        return False
-     return True
+        quit(1)
 		
 else:
     quit(1)
