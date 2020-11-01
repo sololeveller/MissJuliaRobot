@@ -73,11 +73,11 @@ async def leechers(event):
                     return
                 timerr = time.time()
                 leechers.insert_one({"id": USERSPAM[0], "time": timerr})
-            try:
+                try:
                     MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
                     await event.client(
                         EditBannedRequest(event.chat_id, event.sender_id, MUTE_RIGHTS)
                     )
                     await dev.edit(final + "\nYou are now muted !")
-            except Exception:
+                except Exception:
                     pass
