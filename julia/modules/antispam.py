@@ -50,9 +50,9 @@ async def leechers(event):
     else:
         USERSPAM.append(check)  # lock the user id
     for sec in max_seconds(3):
-        if gloval_var > 5 and event.sender_id == USERSPAM[0]:
+        if spamcounter > 5 and event.sender_id == USERSPAM[0]:
             VALID = True
-            global_var = 0
+            spamcounter = 0
             if senderr.username == None:
                 st = senderr.first_name
                 hh = senderr.id
@@ -62,7 +62,7 @@ async def leechers(event):
                 final = f"@{st} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
         else:
             VALID = False
-            global_var = 0
+            spamcounter = 0
     if VALID == True:
             users = leechers.find({})
             for c in users:
