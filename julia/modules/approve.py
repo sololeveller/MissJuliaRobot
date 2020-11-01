@@ -727,7 +727,7 @@ async def approve(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -789,7 +789,7 @@ async def disapprove(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -850,7 +850,7 @@ async def checkst(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     ik = event.pattern_match.group(1)
@@ -893,10 +893,12 @@ async def checkst(event):
 
 @register(pattern="^/listapproved$")
 async def apprlst(event):
-    print("hello")
+    print("😁")
     if event.fwd_from:
+        
         return
     if MONGO_DB_URI is None:
+        
         return
     chat_id = event.chat.id
     sender = event.sender_id
@@ -905,7 +907,7 @@ async def apprlst(event):
     if event.is_group:
         if not await can_approve_users(message=event):
             return
-    if event.is_channel:
+    else:
         return
 
     autos = approved_users.find({})
