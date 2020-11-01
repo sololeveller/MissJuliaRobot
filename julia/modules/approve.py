@@ -895,8 +895,10 @@ async def checkst(event):
 async def apprlst(event):
     print("😁")
     if event.fwd_from:
+        print("1")
         return
     if MONGO_DB_URI is None:
+        print("2")
         return
     chat_id = event.chat.id
     sender = event.sender_id
@@ -904,8 +906,10 @@ async def apprlst(event):
 
     if event.is_group:
         if not await can_approve_users(message=event):
+            print("3")
             return
     if event.is_channel:
+        print("4")
         return
 
     autos = approved_users.find({})
