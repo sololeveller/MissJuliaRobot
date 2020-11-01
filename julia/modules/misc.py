@@ -2224,7 +2224,7 @@ def lyrics(update: Update, context: CallbackContext):
         msg.reply_text(reply)
 
 
-# Made by @MissJulia_Robot
+# Made by @MissJuliaBeta_Robot
 
 
 @register(pattern=r"^/julia(?: |$)([\s\S]*)")
@@ -3670,7 +3670,7 @@ async def inline_query(client, bot, query):
 
 ## -- THANKS TO LONAMI FOR THIS FUNCTION --#
 
-# -- MADE BY @MissJulia_Robot
+# -- MADE BY @MissJuliaBeta_Robot
 
 
 @juliabot(pattern="^/gameed")
@@ -3698,7 +3698,7 @@ async def ramdomgamess(event):
         else:
             return
 
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3734,7 +3734,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3772,7 +3772,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3810,7 +3810,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3848,7 +3848,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3886,7 +3886,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3924,7 +3924,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -3962,7 +3962,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -4000,7 +4000,7 @@ async def ramdomgamess(event):
             pass
         else:
             return
-    chat = "@MissJulia_Robot"
+    chat = "@MissJuliaBeta_Robot"
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -4037,7 +4037,7 @@ async def can_change_info(message):
 
 # ------ THANKS TO LONAMI ------#
 
-# MADE BY @MissJulia_Robot
+# MADE BY @MissJuliaBeta_Robot
 
 
 @register(pattern="^/profanity(?: |$)(.*)")
