@@ -991,6 +991,10 @@ async def stop(event):
         else:
             return
 
+    if not event.reply_to_msg_id:
+        await event.reply("Please reply to a poll to stop it")
+        return
+
     if input is None:
         await event.reply("Where is the poll id ?")
         return
@@ -1010,9 +1014,7 @@ async def stop(event):
         await event.reply("Poll id should be an integer of 5 digits")
         return
 
-    if not event.reply_to_msg_id:
-        await event.reply("Please reply to a poll to stop it")
-        return
+    
     msg = await event.get_reply_message()
     if str(msg.sender_id) != "1496659189":
         await event.reply(
@@ -1025,7 +1027,7 @@ async def stop(event):
             for c in allpoll:
                 if event.sender_id == c["user"] and secret == c["pollid"]:
                     print("🙂")
-                    poll_id.delete_one({"user": event.sender_id, "pollid": secret})
+                    allpoll.delete_one({"user": event.sender_id, "pollid": secret})
                     pollid = msg.poll.poll.id
                     await msg.edit(
                         file=types.InputMediaPoll(
@@ -1034,10 +1036,9 @@ async def stop(event):
                             )
                         )
                     )
-                    await event.reply("Successfully stopped the poll")
-                else:
-                    await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
-                    return
+                    await event.reply("Successfully stopped the poll")  
+                await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
+                return
         except Exception:
             await event.reply(
                 "I can't do this operation on this poll.\nProbably it's already closed"
