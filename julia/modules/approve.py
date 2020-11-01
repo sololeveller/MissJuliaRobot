@@ -893,6 +893,7 @@ async def checkst(event):
 
 @register(pattern="^/listapproved$")
 async def apprlst(event):
+    print("hello")
     if event.fwd_from:
         return
     if MONGO_DB_URI is None:
