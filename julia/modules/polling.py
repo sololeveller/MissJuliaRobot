@@ -1033,11 +1033,9 @@ async def stop(event):
                         )
                     )
                     await event.reply("Successfully stopped the poll")
-
-                await event.reply(
-                    "Oops, either you haven't created this poll or you have given wrong poll id"
-                )
-                return
+                else:
+                    await event.reply("Oops, either you haven't created this poll or you have given wrong poll id")
+                    return
         except Exception:
             await event.reply(
                 "I can't do this operation on this poll.\nProbably it's already closed"
