@@ -3676,6 +3676,7 @@ async def inline_query(client, bot, query):
 @juliabot(pattern="^/gameed")
 async def ramdomgames(event):
     if event.fwd_from:
+        print("1")
         return
     await (await inline_query(ubot, "@gamee", "1+"))[0].click(
         "MissJuliaBetaRobot", hide_via=True
@@ -3685,6 +3686,7 @@ async def ramdomgames(event):
 @register(pattern="^/mathbattle$")
 async def ramdomgamess(event):
     if event.fwd_from:
+        print("2")
         return
     approved_userss = approved_users.find({})
     for ch in approved_userss:
@@ -3696,6 +3698,7 @@ async def ramdomgamess(event):
         elif event.chat_id == iid and event.sender_id == userss:
             pass
         else:
+            print ("3")
             return
 
     chat = "@MissJuliaBeta_Robot"
