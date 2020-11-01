@@ -946,6 +946,8 @@ def spamcheck(func):
                 timer = c["time"]
                 elapsed_time = time.time() - float(timer)
                 final = time.strftime("%H", time.gmtime(elapsed_time))
+                fn = time.strftime("%Hh: %Mm: %Ss", time.gmtime(elapsed_time))
+                print(fn)
                 if not str(final) >= "24":
                     return
 
