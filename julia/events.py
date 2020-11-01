@@ -728,7 +728,7 @@ def callbackquery(**args):
     return decorator
 
 
-def alexabot(**args):
+def juliabot(**args):
     """ Register a new event. """
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
