@@ -51,7 +51,7 @@ async def leechers(event):
         USERSPAM.append(check)  # lock the user id
     for sec in max_seconds(3):
         if spamcounter > 5 and event.sender_id == USERSPAM[0]:
-            print("checking spam")
+            #print("checking spam")
             VALID = True
             spamcounter = 0
             if senderr.username == None:
@@ -65,14 +65,14 @@ async def leechers(event):
             VALID = False
             spamcounter = 0
         if VALID == True:
-            print("spammer found")
+            #print("spammer found")
             dev = await event.respond(final)
             users = leechers.find({})
             for c in users:
                 if USERSPAM[0] == c["id"]:
                     return
-                timerr = time.time()
-                leechers.insert_one({"id": USERSPAM[0], "time": timerr})
+            timerr = time.time()
+            leechers.insert_one({"id": USERSPAM[0], "time": timerr})
             try:
                     MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
                     await event.client(
