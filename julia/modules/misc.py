@@ -3672,7 +3672,6 @@ async def inline_query(client, bot, query):
 
 # -- MADE BY @MissJuliaBeta_Robot
 
-
 @juliabot(pattern="^/gameed")
 async def ramdomgames(event):
     if event.fwd_from:
@@ -3702,7 +3701,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/gameed")
@@ -3738,7 +3737,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jsusxjxhxhxshsjs")
@@ -3776,7 +3775,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jsuskhfkhdxjzhsjs")
@@ -3814,7 +3813,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jslgggfsslaxvuoqdjlxvqs")
@@ -3852,7 +3851,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jsdndbbduoqdjlxvqs")
@@ -3890,7 +3889,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jsdndbafjaffajlxvqs")
@@ -3928,7 +3927,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/jsddjdhiwws")
@@ -3966,7 +3965,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/whwyywwhewws")
@@ -4004,7 +4003,7 @@ async def ramdomgamess(event):
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1248815845)
+                events.NewMessage(incoming=True, from_users=1071539418)
             )
             entity = await event.client.get_entity(OWNER_USERNAME)
             await tbot.send_message(entity, "/wssksskxxskss")
@@ -4012,6 +4011,7 @@ async def ramdomgamess(event):
             await response.forward_to(event.chat_id)
         except Exception:
             pass
+
 
 
 profanity.load_censor_words()
