@@ -51,6 +51,7 @@ async def leechers(event):
         USERSPAM.append(check)  # lock the user id
     for sec in max_seconds(3):
         if spamcounter > 5 and event.sender_id == USERSPAM[0]:
+            print("checking spam")
             VALID = True
             spamcounter = 0
             if senderr.username == None:
