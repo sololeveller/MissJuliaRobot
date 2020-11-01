@@ -660,7 +660,7 @@
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
 from telethon import events
-from alexa import tbot
+from julia import tbot
 import sys
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
@@ -668,7 +668,7 @@ from os import remove
 from time import gmtime, strftime
 from traceback import format_exc
 from telethon import events
-from alexa import ubot, BOTLOG, BOTLOG_CHATID, LOGS
+from julia import ubot, BOTLOG, BOTLOG_CHATID, LOGS
 
 def register(**args):
     """ Registers a new message. """
