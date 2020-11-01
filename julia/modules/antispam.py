@@ -60,23 +60,24 @@ async def leechers(event):
                 final = f"[{st}](tg://user?id={hh}) you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
             else:
                 st = senderr.username
-                final = f"@{st} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
+                final = f"@{st} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"           
         else:
             VALID = False
             spamcounter = 0
-    if VALID == True:
+        if VALID == True:
+            print("spammer found")
+            dev = await event.respond(final)
             users = leechers.find({})
             for c in users:
                 if USERSPAM[0] == c["id"]:
                     return
-                dev = await event.respond(final)
                 timerr = time.time()
                 leechers.insert_one({"id": USERSPAM[0], "time": timerr})
-                try:
+            try:
                     MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
                     await event.client(
                         EditBannedRequest(event.chat_id, event.sender_id, MUTE_RIGHTS)
                     )
                     await dev.edit(final + "\nYou are now muted !")
-                except Exception:
+            except Exception:
                     pass
