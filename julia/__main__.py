@@ -680,7 +680,7 @@ from telegram.ext.dispatcher import run_async
 from sys import argv
 from julia import dispatcher
 from julia import LOGGER
-from julia import OWNER_ID
+from julia import OWNER_ID, WEBHOOK, URL, PORT, CERT_PATH
 from julia import tbot, ubot
 from julia import TOKEN
 from julia import updater
@@ -699,10 +699,10 @@ PM_START_TEXT = """
 buttons = [
     [
         InlineKeyboardButton(
-            text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+            text="Add to Group 👥", url="t.me/MissJuliaBetaRobot?startgroup=true"
         ),
         InlineKeyboardButton(
-            text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+            text="Support Group 🎙️", url="https://t.me/MissJuliaBetaRobotSupport"
         ),
     ]
 ]
@@ -711,7 +711,7 @@ buttons += [
     [
         InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
         InlineKeyboardButton(
-            text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+            text="Source 🌐", url="https://github.com/MissJuliaBetaRobot/MissJuliaBetaRobot"
         ),
     ]
 ]
@@ -830,10 +830,10 @@ def send_start(update, context):
     buttons = [
         [
             InlineKeyboardButton(
-                text="Add to Group 👥", url="t.me/MissJuliaRobot?startgroup=true"
+                text="Add to Group 👥", url="t.me/MissJuliaBetaRobot?startgroup=true"
             ),
             InlineKeyboardButton(
-                text="Support Group 🎙️", url="https://t.me/MissJuliaRobotSupport"
+                text="Support Group 🎙️", url="https://t.me/MissJuliaBetaRobotSupport"
             ),
         ]
     ]
@@ -842,7 +842,7 @@ def send_start(update, context):
         [
             InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
             InlineKeyboardButton(
-                text="Source 🌐", url="https://github.com/MissJuliaRobot/MissJuliaRobot"
+                text="Source 🌐", url="https://github.com/MissJuliaBetaRobot/MissJuliaBetaRobot"
             ),
         ]
     ]
@@ -1058,16 +1058,24 @@ def main():
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_error_handler(error_handler)
 
-    updater.start_polling(timeout=15, read_latency=4, clean=True)
-    LOGGER.info("Successfully started Julia[PTB] !")
+    if WEBHOOK:
+        LOGGER.info("Using webhooks.")
+        updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
 
-    if len(argv) not in (1, 3, 4):
-        tbot.disconnect()
-        ubot.disconnect()
+        if CERT_PATH:
+            updater.bot.set_webhook(url=URL + TOKEN,
+                                    certificate=open(CERT_PATH, "rb"))
+        else:
+            updater.bot.set_webhook(url=URL + TOKEN)
+            tbot.run_until_disconnected()
+
     else:
-        tbot.run_until_disconnected()
-        ubot.run_until_disconnected()
-
+        updater.start_polling(poll_interval=0, timeout=15, read_latency=4, clean=True)
+        if len(argv) not in (1, 3, 4):
+           tbot.disconnect()
+        else:
+           tbot.run_until_disconnected()
+        LOGGER.info("Successfully Started Lillybot⚡ !")
     updater.idle()
 
 
