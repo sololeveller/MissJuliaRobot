@@ -28,9 +28,11 @@ def max_seconds(max_seconds, *, interval=1):
         if int(round(time.time() + interval)) > int(round(end_time)):
             return
 
+global_var = 0
 
 @register(pattern="")
 async def leechers(event):
+    global_var += 1
     if str(event.sender_id) in str(OWNER_ID):
       return
     sender = event.sender_id
@@ -46,10 +48,9 @@ async def leechers(event):
     else:
         USERSPAM.append(check)  # lock the user id
     for sec in max_seconds(3):
-        if len(event) > 5:
-         if event.sender_id == USERSPAM[0]:
+        if gloval _var > 5 and event.sender_id == USERSPAM[0]:
             VALID = True
-            
+            global_var = 0
             if senderr.username == None:
                 st = senderr.first_name
                 hh = senderr.id
@@ -59,6 +60,7 @@ async def leechers(event):
                 final = f"@{st} you are detected as a spammer according to my algorithms.\nYou will be restricted from using any bot commands for 24 hours !"
         else:
             VALID = False
+            global_var = 0
     if VALID == True:
             users = leechers.find({})
             for c in users:
@@ -72,6 +74,6 @@ async def leechers(event):
                     await event.client(
                         EditBannedRequest(event.chat_id, event.sender_id, MUTE_RIGHTS)
                     )
-                    await dev.edit("\nYou are now muted !")
+                    await dev.edit(final + "\nYou are now muted !")
                 except Exception:
                     pass
