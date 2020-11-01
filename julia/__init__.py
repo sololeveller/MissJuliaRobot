@@ -744,7 +744,7 @@ if ENV:
     SUDO_USERS.add(OWNER_ID)
     GBAN_LOGS = os.environ.get("MESSAGE_DUMP")
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
-    tbot = TelegramClient("alexa", API_KEY, API_HASH)
+    tbot = TelegramClient("julia", API_KEY, API_HASH)
     updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
     dispatcher = updater.dispatcher
     SUDO_USERS = list(SUDO_USERS)
@@ -766,9 +766,7 @@ if ENV:
     
     STRING_SESSION = os.environ.get("STRING_SESSION", None)
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    UPSTREAM_REPO_URL = os.environ.get("UPSTREAM_REPO_URL", "https://github.com/MainTeraHer0/MissLillyRobot.git")
     TEMPORARY_DATA = os.environ.get("TEMPORARY_DATA", None)
-    SPAMMERS = list(SPAMMERS)
     
     # Bot Logs setup:
     CONSOLE_LOGGER_VERBOSE = os.environ.get("CONSOLE_LOGGER_VERBOSE", "True")
