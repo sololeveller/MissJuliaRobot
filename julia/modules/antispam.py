@@ -33,6 +33,7 @@ spamcounter=0
 
 @register(pattern="")
 async def leechers(event):
+    global spamcounter
     spamcounter += 1
     if str(event.sender_id) in str(OWNER_ID):
       return
