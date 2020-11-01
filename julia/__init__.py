@@ -814,14 +814,6 @@ if ENV:
     except PhoneNumberInvalidError:
         print(INVALID_PH)
         exit(1)
-
-    MONGOCLIENT = MongoClient(MONGO_DB_URI, 27017, serverSelectionTimeoutMS=1)
-    
-    try:
-        MONGOCLIENT.server_info()
-    except BaseException as e:
-        print(e)
-        quit(1)
 		
 else:
     quit(1)
