@@ -978,6 +978,7 @@ async def _(event):
 @register(pattern="^/stoppoll(?: |$)(.*)")
 async def stop(event):
     secret = event.pattern_match.group(1)
+    print(secret)
     approved_userss = approved_users.find({})
     for ch in approved_userss:
         iid = ch["id"]
@@ -1023,6 +1024,7 @@ async def stop(event):
             allpoll = poll_id.find({})
             for c in allpoll:
                 if event.sender_id == c["user"] and secret == c["pollid"]:
+                    print("🙂")
                     poll_id.delete_one({"user": event.sender_id, "pollid": secret})
                     pollid = msg.poll.poll.id
                     await msg.edit(
